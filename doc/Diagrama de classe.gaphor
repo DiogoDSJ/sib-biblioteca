@@ -54,6 +54,7 @@ controlflow {
 <ref refid="78d21dd6-4b19-11ee-9a09-001a7dda7113"/>
 <ref refid="9662021f-4b1b-11ee-a700-001a7dda7113"/>
 <ref refid="1eb749e1-4b1c-11ee-b4bd-001a7dda7113"/>
+<ref refid="7d7175da-4b20-11ee-b912-001a7dda7113"/>
 </reflist>
 </ownedType>
 </Package>
@@ -2600,6 +2601,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="fab7bae7-4b0f-11ee-8b5c-001a7dda7113"/>
 <ref refid="e22bf1dd-4b17-11ee-b15a-001a7dda7113"/>
 <ref refid="7da59ef5-4b18-11ee-8968-001a7dda7113"/>
+<ref refid="7d735ec2-4b20-11ee-80e5-001a7dda7113"/>
 <ref refid="ad57a8d8-4b11-11ee-a023-001a7dda7113"/>
 <ref refid="a65c63d0-4b12-11ee-8831-001a7dda7113"/>
 <ref refid="db7c91a4-4b14-11ee-a368-001a7dda7113"/>
@@ -3122,7 +3124,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <val>statusDaConta</val>
 </name>
 <typeValue>
-<val>Enum</val>
+<val>StatusConta</val>
 </typeValue>
 <visibility>
 <val>private</val>
@@ -5967,4 +5969,62 @@ existing classes or even new classes with specific responsibilities.</val>
 <val>String</val>
 </typeValue>
 </Parameter>
+<Enumeration id="7d7175da-4b20-11ee-b912-001a7dda7113">
+<name>
+<val>StatusConta</val>
+</name>
+<ownedLiteral>
+<reflist>
+<ref refid="9c5356a1-4b20-11ee-87de-001a7dda7113"/>
+<ref refid="a07df44b-4b20-11ee-b159-001a7dda7113"/>
+</reflist>
+</ownedLiteral>
+<package>
+<ref refid="58d6c2e8-66f8-11ec-b4c8-0456e5e540ed"/>
+</package>
+<presentation>
+<reflist>
+<ref refid="7d735ec2-4b20-11ee-80e5-001a7dda7113"/>
+</reflist>
+</presentation>
+</Enumeration>
+<EnumerationItem id="7d735ec2-4b20-11ee-80e5-001a7dda7113">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 114.73612929323049, -487.16707993967026)</val>
+</matrix>
+<top-left>
+<val>(0.0, 0.0)</val>
+</top-left>
+<width>
+<val>180.0</val>
+</width>
+<height>
+<val>120.0</val>
+</height>
+<diagram>
+<ref refid="1fc3636b-4917-11ee-ab7b-001a7dda7113"/>
+</diagram>
+<show_attributes>
+<val>0</val>
+</show_attributes>
+<subject>
+<ref refid="7d7175da-4b20-11ee-b912-001a7dda7113"/>
+</subject>
+</EnumerationItem>
+<EnumerationLiteral id="9c5356a1-4b20-11ee-87de-001a7dda7113">
+<enumeration>
+<ref refid="7d7175da-4b20-11ee-b912-001a7dda7113"/>
+</enumeration>
+<name>
+<val>- DESBLOQUEADA : INT = 0</val>
+</name>
+</EnumerationLiteral>
+<EnumerationLiteral id="a07df44b-4b20-11ee-b159-001a7dda7113">
+<enumeration>
+<ref refid="7d7175da-4b20-11ee-b912-001a7dda7113"/>
+</enumeration>
+<name>
+<val>- BLOQUEADA : INT = 1</val>
+</name>
+</EnumerationLiteral>
 </gaphor>
