@@ -4,12 +4,12 @@ import model.entities.enums.Cargo;
 
 public class Administrador extends Bibliotecario {
 
-    public Administrador(String nome, String endereco, String telefone, String id, String usuario, String senhaDeAcesso) {
+    public Administrador(String nome, String endereco, String telefone, int id, String usuario, String senhaDeAcesso) {
         super(nome, endereco, telefone, id, usuario, senhaDeAcesso);
         this.setCargo(Cargo.ADMINISTRADOR);
     }
 
-    public Usuario cadastrarUsuario(String nome, String endereco, String telefone, String id, String usuario, String senhaDeAcesso, Cargo cargo)
+    public Usuario cadastrarUsuario(String nome, String endereco, String telefone, int id, String usuario, String senhaDeAcesso, Cargo cargo)
     {
         if(cargo == Cargo.LEITOR) {
             return new Leitor(nome, endereco, telefone, id, usuario, senhaDeAcesso);
@@ -25,10 +25,10 @@ public class Administrador extends Bibliotecario {
         }
     }
 
-    public void editarUsuario(String id){
+    public void editarUsuario(int id){
 
     }
-    public void removerUsuario(String id){
+    public void removerUsuario(int id){
 
     }
 }

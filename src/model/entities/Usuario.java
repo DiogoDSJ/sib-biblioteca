@@ -8,13 +8,13 @@ public abstract class Usuario extends Convidado {
     private String nome;
     private String endereco;
     private String telefone;
-    private String id;
+    private int id;
     private StatusConta statusDaConta;
     private String usuario;
     private String senhaDeAcesso;
     private Cargo cargo;
 
-    public Usuario(String nome, String endereco, String telefone, String id, String usuario, String senhaDeAcesso) {
+    public Usuario(String nome, String endereco, String telefone, int id, String usuario, String senhaDeAcesso) {
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
@@ -48,11 +48,11 @@ public abstract class Usuario extends Convidado {
         this.telefone = telefone;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
