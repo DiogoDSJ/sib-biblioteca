@@ -6,12 +6,15 @@ import dao.bibliotecario.BibliotecarioDAO;
 import dao.bibliotecario.BibliotecarioDAOList;
 import dao.leitor.LeitorDAO;
 import dao.leitor.LeitorDAOList;
+import dao.livro.LivroDAO;
+import dao.livro.LivroDAOList;
 
 public class DAO {
 
     private static AdministradorDAO administradorDAO;
     private static BibliotecarioDAO bibliotecarioDAO;
     private static LeitorDAO leitorDAO;
+    private static LivroDAO livroDAO;
     public static AdministradorDAO getAdministradorDAO() {
         if(administradorDAO == null)
         {
@@ -33,6 +36,13 @@ public class DAO {
             leitorDAO = new LeitorDAOList();
         }
         return leitorDAO;
+    }
+
+    public static LivroDAO getLivroDAO(){
+        if(livroDAO == null){
+            livroDAO = new LivroDAOList();
+        }
+        return livroDAO;
     }
 
 }
