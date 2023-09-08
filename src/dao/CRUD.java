@@ -9,7 +9,7 @@ public interface CRUD<T> {
 
     public void delete(T obj);
 
-    public T findByPk(T obj);
+    public T findByPk(int obj);
 
     public void deleteMany();
 
