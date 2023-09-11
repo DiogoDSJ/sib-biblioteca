@@ -14,11 +14,10 @@ public abstract class Usuario extends Convidado {
     private String senhaDeAcesso;
     private Cargo cargo;
 
-    public Usuario(String nome, String endereco, String telefone, int id, String usuario, String senhaDeAcesso) {
+    public Usuario(String nome, String endereco, String telefone, String usuario, String senhaDeAcesso) {
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
-        this.id = id;
         this.statusDaConta = StatusConta.DESBLOQUEADA;
         this.usuario = usuario;
         this.senhaDeAcesso = senhaDeAcesso;

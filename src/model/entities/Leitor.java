@@ -6,6 +6,8 @@ public class Leitor extends Usuario {
 
     public Leitor(String nome, String endereco, String telefone, int id, String usuario, String senhaDeAcesso) {
         super(nome, endereco, telefone, id, usuario, senhaDeAcesso);
+    public Leitor(String nome, String endereco, String telefone, String usuario, String senhaDeAcesso) {
+        super(nome, endereco, telefone, usuario, senhaDeAcesso);
         this.setCargo(Cargo.LEITOR);
     }
 
