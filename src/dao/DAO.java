@@ -4,6 +4,8 @@ import dao.administrador.AdministradorDAO;
 import dao.administrador.AdministradorDAOList;
 import dao.bibliotecario.BibliotecarioDAO;
 import dao.bibliotecario.BibliotecarioDAOList;
+import dao.emprestimo.EmprestimoDAO;
+import dao.emprestimo.EmprestimoDAOList;
 import dao.leitor.LeitorDAO;
 import dao.leitor.LeitorDAOList;
 import dao.livro.LivroDAO;
@@ -15,6 +17,7 @@ public class DAO {
     private static BibliotecarioDAO bibliotecarioDAO;
     private static LeitorDAO leitorDAO;
     private static LivroDAO livroDAO;
+    private static EmprestimoDAO emprestimoDAO;
     public static AdministradorDAO getAdministradorDAO() {
         if(administradorDAO == null)
         {
@@ -43,6 +46,13 @@ public class DAO {
             livroDAO = new LivroDAOList();
         }
         return livroDAO;
+    }
+
+    public static EmprestimoDAO getEmprestimoDAO(){
+        if(emprestimoDAO == null){
+            emprestimoDAO = new EmprestimoDAOList();
+        }
+        return emprestimoDAO;
     }
 
 }
