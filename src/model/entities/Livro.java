@@ -2,8 +2,8 @@ package model.entities;
 
 public class Livro {
 
-    private int id;
-    private int isbn;
+    private String id;
+    private String isbn;
     private String autor;
     private String titulo;
     private String editora;
@@ -12,7 +12,7 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro(int isbn, String autor, String titulo, String editora, String categoria) {
+    public Livro(String isbn, String autor, String titulo, String editora, String categoria) {
         this.isbn = isbn;
         this.autor = autor;
         this.titulo = titulo;
@@ -20,19 +20,19 @@ public class Livro {
         this.categoria = categoria;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 

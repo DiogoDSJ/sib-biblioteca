@@ -8,7 +8,7 @@ public abstract class Usuario extends Convidado {
     private String nome;
     private String endereco;
     private String telefone;
-    private int id;
+    private String id;
     private StatusConta statusDaConta;
     private String usuario;
     private String senhaDeAcesso;
@@ -47,11 +47,11 @@ public abstract class Usuario extends Convidado {
         this.telefone = telefone;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

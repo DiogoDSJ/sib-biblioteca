@@ -9,7 +9,7 @@ public class Administrador extends Bibliotecario {
         this.setCargo(Cargo.ADMINISTRADOR);
     }
 
-    public Usuario cadastrarUsuario(String nome, String endereco, String telefone, int id, String usuario, String senhaDeAcesso, Cargo cargo)
+    public Usuario cadastrarUsuario(String nome, String endereco, String telefone, String id, String usuario, String senhaDeAcesso, Cargo cargo)
     {
         if(cargo == Cargo.LEITOR) {
             return new Leitor(nome, endereco, telefone, usuario, senhaDeAcesso);
@@ -25,10 +25,10 @@ public class Administrador extends Bibliotecario {
         }
     }
 
-    public void editarUsuario(int id){
+    public void editarUsuario(String id){
 
     }
-    public void removerUsuario(int id){
+    public void removerUsuario(String id){
 
     }
 }

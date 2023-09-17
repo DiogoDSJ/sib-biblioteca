@@ -8,16 +8,17 @@ import java.util.List;
 public class EmprestimoDAOList implements EmprestimoDAO {
 
     private List<Emprestimo> lista;
-    private int proximoID;
+    private String proximoID;
 
-    public int getProximoID() {
-
-        return proximoID++;
+    private String getProximoID() {
+        int proxID = Integer.parseInt(proximoID);
+        proxID++;
+        return this.proximoID = Integer.toString(proxID);
     }
 
     public EmprestimoDAOList() {
         this.lista = new ArrayList<>();
-        this.proximoID = 0;
+        this.proximoID = "0";
     }
 
     @Override
@@ -33,9 +34,9 @@ public class EmprestimoDAOList implements EmprestimoDAO {
     }
 
     @Override
-    public Emprestimo findByPk(int obj) {
+    public Emprestimo findByPk(String obj) {
         for (Emprestimo objIterator: this.lista) {
-            if(obj == objIterator.getIdEmprestimo()) {
+            if(obj.equals(objIterator.getIdEmprestimo())) {
                 return objIterator;
             }
         }
@@ -45,7 +46,7 @@ public class EmprestimoDAOList implements EmprestimoDAO {
     @Override
     public void deleteMany() {
         this.lista = new ArrayList<>();
-        this.proximoID = 0;
+        this.proximoID = "0";
     }
 
     @Override

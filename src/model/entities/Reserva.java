@@ -8,9 +8,9 @@ public class Reserva {
     private String idReservante;
     private Date dataReserva;
     private String idLivro;
-    private int idReserva;
+    private String idReserva;
 
-    public Reserva(String idReservante, Date dataReserva, String idLivro, int idReserva) {
+    public Reserva(String idReservante, Date dataReserva, String idLivro, String idReserva) {
         this.idReservante = idReservante;
         this.dataReserva = dataReserva;
         this.idLivro = idLivro;
@@ -41,11 +41,11 @@ public class Reserva {
         this.idLivro = idLivro;
     }
 
-    public int getIdReserva() {
+    public String getIdReserva() {
         return idReserva;
     }
 
-    public void setIdReserva(int idReserva) {
+    public void setIdReserva(String idReserva) {
         this.idReserva = idReserva;
     }
 }

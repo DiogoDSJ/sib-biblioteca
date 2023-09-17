@@ -12,7 +12,18 @@ public class Leitor extends Usuario {
         this.setCargo(Cargo.LEITOR);
     }
 
-    public Integer getNumeroDeEmprestimos(){
+    public int getNumeroDeEmprestimos(){
         return numeroDeEmprestimos;
+    }
+
+    public void adicionarUmEmprestimo() {
+        if(numeroDeEmprestimos <= 2)
+            this.numeroDeEmprestimos++ ;
+    }
+
+    public void removerUmEmprestimo() {
+        if (numeroDeEmprestimos > 0) {
+            this.numeroDeEmprestimos--;
+        }
     }
 }

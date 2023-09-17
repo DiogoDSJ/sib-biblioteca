@@ -9,16 +9,18 @@ import java.util.List;
 public class AdministradorDAOList implements AdministradorDAO {
 
     private List<Administrador> lista;
-    private int proximoID;
+    private String proximoID;
 
     public AdministradorDAOList() {
         this.lista = new ArrayList<>();
-        this.proximoID = 0;
+        this.proximoID = "0";
     }
 
 
-    private int getProximoID(){
-        return this.proximoID++;
+    private String getProximoID(){
+        int proxID = Integer.parseInt(proximoID);
+        proxID++;
+        return this.proximoID = Integer.toString(proxID);
     }
 
 
@@ -35,9 +37,9 @@ public class AdministradorDAOList implements AdministradorDAO {
     }
 
     @Override
-    public Administrador findByPk(int obj) {
+    public Administrador findByPk(String obj) {
         for (Administrador objIterator : this.lista) {
-            if(obj == objIterator.getId())
+            if(obj.equals(objIterator.getId()))
             {
                 return objIterator;
             }
@@ -48,7 +50,7 @@ public class AdministradorDAOList implements AdministradorDAO {
     @Override
     public void deleteMany() {
         this.lista = new ArrayList<>();
-        this.proximoID = 0;
+        this.proximoID = "0";
     }
 
     @Override

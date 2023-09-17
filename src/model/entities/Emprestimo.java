@@ -1,26 +1,29 @@
 package model.entities;
 
+import dao.DAO;
+
 import java.util.Date;
 
 public class Emprestimo {
-    private Date dataInicio;
-    private Date dataFim;
-    private int idMutuario;
-    private String isbnLivro;
-    private int idEmprestimo;
+    private final Date dataInicio;
+    private final Date dataFim;
+    private final String idMutuario;
+    private final String isbnLivro;
+    private String idEmprestimo;
 
-    public Emprestimo(Date dataInicio, Date dataFim, int idMutuario, String isbnLivro) {
+    public Emprestimo(Date dataInicio, Date dataFim, String idMutuario, String isbnLivro) {
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.idMutuario = idMutuario;
         this.isbnLivro = isbnLivro;
+        DAO.getLeitorDAO().findByPk(idMutuario).removerUmEmprestimo();
     }
 
     public Date getDataInicio() {
         return dataInicio;
     }
 
-    public void setIdEmprestimo(int idEmprestimo) {
+    public void setIdEmprestimo(String idEmprestimo) {
         this.idEmprestimo = idEmprestimo;
     }
 
@@ -28,7 +31,7 @@ public class Emprestimo {
         return dataFim;
     }
 
-    public int getIdMutuario() {
+    public String getIdMutuario() {
         return idMutuario;
     }
 
@@ -36,7 +39,7 @@ public class Emprestimo {
         return isbnLivro;
     }
 
-    public int getIdEmprestimo() {
+    public String getIdEmprestimo() {
         return idEmprestimo;
     }
 }

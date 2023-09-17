@@ -8,16 +8,17 @@ import java.util.List;
 public class BibliotecarioDAOList implements BibliotecarioDAO {
 
     private List<Bibliotecario> lista;
-    private int proximoID;
+    private String proximoID;
 
-    public int getProximoID() {
-
-        return proximoID++;
+    private String getProximoID() {
+        int proxID = Integer.parseInt(proximoID);
+        proxID++;
+        return this.proximoID = Integer.toString(proxID);
     }
 
     public BibliotecarioDAOList() {
         this.lista = new ArrayList<>();
-        this.proximoID = 0;
+        this.proximoID = "0";
     }
 
     @Override
@@ -33,9 +34,9 @@ public class BibliotecarioDAOList implements BibliotecarioDAO {
     }
 
     @Override
-    public Bibliotecario findByPk(int obj) {
+    public Bibliotecario findByPk(String obj) {
         for (Bibliotecario objIterator: this.lista) {
-            if(obj == objIterator.getId()) {
+            if(obj.equals(objIterator.getId())) {
                 return objIterator;
             }
         }
@@ -45,7 +46,7 @@ public class BibliotecarioDAOList implements BibliotecarioDAO {
     @Override
     public void deleteMany() {
         this.lista = new ArrayList<>();
-        this.proximoID = 0;
+        this.proximoID = "0";
     }
 
     @Override

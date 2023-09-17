@@ -8,15 +8,17 @@ import java.util.List;
 public class LeitorDAOList implements LeitorDAO {
 
     private List<Leitor> lista;
-    private int ProximoID;
+    private String proximoID;
 
     public LeitorDAOList() {
         lista = new ArrayList<>();
-        this.ProximoID = 0;
+        this.proximoID = "0";
     }
 
-    private int getProximoID() {
-        return ProximoID++;
+    private String getProximoID() {
+        int proxID = Integer.parseInt(proximoID);
+        proxID++;
+        return this.proximoID = Integer.toString(proxID);
     }
 
     @Override
@@ -32,9 +34,9 @@ public class LeitorDAOList implements LeitorDAO {
     }
 
     @Override
-    public Leitor findByPk(int obj) {
+    public Leitor findByPk(String obj) {
         for (Leitor objIterator: this.lista) {
-            if(obj == objIterator.getId())
+            if(obj.equals(objIterator.getId()))
                 return objIterator;
         }
         return null;
@@ -43,7 +45,7 @@ public class LeitorDAOList implements LeitorDAO {
     @Override
     public void deleteMany() {
         this.lista = new ArrayList<>();
-        this.ProximoID = 0;
+        this.proximoID = "0";
     }
 
     @Override

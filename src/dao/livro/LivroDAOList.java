@@ -8,15 +8,17 @@ import java.util.List;
 public class LivroDAOList implements LivroDAO {
 
     private List<Livro> lista;
-    private int proximoID;
+    private String proximoID;
 
     public LivroDAOList() {
         this.lista = new ArrayList<>();
-        this.proximoID = 0;
+        this.proximoID = "0";
     }
 
-    public int getProximoID() {
-        return proximoID++;
+    private String getProximoID() {
+        int proxID = Integer.parseInt(this.proximoID);
+        proxID++;
+        return this.proximoID = Integer.toString(proxID);
     }
 
     @Override
@@ -32,9 +34,9 @@ public class LivroDAOList implements LivroDAO {
     }
 
     @Override
-    public Livro findByPk(int obj) {
+    public Livro findByPk(String obj) {
         for (Livro objIterator: this.lista) {
-            if(obj == objIterator.getId()){
+            if(obj.equals(objIterator.getId())){
                 return objIterator;
             }
         }
@@ -44,7 +46,7 @@ public class LivroDAOList implements LivroDAO {
     @Override
     public void deleteMany() {
         this.lista = new ArrayList<>();
-        this.proximoID = 0;
+        this.proximoID = "0";
     }
 
     @Override

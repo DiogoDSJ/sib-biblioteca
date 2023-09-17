@@ -10,6 +10,8 @@ import dao.leitor.LeitorDAO;
 import dao.leitor.LeitorDAOList;
 import dao.livro.LivroDAO;
 import dao.livro.LivroDAOList;
+import dao.reserva.ReservaDAO;
+import dao.reserva.ReservaDAOList;
 
 public class DAO {
 
@@ -18,6 +20,8 @@ public class DAO {
     private static LeitorDAO leitorDAO;
     private static LivroDAO livroDAO;
     private static EmprestimoDAO emprestimoDAO;
+
+    private static ReservaDAO reservaDAO;
     public static AdministradorDAO getAdministradorDAO() {
         if(administradorDAO == null)
         {
@@ -53,6 +57,13 @@ public class DAO {
             emprestimoDAO = new EmprestimoDAOList();
         }
         return emprestimoDAO;
+    }
+
+    public static ReservaDAO getReservaDAO(){
+        if(reservaDAO == null){
+            reservaDAO = new ReservaDAOList();
+        }
+        return reservaDAO;
     }
 
 }

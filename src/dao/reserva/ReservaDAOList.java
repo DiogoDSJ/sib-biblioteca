@@ -9,14 +9,16 @@ public class ReservaDAOList implements ReservaDAO{
 
     private List<Reserva> lista;
 
-    private int proximoID;
+    private String proximoID;
 
     public ReservaDAOList() {
         this.lista = new ArrayList<>();
-        this.proximoID = 0;
+        this.proximoID = "0";
     }
-    public int getProximoID() {
-        return proximoID++;
+    private String getProximoID() {
+        int proxID = Integer.parseInt(proximoID);
+        proxID++;
+        return this.proximoID = Integer.toString(proxID);
     }
     @Override
     public Reserva create(Reserva obj) {
@@ -31,10 +33,9 @@ public class ReservaDAOList implements ReservaDAO{
     }
 
     @Override
-    public Reserva findByPk(int obj) {
-        for (Reserva objReserva:
-             this.lista) {
-            if(obj == objReserva.getIdReserva()){
+    public Reserva findByPk(String obj) {
+        for (Reserva objReserva: this.lista) {
+            if(obj.equals(objReserva.getIdReserva())){
                 return objReserva;
             }
         }
@@ -44,12 +45,12 @@ public class ReservaDAOList implements ReservaDAO{
     @Override
     public void deleteMany() {
         this.lista = new ArrayList<>();
-        this.proximoID = 0;
+        this.proximoID = "0";
     }
 
     @Override
     public Reserva update(Reserva obj) {
-        this.lista.set(obj.getIdReserva(), obj);
+        this.lista.set(this.lista.indexOf(obj), obj);
         return obj;
     }
 
