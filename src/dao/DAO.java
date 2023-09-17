@@ -10,6 +10,8 @@ import dao.leitor.LeitorDAO;
 import dao.leitor.LeitorDAOList;
 import dao.livro.LivroDAO;
 import dao.livro.LivroDAOList;
+import dao.multa.MultaDAO;
+import dao.multa.MultaDAOList;
 import dao.reserva.ReservaDAO;
 import dao.reserva.ReservaDAOList;
 
@@ -20,8 +22,8 @@ public class DAO {
     private static LeitorDAO leitorDAO;
     private static LivroDAO livroDAO;
     private static EmprestimoDAO emprestimoDAO;
-
     private static ReservaDAO reservaDAO;
+    private static MultaDAO multaDAO;
     public static AdministradorDAO getAdministradorDAO() {
         if(administradorDAO == null)
         {
@@ -66,4 +68,10 @@ public class DAO {
         return reservaDAO;
     }
 
+    public static MultaDAO getMultaDAO(){
+        if(multaDAO == null){
+            multaDAO = new MultaDAOList();
+        }
+        return multaDAO;
+    }
 }
