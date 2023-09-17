@@ -1,0 +1,60 @@
+package dao.reserva;
+
+import model.entities.Reserva;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ReservaDAOList implements ReservaDAO{
+
+    private List<Reserva> lista;
+
+    private int proximoID;
+
+    public ReservaDAOList() {
+        this.lista = new ArrayList<>();
+        this.proximoID = 0;
+    }
+    public int getProximoID() {
+        return proximoID++;
+    }
+    @Override
+    public Reserva create(Reserva obj) {
+        obj.setIdReserva(this.getProximoID());
+        this.lista.add(obj);
+        return obj;
+    }
+
+    @Override
+    public void delete(Reserva obj) {
+        this.lista.remove(obj);
+    }
+
+    @Override
+    public Reserva findByPk(int obj) {
+        for (Reserva objReserva:
+             this.lista) {
+            if(obj == objReserva.getIdReserva()){
+                return objReserva;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteMany() {
+        this.lista = new ArrayList<>();
+        this.proximoID = 0;
+    }
+
+    @Override
+    public Reserva update(Reserva obj) {
+        this.lista.set(obj.getIdReserva(), obj);
+        return obj;
+    }
+
+    @Override
+    public List<Reserva> findMany() {
+        return this.lista;
+    }
+}
