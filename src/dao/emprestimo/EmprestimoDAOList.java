@@ -1,9 +1,13 @@
 package dao.emprestimo;
 
+import dao.DAO;
 import model.entities.Emprestimo;
+import model.entities.Leitor;
+import model.entities.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class EmprestimoDAOList implements EmprestimoDAO {
 
@@ -13,7 +17,8 @@ public class EmprestimoDAOList implements EmprestimoDAO {
     private String getProximoID() {
         int proxID = Integer.parseInt(proximoID);
         proxID++;
-        return this.proximoID = Integer.toString(proxID);
+        this.proximoID = Integer.toString(proxID);
+        return this.proximoID;
     }
 
     public EmprestimoDAOList() {
@@ -59,4 +64,28 @@ public class EmprestimoDAOList implements EmprestimoDAO {
     public List<Emprestimo> findMany() {
         return this.lista;
     }
+
+    @Override
+    public List<Emprestimo> findByIdMutuario(String idMutuario) {
+        List<Emprestimo> emprestimoList = new ArrayList<>();
+        for (Emprestimo objIterator: this.lista) {
+            if(idMutuario.equals(objIterator.getIdMutuario())) {
+                emprestimoList.add(objIterator);
+            }
+        }
+        return emprestimoList;
+    }
+    @Override
+    public List<Emprestimo> findByIsbn(String isbn) {
+        List<Emprestimo> emprestimoList = new ArrayList<>();
+        for (Emprestimo objIterator: this.lista) {
+            if(isbn.equals(objIterator.getIdMutuario())) {
+                emprestimoList.add(objIterator);
+            }
+        }
+        return emprestimoList;
+    }
+
+
+
 }
