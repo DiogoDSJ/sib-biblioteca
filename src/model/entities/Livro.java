@@ -9,6 +9,8 @@ public class Livro {
     private String editora;
     private String categoria;
 
+    private String quantidade;
+
     public Livro() {
     }
 
@@ -18,6 +20,7 @@ public class Livro {
         this.titulo = titulo;
         this.editora = editora;
         this.categoria = categoria;
+        this.quantidade = "1";
     }
 
     public String getId() {
@@ -42,6 +45,23 @@ public class Livro {
 
     public void setAutor(String autor) {
         this.autor = autor;
+    }
+
+    public String getQuantidade() {
+        return quantidade;
+    }
+    public void adicionarUmaUnidade() {
+        int quantidadeInt = Integer.parseInt(this.quantidade);
+        quantidadeInt++;
+        this.quantidade = Integer.toString(quantidadeInt);
+    }
+
+    public void removerUmaUnidade() {
+        int quantidadeInt = Integer.parseInt(this.quantidade);
+        if(quantidadeInt > 0) {
+            quantidadeInt--;
+        }
+        this.quantidade = Integer.toString(quantidadeInt);
     }
 
     public String getTitulo() {
