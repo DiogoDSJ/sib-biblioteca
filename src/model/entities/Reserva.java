@@ -1,16 +1,16 @@
 package model.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Reserva {
 
 
     private String idReservante;
-    private Date dataReserva;
+    private LocalDate dataReserva;
     private String idLivro;
     private String idReserva;
 
-    public Reserva(String idReservante, Date dataReserva, String idLivro, String idReserva) {
+    public Reserva(String idReservante, LocalDate dataReserva, String idLivro, String idReserva) {
         this.idReservante = idReservante;
         this.dataReserva = dataReserva;
         this.idLivro = idLivro;
@@ -25,11 +25,11 @@ public class Reserva {
         this.idReservante = idReservante;
     }
 
-    public Date getDataReserva() {
+    public LocalDate getDataReserva() {
         return dataReserva;
     }
 
-    public void setDataReserva(Date dataReserva) {
+    public void setDataReserva(LocalDate dataReserva) {
         this.dataReserva = dataReserva;
     }
 

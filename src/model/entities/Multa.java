@@ -1,34 +1,34 @@
 package model.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Multa {
 
-    private Date dataIncio;
-    private Date dataFim;
+    private LocalDate dataIncio;
+    private LocalDate dataFim;
     private String idMulta;
     private String idUsuario;
 
-    public Multa(Date dataIncio, Date dataFim, String idMulta, String idUsuario) {
+    public Multa(LocalDate dataIncio, LocalDate dataFim, String idMulta, String idUsuario) {
         this.dataIncio = dataIncio;
         this.dataFim = dataFim;
         this.idMulta = idMulta;
         this.idUsuario = idUsuario;
     }
 
-    public Date getDataIncio() {
+    public LocalDate getDataIncio() {
         return dataIncio;
     }
 
-    public void setDataIncio(Date dataIncio) {
+    public void setDataIncio(LocalDate dataIncio) {
         this.dataIncio = dataIncio;
     }
 
-    public Date getDataFim() {
+    public LocalDate getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(Date dataFim) {
+    public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
     }
 
