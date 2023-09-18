@@ -18,7 +18,8 @@ public class LeitorDAOList implements LeitorDAO {
     private String getProximoID() {
         int proxID = Integer.parseInt(proximoID);
         proxID++;
-        return this.proximoID = Integer.toString(proxID);
+        this.proximoID = Integer.toString(proxID);
+        return this.proximoID;
     }
 
     @Override
@@ -36,8 +37,9 @@ public class LeitorDAOList implements LeitorDAO {
     @Override
     public Leitor findByPk(String obj) {
         for (Leitor objIterator: this.lista) {
-            if(obj.equals(objIterator.getId()))
+            if(obj.equals(objIterator.getId())) {
                 return objIterator;
+            }
         }
         return null;
     }
