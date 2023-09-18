@@ -59,4 +59,24 @@ public class LivroDAOList implements LivroDAO {
     public List<Livro> findMany() {
         return this.lista;
     }
+
+    @Override
+    public Livro findByIsbn(String isbn){
+        for (Livro objIterator: this.lista) {
+            if(isbn.equals(objIterator.getIsbn())){
+                return objIterator;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Livro findByTitulo(String titulo){
+        for (Livro objIterator: this.lista) {
+            if(titulo.equals(objIterator.getTitulo())){
+                return objIterator;
+            }
+        }
+        return null;
+    }
 }
