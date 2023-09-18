@@ -11,12 +11,13 @@ public class Emprestimo {
     private final String isbnLivro;
     private String idEmprestimo;
 
-    public Emprestimo(LocalDate dataInicio, LocalDate dataFim, String idMutuario, String isbnLivro) {
-        this.dataInicio = LocalDate.now();;
-        this.dataFim = dataFim;
+    public Emprestimo(String idMutuario, String isbnLivro) {
+        this.dataInicio = LocalDate.now();
+        this.dataFim = dataInicio.plusDays(7);
         this.idMutuario = idMutuario;
         this.isbnLivro = isbnLivro;
         DAO.getLeitorDAO().findByPk(idMutuario).removerUmEmprestimo();
+        DAO.getLivroDAO().findByIsbn(isbnLivro).removerUmaUnidade();
     }
 
     public LocalDate getDataInicio() {
