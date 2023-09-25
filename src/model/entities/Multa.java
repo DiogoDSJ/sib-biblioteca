@@ -9,10 +9,9 @@ public class Multa {
     private String idMulta;
     private String idUsuario;
 
-    public Multa(LocalDate dataIncio, LocalDate dataFim, String idMulta, String idUsuario) {
+    public Multa(LocalDate dataIncio, LocalDate dataFim, String idUsuario) {
         this.dataIncio = dataIncio;
         this.dataFim = dataFim;
-        this.idMulta = idMulta;
         this.idUsuario = idUsuario;
     }
 
@@ -20,16 +19,12 @@ public class Multa {
         return dataIncio;
     }
 
-    public void setDataIncio(LocalDate dataIncio) {
-        this.dataIncio = dataIncio;
-    }
-
     public LocalDate getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(LocalDate dataFim) {
-        this.dataFim = dataFim;
+    public void aumentarMulta(int dias) {
+        this.dataFim = this.dataFim.plusDays(dias);
     }
 
     public String getIdMulta() {
