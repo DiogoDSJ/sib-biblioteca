@@ -7,14 +7,15 @@ public class Reserva {
 
     private String idReservante;
     private LocalDate dataReserva;
+    private LocalDate dataInicioReserva;
+    private LocalDate dataFimReserva;
     private String idLivro;
     private String idReserva;
 
-    public Reserva(String idReservante, LocalDate dataReserva, String idLivro, String idReserva) {
+    public Reserva(String idReservante, String idLivro) {
         this.idReservante = idReservante;
-        this.dataReserva = dataReserva;
+        this.dataReserva = LocalDate.now();
         this.idLivro = idLivro;
-        this.idReserva = idReserva;
     }
 
     public String getIdReservante() {
@@ -27,10 +28,6 @@ public class Reserva {
 
     public LocalDate getDataReserva() {
         return dataReserva;
-    }
-
-    public void setDataReserva(LocalDate dataReserva) {
-        this.dataReserva = dataReserva;
     }
 
     public String getIdLivro() {
@@ -47,5 +44,21 @@ public class Reserva {
 
     public void setIdReserva(String idReserva) {
         this.idReserva = idReserva;
+    }
+
+    public LocalDate getDataInicioReserva() {
+        return dataInicioReserva;
+    }
+
+    public void setDataInicioReserva(LocalDate dataInicioReserva) {
+        this.dataInicioReserva = dataInicioReserva;
+    }
+
+    public LocalDate getDataFimReserva() {
+        return dataFimReserva;
+    }
+
+    public void setDataFimReserva(LocalDate dataFimReserva) {
+        this.dataFimReserva = dataFimReserva;
     }
 }
