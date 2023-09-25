@@ -1,6 +1,7 @@
 package model.entities;
 
 import dao.DAO;
+import exceptions.foraDeEstoqueException;
 import model.entities.Emprestimo;
 import model.entities.Leitor;
 import model.entities.Multa;
@@ -64,6 +65,38 @@ public class Sistema {
         }
     }
 
+
+    public static int getOrdemReserva(Leitor leitor, Livro livro){
+        int contadora = 0;
+        for (Reserva obj : DAO.getReservaDAO().findMany()){
+            if(obj.getIdLivro().equals(livro.getIsbn())){
+                contadora++;
+                if(obj.getIdReservante().equals(leitor.getId())){
+                    break;
+                }
+            }
+        }
+        return contadora;
+    }
+
+    public static boolean checarSeAReservaDoUsuarioOPermitePegarOLivro(Leitor leitor, Livro livro){
+        int quantidade = Integer.parseInt(livro.getQuantidade());
+        return (getOrdemReserva(leitor, livro) <= quantidade && getOrdemReserva(leitor, livro) > numeroReservasLivro(livro));
+
+
+    }
+
+    public static int numeroReservasLivro(Livro livro){
+        int contadora = 0;
+        for (Reserva obj : DAO.getReservaDAO().findMany()){
+            if(obj.getIdLivro().equals(livro.getIsbn())){
+                contadora++;
+            }
+        }
+        return contadora;
+    }
+
+
 /*    public void removerEmprestimo(){
         for (Emprestimo obj: DAO.getEmprestimoDAO().findMany()) {
             if(!checarSeHaAtrasoEmprestimo(obj)){
@@ -79,6 +112,42 @@ public class Sistema {
 
     public static int getQuantidadeLivrosEmprestados(){
         return DAO.getEmprestimoDAO().findMany().size();
+    }
+
+
+    /*
+    atualizar reservas tem 3 etapas.
+
+    1) ativar as reservas quando um livro novo ser liberado
+    2) apagar as reservas esgostadas.
+
+    */
+
+    public static void ativarReservasLivros (){
+        for (Livro livro: DAO.getLivroDAO().findMany()) {
+            int unidadesLivro = Integer.parseInt(livro.getQuantidade());
+            int contador = 0;
+            for (Reserva reserva : DAO.getReservaDAO().findMany()) {
+                if (contador == unidadesLivro) {
+                    break;
+                }
+                if (reserva.getIdLivro().equals(livro.getIsbn())) {
+                    reserva.setDataInicioReserva(LocalDate.now());
+                    reserva.setDataFimReserva(reserva.getDataInicioReserva().plusDays(2));
+                    contador++;
+                }
+            }
+        }
+
+    }
+
+    public static void atualizarReservas() throws foraDeEstoqueException {
+        for (Reserva reserva : DAO.getReservaDAO().findMany()) {
+            if(reserva.getDataFimReserva().isAfter(LocalDate.now())){
+                DAO.getReservaDAO().delete(reserva);
+                DAO.getLeitorDAO().findByPk(reserva.getIdReserva()).adicionarUmaReserva();
+            }
+        }
     }
 
 

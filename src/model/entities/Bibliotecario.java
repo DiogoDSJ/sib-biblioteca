@@ -1,6 +1,10 @@
 package model.entities;
 
 import dao.DAO;
+import exceptions.foraDeEstoqueException;
+import exceptions.livroReservadoException;
+import exceptions.naoEncontradoException;
+import exceptions.usuarioBloqueadoException;
 import model.entities.enums.Cargo;
 
 
@@ -50,6 +54,27 @@ public class Bibliotecario extends Usuario {
         DAO.getEmprestimoDAO().create(emprestimo);
         leitor.adicionarEmprestimoNoHistorico(emprestimo);
         leitor.removerUmEmprestimo();
+    }
+
+    public void fazerReserva(String idReservante, String isbnLivro) throws naoEncontradoException, usuarioBloqueadoException, foraDeEstoqueException{
+        Leitor leitor = DAO.getLeitorDAO().findByPk(idReservante);
+        Livro livro = DAO.getLivroDAO().findByIsbn(isbnLivro);
+        if (leitor == null) {
+            throw new naoEncontradoException("Leitor não existe.");
+        }
+        else if (livro == null) {
+            throw new naoEncontradoException("Livro não existe.");
+        }
+        else if(leitor.getNumeroDeReservas() == 0){
+            throw new foraDeEstoqueException("Usuário alcançou o máximo de reservas.");
+        }
+        Sistema.updateMultas(); // colocar no beforeEach || Atualizo as multas para remover multas que já foram pagas e não atrapalha na checagem de atraso
+        if (Sistema.checarSeHaAtrasoLeitor(leitor)) { // dois casos : ele já esta multado ou precisa ser multado.
+            throw new usuarioBloqueadoException("Usuário em atraso.");
+        }
+        Reserva reserva = new Reserva(idReservante, isbnLivro);
+        DAO.getReservaDAO().create(reserva);
+        leitor.adicionarUmaReserva();
     }
 
 }
