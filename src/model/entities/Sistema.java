@@ -45,14 +45,10 @@ public class Sistema {
         List<Emprestimo> emprestimoList = DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId());
         for (Emprestimo obj: emprestimoList) {
             if(checarSeHaAtrasoEmprestimo(obj)){
-                leitor.bloquearConta();
                 return true;
             }
         }
-        if(DAO.getMultaDAO().findByIdMutuario(leitor.getId()) == null){
-            leitor.desbloquearConta();
-        }
-        return false;
+        return DAO.getMultaDAO().findByIdMutuario(leitor.getId()) != null;
     }
 
     public static boolean checarSeHaAtrasoEmprestimo(Emprestimo emprestimo){
@@ -62,6 +58,7 @@ public class Sistema {
     public static void updateMultas(){
         for(Multa objIterator : DAO.getMultaDAO().findMany()){
             if(!objIterator.getDataFim().isBefore(LocalDate.now())){
+                DAO.getLeitorDAO().findByPk(objIterator.getIdUsuario()).desbloquearConta();
                 DAO.getMultaDAO().delete(objIterator);
             }
         }
