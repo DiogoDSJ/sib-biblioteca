@@ -28,25 +28,28 @@ public class Bibliotecario extends Usuario {
         }
     }
 
-    public boolean fazerEmprestimo(String idMutuario, String isbnLivro){
+    public void fazerEmprestimo(String idMutuario, String isbnLivro) throws naoEncontradoException, foraDeEstoqueException, usuarioBloqueadoException, livroReservadoException {
         Leitor leitor = DAO.getLeitorDAO().findByPk(idMutuario);
         Livro livro = DAO.getLivroDAO().findByIsbn(isbnLivro);
-        Sistema.updateMultas();
-        if(Sistema.checarSeHaAtrasoLeitor(leitor) || DAO.getMultaDAO().findByIdMutuario(idMutuario) != null){
-            Sistema.aplicarMulta(leitor);
-            return false;
+        if (leitor == null) {
+            throw new naoEncontradoException("Leitor não existe.");
+        } else if (livro == null) {
+            throw new naoEncontradoException("Livro não existe.");
         }
-
-        if(leitor.getNumeroDeEmprestimos() > 0 && (livro != null && !livro.getQuantidade().equals("0"))) {
-            Emprestimo emprestimo = new Emprestimo(idMutuario, isbnLivro);
-            DAO.getEmprestimoDAO().create(emprestimo);
-            DAO.getLeitorDAO().findByPk(idMutuario).adicionarEmprestimoNoHistorico(emprestimo);
-            return true;
+        Sistema.updateMultas(); // colocar no beforeEach || Atualizo as multas para remover multas que já foram pagas e não atrapalha na checagem de atraso
+        if (Sistema.checarSeHaAtrasoLeitor(leitor)) { // dois casos : ele já esta multado ou precisa ser multado.
+            throw new usuarioBloqueadoException("Usuário em atraso.");
+        } else if (livro.getQuantidade().equals("0")) {
+            throw new foraDeEstoqueException("Não há estoque disponível para esse livro.");
+        } else if (leitor.getNumeroDeEmprestimos() == 0) {
+            throw new foraDeEstoqueException("Usuário alcançou o máximo de livros.");
+        } else if (!Sistema.checarSeAReservaDoUsuarioOPermitePegarOLivro(leitor, livro)) { // aqui eu tenho o livro em estoque e checo se o usuário tem reserva
+            throw new livroReservadoException("Livro está reservado para outro usuário.");
         }
-        else{
-            return false;
-            //System.out.println("Falha");
-        }
+        Emprestimo emprestimo = new Emprestimo(idMutuario, isbnLivro);
+        DAO.getEmprestimoDAO().create(emprestimo);
+        leitor.adicionarEmprestimoNoHistorico(emprestimo);
+        leitor.removerUmEmprestimo();
     }
 
 }
