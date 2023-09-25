@@ -1,17 +1,18 @@
 package model.entities;
 
 import dao.DAO;
+import exceptions.foraDeEstoqueException;
 
 import java.time.LocalDate;
 
 public class Emprestimo {
     private final LocalDate dataInicio;
-    private final LocalDate dataFim;
+    private LocalDate dataFim;
     private final String idMutuario;
     private final String isbnLivro;
     private String idEmprestimo;
 
-    public Emprestimo(String idMutuario, String isbnLivro) {
+    public Emprestimo(String idMutuario, String isbnLivro) throws foraDeEstoqueException {
         this.dataInicio = LocalDate.now();
         this.dataFim = dataInicio.plusDays(7);
         this.idMutuario = idMutuario;
@@ -45,8 +46,8 @@ public class Emprestimo {
     }
 
     public boolean renovarEmprestimo() {
-        if(getDataFim().compareTo(dataInicio) <= 7){
-            getDataFim().plusDays(7);
+        if((getDataFim().compareTo(dataInicio)) <= 7){
+            this.dataFim = LocalDate.now().plusDays(7);
             return true;
         }
         else{
