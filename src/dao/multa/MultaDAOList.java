@@ -60,4 +60,16 @@ public class MultaDAOList implements MultaDAO {
     public List<Multa> findMany() {
         return this.lista;
     }
+
+    @Override
+    public Multa findByIdMutuario(String obj){
+        for (Multa objIterator: lista) {
+            if(obj.equals(objIterator.getIdUsuario())) {
+                return objIterator;
+            }
+        }
+        return null;
+    }
+
+
 }
