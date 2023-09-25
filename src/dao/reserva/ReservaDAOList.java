@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservaDAOList implements ReservaDAO{
-
+    // ordenar por ordem de chegada e chave será isbn do livro
     private List<Reserva> lista;
 
     private String proximoID;
@@ -57,5 +57,15 @@ public class ReservaDAOList implements ReservaDAO{
     @Override
     public List<Reserva> findMany() {
         return this.lista;
+    }
+
+    @Override
+    public Reserva findByIdReservante(String obj) {
+        for (Reserva objReserva: this.lista) {
+            if(obj.equals(objReserva.getIdReservante())){
+                return objReserva;
+            }
+        }
+        return null;
     }
 }
