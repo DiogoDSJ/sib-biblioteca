@@ -28,12 +28,24 @@ public class Bibliotecario extends Usuario {
         }
     }
 
-    public void fazerEmprestimo(String idMutuario, String isbnLivro){
-        if(DAO.getLeitorDAO().findByPk(idMutuario).getNumeroDeEmprestimos() > 0 && (DAO.getLivroDAO().findByIsbn(isbnLivro) != null && !DAO.getLivroDAO().findByIsbn(isbnLivro).getQuantidade().equals("0"))) {
-            DAO.getEmprestimoDAO().create(new Emprestimo(idMutuario, isbnLivro));
+    public boolean fazerEmprestimo(String idMutuario, String isbnLivro){
+        Leitor leitor = DAO.getLeitorDAO().findByPk(idMutuario);
+        Livro livro = DAO.getLivroDAO().findByIsbn(isbnLivro);
+        Sistema.updateMultas();
+        if(Sistema.checarSeHaAtrasoLeitor(leitor) || DAO.getMultaDAO().findByIdMutuario(idMutuario) != null){
+            Sistema.aplicarMulta(leitor);
+            return false;
+        }
+
+        if(leitor.getNumeroDeEmprestimos() > 0 && (livro != null && !livro.getQuantidade().equals("0"))) {
+            Emprestimo emprestimo = new Emprestimo(idMutuario, isbnLivro);
+            DAO.getEmprestimoDAO().create(emprestimo);
+            DAO.getLeitorDAO().findByPk(idMutuario).adicionarEmprestimoNoHistorico(emprestimo);
+            return true;
         }
         else{
-            System.out.println("Falha");
+            return false;
+            //System.out.println("Falha");
         }
     }
 

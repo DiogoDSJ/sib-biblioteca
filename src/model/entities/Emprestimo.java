@@ -43,4 +43,14 @@ public class Emprestimo {
     public String getIdEmprestimo() {
         return idEmprestimo;
     }
+
+    public boolean renovarEmprestimo() {
+        if(getDataFim().compareTo(dataInicio) <= 7){
+            getDataFim().plusDays(7);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
