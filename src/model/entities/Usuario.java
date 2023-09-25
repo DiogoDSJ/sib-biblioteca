@@ -59,8 +59,11 @@ public abstract class Usuario extends Convidado {
         return statusDaConta;
     }
 
-    public void setStatusDaConta(StatusConta statusDaConta) {
-        this.statusDaConta = statusDaConta;
+    public void bloquearConta(){
+        this.statusDaConta = StatusConta.BLOQUEADA;
+    }
+    public void desbloquearConta(){
+        this.statusDaConta = StatusConta.DESBLOQUEADA;
     }
 
     public String getUsuario() {
