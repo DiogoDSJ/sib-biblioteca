@@ -81,7 +81,12 @@ public class Sistema {
 
     public static boolean checarSeAReservaDoUsuarioOPermitePegarOLivro(Leitor leitor, Livro livro){
         int quantidade = Integer.parseInt(livro.getQuantidade());
-        return (getOrdemReserva(leitor, livro) <= quantidade && getOrdemReserva(leitor, livro) > numeroReservasLivro(livro));
+        int ordemReserva = getOrdemReserva(leitor, livro);
+        int numeroReservasLivro = numeroReservasLivro(livro);
+        if(ordemReserva == 0) { // usuário não tem reserva
+            return quantidade > numeroReservasLivro;
+        }
+        return (ordemReserva <= quantidade && ordemReserva > numeroReservasLivro);
 
 
     }
