@@ -2,6 +2,7 @@ package model.entities;
 
 import dao.DAO;
 import exceptions.foraDeEstoqueException;
+import exceptions.objetoInexistenteException;
 import model.entities.Emprestimo;
 import model.entities.Leitor;
 import model.entities.Multa;
@@ -155,5 +156,28 @@ public class Sistema {
         }
     }
 
+    public static void devolverLivro(Leitor leitor, Livro livro) throws objetoInexistenteException, foraDeEstoqueException { // dois casos, o usuário está multado ou ele não está multado
+        List<Emprestimo>  emprestimosLeitor = DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId());
+        int checkvar = 0;
+        if (emprestimosLeitor == null) {
+            throw new objetoInexistenteException("Usuário não tem empréstimos ativos.");
+        }
+        for(Emprestimo emprestimo : emprestimosLeitor) {
+            if (livro.getIsbn().equals(emprestimo.getIsbnLivro())) {
+                checkvar = 1;
+                if (checarSeHaAtrasoLeitor(leitor)) {
+                    aplicarMulta(leitor);
+                }
+                DAO.getLivroDAO().findByPk(livro.getId()).adicionarUmaUnidade();
+                leitor.adicionarUmEmprestimo();
+                DAO.getLeitorDAO().update(leitor);
+                DAO.getEmprestimoDAO().delete(emprestimo);
+                atualizarReservas();
+                ativarReservasLivros();
+                break;
+            }
+        }
+        if(checkvar == 0) throw new objetoInexistenteException("Não há um empréstimo com este livro.");
+    }
 
 }
