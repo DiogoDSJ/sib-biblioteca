@@ -2,10 +2,12 @@ package model.entities;
 
 import dao.DAO;
 import exceptions.foraDeEstoqueException;
+import exceptions.naoEncontradoException;
 import exceptions.objetoInexistenteException;
 import model.entities.Emprestimo;
 import model.entities.Leitor;
 import model.entities.Multa;
+import model.entities.enums.Cargo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -178,6 +180,54 @@ public class Sistema {
             }
         }
         if(checkvar == 0) throw new objetoInexistenteException("Não há um empréstimo com este livro.");
+    }
+
+    public static Usuario fazerLogin(String usuario, String senha, Cargo cargo) throws naoEncontradoException { // deve estar legal, checar depois
+        int varnomecheck = 0;
+        int varsenhacheck = 0;
+        Usuario usuarioEncontrado = null;
+        if(cargo.equals(Cargo.LEITOR)){ // checar se esses equals vaofuncionar
+            List<Leitor> leitores = DAO.getLeitorDAO().findMany();
+            for (Leitor leitor: leitores) {
+                if(usuario.equals(leitor.getUsuario())){
+                    varnomecheck = 1;
+                    if(senha.equals(leitor.getSenhaDeAcesso())){
+                        varsenhacheck = 1;
+                        usuarioEncontrado = leitor;
+                        break;
+                    }
+                }
+            }
+        }
+        else if (cargo.equals(Cargo.BIBLIOTECARIO)) {
+            List<Bibliotecario> bibliotecarios = DAO.getBibliotecarioDAO().findMany();
+            for (Bibliotecario bibliotecario : bibliotecarios) {
+                if (usuario.equals(bibliotecario.getUsuario())) {
+                    varnomecheck = 1;
+                    if (senha.equals(bibliotecario.getSenhaDeAcesso())) {
+                        varsenhacheck = 1;
+                        usuarioEncontrado = bibliotecario;
+                        break;
+                    }
+                }
+            }
+        }
+        else if (cargo.equals(Cargo.ADMINISTRADOR)) {
+            List<Administrador> administradores = DAO.getAdministradorDAO().findMany();
+            for (Administrador administrador : administradores) {
+                if (usuario.equals(administrador.getUsuario())) {
+                    varnomecheck = 1;
+                    if (senha.equals(administrador.getSenhaDeAcesso())) {
+                        varsenhacheck = 1;
+                        usuarioEncontrado = administrador;
+                        break;
+                    }
+                }
+            }
+        }
+        if(varnomecheck == 0) throw new naoEncontradoException("Usuário não encontrado.");
+        else if(varsenhacheck == 0) throw new naoEncontradoException("Senha incorreta.");
+        return usuarioEncontrado;
     }
 
 }
