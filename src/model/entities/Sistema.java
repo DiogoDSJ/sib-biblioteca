@@ -230,4 +230,20 @@ public class Sistema {
         return usuarioEncontrado;
     }
 
+    public static Emprestimo buscarEmprestimoDoLeitor(Leitor leitor, String isbnLivro){
+        if(DAO.getLeitorDAO().findByPk(leitor.getId()) == null)
+            return null;
+        List<Emprestimo> emprestimoList = DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId());
+        if (emprestimoList == null)
+            return null;
+        for (Emprestimo emprestimo : emprestimoList) {
+            if (isbnLivro.equals(emprestimo.getIsbnLivro())) {
+                return emprestimo;
+            }
+        }
+        return null;
+    }
+
+
+
 }

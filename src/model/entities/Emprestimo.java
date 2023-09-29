@@ -2,6 +2,8 @@ package model.entities;
 
 import dao.DAO;
 import exceptions.foraDeEstoqueException;
+import exceptions.objetoInexistenteException;
+import exceptions.usuarioBloqueadoException;
 
 import java.time.LocalDate;
 
@@ -45,13 +47,18 @@ public class Emprestimo {
         return idEmprestimo;
     }
 
-    public boolean renovarEmprestimo() {
-        if((getDataFim().compareTo(dataInicio)) <= 7){
+    public void renovarEmprestimo(Leitor leitor, String isbnLivro) throws usuarioBloqueadoException, objetoInexistenteException {
+        if(leitor == null)
+            throw new objetoInexistenteException("Usuário não existe.");
+        Emprestimo emprestimo = Sistema.buscarEmprestimoDoLeitor(leitor, isbnLivro);
+        if(emprestimo == null)
+            throw new objetoInexistenteException("Empréstimo não existe.");
+        if (Sistema.checarSeHaAtrasoLeitor(leitor))
+            throw new usuarioBloqueadoException("Usuário em atraso, não é possivel renovar.");
+        else if(!emprestimo.getIsbnLivro().equals(this.isbnLivro))
+            throw new objetoInexistenteException("Não há emprestimo com esse livro.");
+        else if ((getDataFim().compareTo(dataInicio)) <= 7) {
             this.dataFim = LocalDate.now().plusDays(7);
-            return true;
-        }
-        else{
-            return false;
         }
     }
 }
