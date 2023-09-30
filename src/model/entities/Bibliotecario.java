@@ -30,22 +30,27 @@ public class Bibliotecario extends Usuario {
         else throw new livroEmprestadoException("Livro está emprestado.");
     }
 
-    public void fazerEmprestimo(String idMutuario, String isbnLivro) throws naoEncontradoException, foraDeEstoqueException, usuarioBloqueadoException, livroReservadoException {
+    public void fazerEmprestimo(String idMutuario, String isbnLivro) throws naoEncontradoException, objetoInexistenteException, foraDeEstoqueException, usuarioBloqueadoException, livroReservadoException, objetoDuplicadoException {
         Leitor leitor = DAO.getLeitorDAO().findByPk(idMutuario);
         Livro livro = DAO.getLivroDAO().findByIsbn(isbnLivro);
         if (leitor == null) {
             throw new naoEncontradoException("Leitor não existe.");
-        } else if (livro == null) {
+        }
+        else if (livro == null) {
             throw new naoEncontradoException("Livro não existe.");
         }
         Sistema.updateMultas(); // colocar no beforeEach || Atualizo as multas para remover multas que já foram pagas e não atrapalha na checagem de atraso
         if (Sistema.checarSeHaAtrasoLeitor(leitor)) { // dois casos : ele já esta multado ou precisa ser multado.
             throw new usuarioBloqueadoException("Usuário em atraso.");
-        } else if (livro.getQuantidade().equals("0")) {
+        }
+        else if (livro.getQuantidade().equals("0")) {
             throw new foraDeEstoqueException("Não há estoque disponível para esse livro.");
-        } else if (leitor.getNumeroDeEmprestimos() == 0) {
+        }
+        else if (leitor.getNumeroDeEmprestimos() == 0) {
             throw new foraDeEstoqueException("Usuário alcançou o máximo de livros.");
-        } else if (!Sistema.checarSeAReservaDoUsuarioOPermitePegarOLivro(leitor, livro)) { // aqui eu tenho o livro em estoque e checo se o usuário tem reserva
+        }
+        else if(Sistema.checarSeOUsuarioTemOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode ter dois livros iguais.");
+        else if (!Sistema.checarSeAReservaDoUsuarioOPermitePegarOLivro(leitor, livro)) { // aqui eu tenho o livro em estoque e checo se o usuário tem reserva
             throw new livroReservadoException("Livro está reservado para outro usuário.");
         }
         Emprestimo emprestimo = new Emprestimo(idMutuario, isbnLivro);
@@ -54,7 +59,7 @@ public class Bibliotecario extends Usuario {
         leitor.removerUmEmprestimo();
     }
 
-    public void fazerReserva(String idReservante, String isbnLivro) throws naoEncontradoException, usuarioBloqueadoException, foraDeEstoqueException{
+    public void fazerReserva(String idReservante, String isbnLivro) throws objetoInexistenteException, objetoDuplicadoException, naoEncontradoException, usuarioBloqueadoException, foraDeEstoqueException{
         Leitor leitor = DAO.getLeitorDAO().findByPk(idReservante);
         Livro livro = DAO.getLivroDAO().findByIsbn(isbnLivro);
         if (leitor == null) {
@@ -66,6 +71,8 @@ public class Bibliotecario extends Usuario {
         else if(leitor.getNumeroDeReservas() == 0){
             throw new foraDeEstoqueException("Usuário alcançou o máximo de reservas.");
         }
+        else if(Sistema.checarSeOUsuarioTemOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode ter dois livros iguais.");
+        else if(Sistema.checarSeOUsuarioReservouOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode reservar outro livro igual.");
         Sistema.updateMultas(); // colocar no beforeEach || Atualizo as multas para remover multas que já foram pagas e não atrapalha na checagem de atraso
         if (Sistema.checarSeHaAtrasoLeitor(leitor)) { // dois casos : ele já esta multado ou precisa ser multado.
             throw new usuarioBloqueadoException("Usuário em atraso.");
