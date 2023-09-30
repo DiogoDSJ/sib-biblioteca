@@ -10,18 +10,19 @@ public class Livro {
     private String titulo;
     private String editora;
     private String categoria;
-
+    private String anoDePublicacao;
     private String quantidade;
 
     public Livro() {
     }
 
-    public Livro(String isbn, String autor, String titulo, String editora, String categoria) {
+    public Livro(String isbn, String autor, String titulo, String editora, String categoria, String anoDePublicacao) {
         this.isbn = isbn;
         this.autor = autor;
         this.titulo = titulo;
         this.editora = editora;
         this.categoria = categoria;
+        this.anoDePublicacao = anoDePublicacao;
         this.quantidade = "1";
     }
 
@@ -52,6 +53,7 @@ public class Livro {
     public String getQuantidade() {
         return quantidade;
     }
+
     public void adicionarUmaUnidade() {
         int quantidadeInt = Integer.parseInt(this.quantidade);
         quantidadeInt++;
@@ -60,10 +62,10 @@ public class Livro {
 
     public void removerUmaUnidade() throws foraDeEstoqueException {
         int quantidadeInt = Integer.parseInt(this.quantidade);
-        if(quantidadeInt == 0) {
+        if (quantidadeInt == 0) {
             throw new foraDeEstoqueException("Não há unidades desse livro");
         }
-        quantidadeInt --;
+        quantidadeInt--;
         this.quantidade = Integer.toString(quantidadeInt);
     }
 
@@ -89,5 +91,13 @@ public class Livro {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public String getAnoDePublicacao() {
+        return anoDePublicacao;
+    }
+
+    public void setAnoDePublicacao(String anoDePublicacao) {
+        this.anoDePublicacao = anoDePublicacao;
     }
 }
