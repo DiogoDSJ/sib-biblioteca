@@ -1,5 +1,7 @@
 package model.entities;
 
+import exceptions.foraDeEstoqueException;
+
 public class Livro {
 
     private String id;
@@ -56,11 +58,12 @@ public class Livro {
         this.quantidade = Integer.toString(quantidadeInt);
     }
 
-    public void removerUmaUnidade() {
+    public void removerUmaUnidade() throws foraDeEstoqueException {
         int quantidadeInt = Integer.parseInt(this.quantidade);
-        if(quantidadeInt > 0) {
-            quantidadeInt--;
+        if(quantidadeInt == 0) {
+            throw new foraDeEstoqueException("Não há unidades desse livro");
         }
+        quantidadeInt --;
         this.quantidade = Integer.toString(quantidadeInt);
     }
 

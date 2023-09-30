@@ -1,10 +1,7 @@
 package model.entities;
 
 import dao.DAO;
-import exceptions.foraDeEstoqueException;
-import exceptions.livroReservadoException;
-import exceptions.naoEncontradoException;
-import exceptions.usuarioBloqueadoException;
+import exceptions.*;
 import model.entities.enums.Cargo;
 
 
@@ -26,10 +23,11 @@ public class Bibliotecario extends Usuario {
         }
     }
 
-    public void removerLivro(String isbn){
+    public void removerLivro(String isbn) throws livroEmprestadoException{
         if(DAO.getEmprestimoDAO().findByIsbn(isbn).isEmpty()) {
             DAO.getLivroDAO().delete(DAO.getLivroDAO().findByIsbn(isbn));
         }
+        else throw new livroEmprestadoException("Livro está emprestado.");
     }
 
     public void fazerEmprestimo(String idMutuario, String isbnLivro) throws naoEncontradoException, foraDeEstoqueException, usuarioBloqueadoException, livroReservadoException {
@@ -75,6 +73,41 @@ public class Bibliotecario extends Usuario {
         Reserva reserva = new Reserva(idReservante, isbnLivro);
         DAO.getReservaDAO().create(reserva);
         leitor.adicionarUmaReserva();
+    }
+
+    public void trocarIsbnLivro(String isbn, String novoisbn) throws objetoInexistenteException {
+        Livro livro = DAO.getLivroDAO().findByIsbn(isbn);
+        if (livro == null) throw new objetoInexistenteException("Livro não existe.");
+        livro.setIsbn(novoisbn);
+        DAO.getLivroDAO().update(livro);
+    }
+
+    public void trocarAutorLivro(String isbn, String novoautor) throws objetoInexistenteException {
+        Livro livro = DAO.getLivroDAO().findByIsbn(isbn);
+        if (livro == null) throw new objetoInexistenteException("Livro não existe.");
+        livro.setAutor(novoautor);
+        DAO.getLivroDAO().update(livro);
+    }
+
+    public void trocarTituloLivro(String isbn, String novotitulo) throws objetoInexistenteException {
+        Livro livro = DAO.getLivroDAO().findByIsbn(isbn);
+        if (livro == null) throw new objetoInexistenteException("Livro não existe.");
+        livro.setTitulo(novotitulo);
+        DAO.getLivroDAO().update(livro);
+    }
+
+    public void trocarEditoraLivro(String isbn, String novaeditora) throws objetoInexistenteException {
+        Livro livro = DAO.getLivroDAO().findByIsbn(isbn);
+        if (livro == null) throw new objetoInexistenteException("Livro não existe.");
+        livro.setEditora(novaeditora);
+        DAO.getLivroDAO().update(livro);
+    }
+
+    public void trocarCategoriaLivro(String isbn, String novacategoria) throws objetoInexistenteException {
+        Livro livro = DAO.getLivroDAO().findByIsbn(isbn);
+        if (livro == null) throw new objetoInexistenteException("Livro não existe.");
+        livro.setCategoria(novacategoria);
+        DAO.getLivroDAO().update(livro);
     }
 
 }
