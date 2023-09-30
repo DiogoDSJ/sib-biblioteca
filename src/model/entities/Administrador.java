@@ -7,6 +7,7 @@ import exceptions.objetoInexistenteException;
 import exceptions.usuarioPendenciasException;
 import model.entities.enums.Cargo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Administrador extends Bibliotecario {
@@ -152,6 +153,38 @@ public class Administrador extends Bibliotecario {
         if (administrador == null) throw new objetoInexistenteException("Administrador não existe.");
         administrador.setEndereco(novoendereco);
         atualizarUsuario(administrador);
+    }
+
+    public void removerReserva(Leitor leitor, String isbnLivro){
+        List<Reserva> reservaList = DAO.getReservaDAO().findByIdReservante(leitor.getId());
+        for (Reserva reserva: reservaList) {
+            if(reserva.getIsbnLivro().equals(isbnLivro)){
+                DAO.getReservaDAO().delete(reserva);
+                break;
+            }
+        }
+    }
+
+    public static void multarLeitor(Leitor leitor, int diasAtraso) throws objetoInexistenteException {
+        if (leitor == null) throw new objetoInexistenteException("Leitor não existe.");
+        List<Emprestimo> emprestimoListLeitor = DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId());
+        if (emprestimoListLeitor.isEmpty()) throw new objetoInexistenteException("Usuário não tem empréstimos.");
+        if(Sistema.checarSeHaAtrasoLeitor(leitor)){
+            Sistema.aplicarMulta(leitor);
+        }
+        if (DAO.getMultaDAO().findByIdMutuario(leitor.getId()) == null) {
+            DAO.getMultaDAO().create(new Multa(LocalDate.now(), LocalDate.now().plusDays(diasAtraso), leitor.getId()));
+        } else if (DAO.getMultaDAO().findByIdMutuario(leitor.getId()) != null) {
+            DAO.getMultaDAO().findByIdMutuario(leitor.getId()).aumentarMulta(diasAtraso);
+        }
+    }
+
+    public static void desbloquearLeitor(Leitor leitor) throws objetoInexistenteException{
+        if(leitor == null) throw new objetoInexistenteException("Leitor não existe.");
+        if(DAO.getMultaDAO().findByIdMutuario(leitor.getId()) == null) throw new objetoInexistenteException("Leitor não está bloqueado");
+        DAO.getMultaDAO().delete(DAO.getMultaDAO().findByIdMutuario(leitor.getId()));
+        DAO.getLeitorDAO().findByPk(leitor.getId()).desbloquearConta();
+
     }
 
 }
