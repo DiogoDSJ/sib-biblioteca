@@ -4,4 +4,8 @@ import dao.CRUD;
 import model.entities.Leitor;
 
 public interface LeitorDAO extends CRUD<Leitor> {
+
+
+    Leitor findByUsuario(String usuario);
+
 }

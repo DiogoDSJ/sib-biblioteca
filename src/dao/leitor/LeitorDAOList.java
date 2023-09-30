@@ -60,4 +60,14 @@ public class LeitorDAOList implements LeitorDAO {
     public List<Leitor> findMany() {
         return this.lista;
     }
+
+    @Override
+    public Leitor findByUsuario(String usuario){
+        for (Leitor leitor: lista) {
+            if(leitor.getUsuario().equals(usuario)){
+                return leitor;
+            }
+        }
+        return null;
+    }
 }

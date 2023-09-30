@@ -60,12 +60,13 @@ public class ReservaDAOList implements ReservaDAO{
     }
 
     @Override
-    public Reserva findByIdReservante(String obj) {
+    public List<Reserva> findByIdReservante(String obj) {
+        List<Reserva> reservaList = new ArrayList<>();
         for (Reserva objReserva: this.lista) {
             if(obj.equals(objReserva.getIdReservante())){
-                return objReserva;
+                reservaList.add(objReserva);
             }
         }
-        return null;
+        return reservaList;
     }
 }
