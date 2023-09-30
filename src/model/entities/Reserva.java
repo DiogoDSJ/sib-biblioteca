@@ -9,13 +9,13 @@ public class Reserva {
     private LocalDate dataReserva;
     private LocalDate dataInicioReserva;
     private LocalDate dataFimReserva;
-    private String idLivro;
+    private String isbnLivro;
     private String idReserva;
 
-    public Reserva(String idReservante, String idLivro) {
+    public Reserva(String idReservante, String isbnLivro) {
         this.idReservante = idReservante;
         this.dataReserva = LocalDate.now();
-        this.idLivro = idLivro;
+        this.isbnLivro = isbnLivro;
     }
 
     public String getIdReservante() {
@@ -30,12 +30,12 @@ public class Reserva {
         return dataReserva;
     }
 
-    public String getIdLivro() {
-        return idLivro;
+    public String getIsbnLivro() {
+        return isbnLivro;
     }
 
-    public void setIdLivro(String idLivro) {
-        this.idLivro = idLivro;
+    public void setIsbnLivro(String isbnLivro) {
+        this.isbnLivro = isbnLivro;
     }
 
     public String getIdReserva() {
