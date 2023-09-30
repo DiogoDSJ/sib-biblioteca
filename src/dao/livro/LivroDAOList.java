@@ -71,12 +71,56 @@ public class LivroDAOList implements LivroDAO {
     }
 
     @Override
-    public Livro findByTitulo(String titulo){
+    public List<Livro> findByTitulo(String titulo){
+        List<Livro> livrosEncontrados = new ArrayList<>();
         for (Livro objIterator: this.lista) {
-            if(titulo.equals(objIterator.getTitulo())){
-                return objIterator;
+            if(objIterator.getTitulo().contains(titulo)){
+                livrosEncontrados.add(objIterator);
             }
         }
-        return null;
+        return livrosEncontrados;
+    }
+
+    @Override
+    public List<Livro> findByAutor(String autor) {
+        List<Livro> livrosEncontrados = new ArrayList<>();
+        for (Livro objIterator : this.lista) {
+            if (objIterator.getAutor().contains(autor)) {
+                livrosEncontrados.add(objIterator);
+            }
+        }
+        return livrosEncontrados;
+    }
+
+    @Override
+    public List<Livro> findByCategoria(String categoria) {
+        List<Livro> livrosEncontrados = new ArrayList<>();
+        for (Livro objIterator : this.lista) {
+            if (categoria.equals(objIterator.getCategoria())) {
+                livrosEncontrados.add(objIterator);
+            }
+        }
+        return livrosEncontrados;
+    }
+
+    @Override
+    public List<Livro> findByAnoDePublicao(String anoDePublicacao) {
+        List<Livro> livrosEncontrados = new ArrayList<>();
+        for (Livro objIterator : this.lista) {
+            if (objIterator.getAnoDePublicacao().contains(anoDePublicacao)) {
+                livrosEncontrados.add(objIterator);
+            }
+        }
+        return livrosEncontrados;
+    }
+    @Override
+    public List<Livro> findByEditora(String editora){
+        List<Livro> livrosEncontrados = new ArrayList<>();
+        for(Livro objIterator : this.lista){
+            if(objIterator.getEditora().contains(editora)){
+                livrosEncontrados.add(objIterator);
+            }
+        }
+        return livrosEncontrados;
     }
 }
