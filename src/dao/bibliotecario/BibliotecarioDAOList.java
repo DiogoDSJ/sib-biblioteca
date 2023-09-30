@@ -1,6 +1,7 @@
 package dao.bibliotecario;
 
 import model.entities.Bibliotecario;
+import model.entities.Leitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +36,8 @@ public class BibliotecarioDAOList implements BibliotecarioDAO {
 
     @Override
     public Bibliotecario findByPk(String obj) {
-        for (Bibliotecario objIterator: this.lista) {
-            if(obj.equals(objIterator.getId())) {
+        for (Bibliotecario objIterator : this.lista) {
+            if (obj.equals(objIterator.getId())) {
                 return objIterator;
             }
         }
@@ -58,5 +59,15 @@ public class BibliotecarioDAOList implements BibliotecarioDAO {
     @Override
     public List<Bibliotecario> findMany() {
         return this.lista;
+    }
+
+    @Override
+    public Bibliotecario findByUsuario(String usuario) {
+        for (Bibliotecario bibliotecario : lista) {
+            if (bibliotecario.getUsuario().equals(usuario)) {
+                return bibliotecario;
+            }
+        }
+        return null;
     }
 }

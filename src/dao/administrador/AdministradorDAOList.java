@@ -1,6 +1,7 @@
 package dao.administrador;
 
 import model.entities.Administrador;
+import model.entities.Bibliotecario;
 
 
 import java.util.ArrayList;
@@ -62,5 +63,15 @@ public class AdministradorDAOList implements AdministradorDAO {
     @Override
     public List<Administrador> findMany() {
         return this.lista;
+    }
+
+    @Override
+    public Administrador findByUsuario(String usuario) {
+        for (Administrador administrador : lista) {
+            if (administrador.getUsuario().equals(usuario)) {
+                return administrador;
+            }
+        }
+        return null;
     }
 }
