@@ -1,6 +1,13 @@
 package model.entities;
 
+import dao.DAO;
+import exceptions.cargoInvalidoException;
+import exceptions.foraDeEstoqueException;
+import exceptions.objetoInexistenteException;
+import exceptions.usuarioPendenciasException;
 import model.entities.enums.Cargo;
+
+import java.util.List;
 
 public class Administrador extends Bibliotecario {
 
@@ -9,19 +16,19 @@ public class Administrador extends Bibliotecario {
         this.setCargo(Cargo.ADMINISTRADOR);
     }
 
-    public Usuario cadastrarUsuario(String nome, String endereco, String telefone, String id, String usuario, String senhaDeAcesso, Cargo cargo)
+    public void cadastrarUsuario(String nome, String endereco, String telefone, String id, String usuario, String senhaDeAcesso, Cargo cargo) throws cargoInvalidoException
     {
         if(cargo == Cargo.LEITOR) {
-            return new Leitor(nome, endereco, telefone, usuario, senhaDeAcesso);
+            DAO.getLeitorDAO().create(new Leitor(nome, endereco, telefone, usuario, senhaDeAcesso));
         }
         else if(cargo == Cargo.BIBLIOTECARIO) {
-            return new Bibliotecario(nome, endereco, telefone, usuario, senhaDeAcesso);
+            DAO.getBibliotecarioDAO().create(new Bibliotecario(nome, endereco, telefone, usuario, senhaDeAcesso));
         }
         else if(cargo == Cargo.ADMINISTRADOR) {
-            return new Administrador(nome, endereco, telefone, usuario, senhaDeAcesso);
+            DAO.getAdministradorDAO().create(new Administrador(nome, endereco, telefone, usuario, senhaDeAcesso));
         }
         else{
-            return null;
+            throw new cargoInvalidoException("Cargo não existe.");
         }
     }
 
