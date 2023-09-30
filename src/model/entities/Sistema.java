@@ -10,7 +10,7 @@ import model.entities.Multa;
 import model.entities.enums.Cargo;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 public class Sistema {
 
@@ -122,6 +122,48 @@ public class Sistema {
         return DAO.getEmprestimoDAO().findMany().size();
     }
 
+    public static int getQuantidadeDeLivrosAtrasados(){
+        List<Emprestimo> emprestimos = DAO.getEmprestimoDAO().findMany();
+        int contador = 0;
+        for (Emprestimo emprestimo: emprestimos) {
+            if(checarSeHaAtrasoEmprestimo(emprestimo)){
+                contador++;
+            }
+
+        }
+        return contador;
+    }
+
+    public static int getQuantidadeDeLivrosReservados(){
+        return DAO.getMultaDAO().findMany().size();
+    }
+
+    public static Map<Integer, Livro> getLivrosOrdenadosPorNumeroDeEmprestimo() throws objetoInexistenteException {
+        List<Livro> livrosPopulares = DAO.getLivroDAO().findMany();
+        Map<Integer, Livro> livrosPopularesDict = new TreeMap<>();
+        for (Livro livro: livrosPopulares) {
+            livrosPopularesDict.put(getQtdLivroNosEmprestimos(livro.getIsbn()), livro);
+        }
+        return livrosPopularesDict;
+    }
+
+    public static List<Livro> getDezLivrosMaisPopulares() throws objetoInexistenteException{
+        Map<Integer, Livro> livrosPopularesDict = getLivrosOrdenadosPorNumeroDeEmprestimo();
+        List<Livro> dezLivrosPopulares = (List<Livro>) livrosPopularesDict.values();
+        return dezLivrosPopulares.subList(0,9);
+    }
+
+    public static int getQtdLivroNosEmprestimos(String isbn) throws objetoInexistenteException{
+        Livro livro = DAO.getLivroDAO().findByIsbn(isbn);
+        int contador = 0;
+        if(livro == null) throw new objetoInexistenteException("Livro não existe.");
+        for (Emprestimo emprestimo: DAO.getEmprestimoDAO().findMany()) {
+            if(livro.getIsbn().equals(emprestimo.getIsbnLivro())){
+                contador++;
+            }
+        }
+        return contador;
+    }
 
     /*
     atualizar reservas tem 3 etapas.
