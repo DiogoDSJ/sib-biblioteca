@@ -83,7 +83,7 @@ public class Administrador extends Bibliotecario {
     public void removerLeitor(String id) throws naoEncontradoException, usuarioPendenciasException, foraDeEstoqueException {
         Leitor leitor = DAO.getLeitorDAO().findByPk(id);
         if (leitor == null) throw new naoEncontradoException("Leitor não existe.");
-        else if (DAO.getEmprestimoDAO().findByIdMutuario(id).isEmpty())
+        else if (!DAO.getEmprestimoDAO().findByIdMutuario(id).isEmpty())
             throw new usuarioPendenciasException("Usuário tem pendências, não pode ser removido.");
         else {
             List<Reserva> reservas = DAO.getReservaDAO().findByIdReservante(id);
