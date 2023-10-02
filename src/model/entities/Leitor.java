@@ -130,7 +130,6 @@ public class Leitor extends Usuario {
         }
         else if(Sistema.checarSeOUsuarioTemOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode ter dois livros iguais.");
         else if(Sistema.checarSeOUsuarioReservouOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode reservar outro livro igual.");
-        Sistema.updateMultas();
         if (Sistema.checarSeHaAtrasoLeitor(leitor)) {
             throw new usuarioBloqueadoException("Usuário em atraso.");
         }

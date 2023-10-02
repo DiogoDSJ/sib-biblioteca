@@ -82,12 +82,15 @@ public class Sistema {
      * Função que atualiza todas as multas do sistema, ou seja, apaga as multas que já venceram e desbloqueia o leitor.
      */
     public static void updateMultas() {
-        for (Multa objIterator : DAO.getMultaDAO().findMany()) {
+        List<Multa> multas = DAO.getMultaDAO().findMany();
+        List<Multa> multasremovidas = new ArrayList<>();
+        for (Multa objIterator : multas) {
             if (!objIterator.getDataFim().isBefore(LocalDate.now())) {
                 DAO.getLeitorDAO().findByPk(objIterator.getIdUsuario()).desbloquearConta();
-                DAO.getMultaDAO().delete(objIterator);
+                multasremovidas.add(objIterator);
             }
         }
+        DAO.getMultaDAO().findMany().removeAll(multasremovidas);
     }
 
     /**
@@ -399,7 +402,7 @@ public class Sistema {
      */
     public static boolean checarSeOUsuarioReservouOLivro(Leitor leitor, String isbnLivro) throws objetoInexistenteException {
         if (leitor == null) throw new objetoInexistenteException("Leitor não existe.");
-        if (DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId()).isEmpty()) {
+        if (DAO.getReservaDAO().findByIdReservante(leitor.getId()).isEmpty()) {
             return false;
         } else {
             for (Reserva reserva : DAO.getReservaDAO().findByIdReservante(leitor.getId())) {
