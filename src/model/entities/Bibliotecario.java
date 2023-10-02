@@ -23,11 +23,17 @@ public class Bibliotecario extends Usuario {
         }
     }
 
-    public void removerLivro(String isbn) throws livroEmprestadoException{
-        if(DAO.getEmprestimoDAO().findByIsbn(isbn).isEmpty()) {
+    public void removerLivro(String isbn) throws livroEmprestadoException, naoEncontradoException{
+        if(DAO.getLivroDAO().findByIsbn(isbn) == null) throw new naoEncontradoException("Livro não existe");
+        else if(!DAO.getEmprestimoDAO().findByIsbn(isbn).isEmpty()) {
+            throw new livroEmprestadoException("Livro está emprestado.");
+        }
+        else if(Sistema.checarSeOLivroFoiReservado(isbn)) {
+            throw new livroEmprestadoException("Livro está reservado.");
+        }
+        else{
             DAO.getLivroDAO().delete(DAO.getLivroDAO().findByIsbn(isbn));
         }
-        else throw new livroEmprestadoException("Livro está emprestado.");
     }
 
     public void fazerEmprestimo(String idMutuario, String isbnLivro) throws naoEncontradoException, objetoInexistenteException, foraDeEstoqueException, usuarioBloqueadoException, livroReservadoException, objetoDuplicadoException {

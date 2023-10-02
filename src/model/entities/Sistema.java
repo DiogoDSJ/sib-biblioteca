@@ -321,5 +321,12 @@ public class Sistema {
         return false;
     }
 
-
+    public static boolean checarSeOLivroFoiReservado(String isbnLivro) {
+        for (Reserva reserva : DAO.getReservaDAO().findMany()) {
+            if (reserva.getIsbnLivro().equals(isbnLivro)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
