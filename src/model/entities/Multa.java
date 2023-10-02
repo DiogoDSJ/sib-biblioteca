@@ -46,6 +46,10 @@ public class Multa {
         this.idMulta = idMulta;
     }
 
+    public void setDataFim(LocalDate dataFim) {
+        this.dataFim = dataFim;
+    }
+
     public String getIdUsuario() {
         return idUsuario;
     }
