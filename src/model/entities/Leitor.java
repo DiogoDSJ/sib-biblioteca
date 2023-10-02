@@ -1,6 +1,7 @@
 package model.entities;
 
-import exceptions.foraDeEstoqueException;
+import dao.DAO;
+import exceptions.*;
 import model.entities.enums.Cargo;
 
 import java.util.ArrayList;
@@ -59,6 +60,45 @@ public class Leitor extends Usuario {
 
     public void adicionarEmprestimoNoHistorico(Emprestimo emprestimo) {
         this.historicoEmprestimos.add(emprestimo);
+    }
+
+
+    public void fazerReserva(String isbnLivro) throws objetoInexistenteException, objetoDuplicadoException, naoEncontradoException, usuarioBloqueadoException, foraDeEstoqueException{
+        Leitor leitor = DAO.getLeitorDAO().findByPk(this.getId());
+        Livro livro = DAO.getLivroDAO().findByIsbn(isbnLivro);
+        if (livro == null) {
+            throw new naoEncontradoException("Livro não existe.");
+        }
+        else if(this.getNumeroDeReservas() == 0){
+            throw new foraDeEstoqueException("Usuário alcançou o máximo de reservas.");
+        }
+        else if(Sistema.checarSeOUsuarioTemOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode ter dois livros iguais.");
+        else if(Sistema.checarSeOUsuarioReservouOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode reservar outro livro igual.");
+        Sistema.updateMultas(); // colocar no beforeEach || Atualizo as multas para remover multas que já foram pagas e não atrapalha na checagem de atraso
+        if (Sistema.checarSeHaAtrasoLeitor(leitor)) { // dois casos : ele já esta multado ou precisa ser multado.
+            throw new usuarioBloqueadoException("Usuário em atraso.");
+        }
+        Reserva reserva = new Reserva(this.getId(), isbnLivro);
+        DAO.getReservaDAO().create(reserva);
+        leitor.removerUmaReserva();
+        DAO.getLeitorDAO().update(leitor);
+    }
+
+    public void removerReserva(String isbnLivro) throws naoEncontradoException, foraDeEstoqueException{
+        Leitor leitor = DAO.getLeitorDAO().findByPk(this.getId());
+        if(DAO.getLivroDAO().findByIsbn(isbnLivro) == null) throw new naoEncontradoException("Livro não existe");
+        boolean checkvar = false;
+        List<Reserva> reservaList = DAO.getReservaDAO().findByIdReservante(this.getId());
+        for (Reserva reserva: reservaList) {
+            if(reserva.getIsbnLivro().equals(isbnLivro)){
+                DAO.getReservaDAO().delete(reserva);
+                leitor.adicionarUmaReserva();
+                DAO.getLeitorDAO().update(leitor);
+                checkvar = true;
+                break;
+            }
+        }
+        if (!checkvar) throw new naoEncontradoException("Não há uma reserva com esse livro.");
     }
 
 }

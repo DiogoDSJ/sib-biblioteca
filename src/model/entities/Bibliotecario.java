@@ -65,29 +65,6 @@ public class Bibliotecario extends Usuario {
         leitor.removerUmEmprestimo();
     }
 
-    public void fazerReserva(String idReservante, String isbnLivro) throws objetoInexistenteException, objetoDuplicadoException, naoEncontradoException, usuarioBloqueadoException, foraDeEstoqueException{
-        Leitor leitor = DAO.getLeitorDAO().findByPk(idReservante);
-        Livro livro = DAO.getLivroDAO().findByIsbn(isbnLivro);
-        if (leitor == null) {
-            throw new naoEncontradoException("Leitor não existe.");
-        }
-        else if (livro == null) {
-            throw new naoEncontradoException("Livro não existe.");
-        }
-        else if(leitor.getNumeroDeReservas() == 0){
-            throw new foraDeEstoqueException("Usuário alcançou o máximo de reservas.");
-        }
-        else if(Sistema.checarSeOUsuarioTemOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode ter dois livros iguais.");
-        else if(Sistema.checarSeOUsuarioReservouOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode reservar outro livro igual.");
-        Sistema.updateMultas(); // colocar no beforeEach || Atualizo as multas para remover multas que já foram pagas e não atrapalha na checagem de atraso
-        if (Sistema.checarSeHaAtrasoLeitor(leitor)) { // dois casos : ele já esta multado ou precisa ser multado.
-            throw new usuarioBloqueadoException("Usuário em atraso.");
-        }
-        Reserva reserva = new Reserva(idReservante, isbnLivro);
-        DAO.getReservaDAO().create(reserva);
-        leitor.adicionarUmaReserva();
-    }
-
     public void trocarIsbnLivro(String isbn, String novoisbn) throws objetoInexistenteException {
         Livro livro = DAO.getLivroDAO().findByIsbn(isbn);
         if (livro == null) throw new objetoInexistenteException("Livro não existe.");
