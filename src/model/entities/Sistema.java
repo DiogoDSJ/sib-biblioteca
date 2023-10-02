@@ -262,12 +262,15 @@ public class Sistema {
      * @throws foraDeEstoqueException Caso o usuário já tenha alcançado o máximo do estoque de reservas.
      */
     public static void atualizarReservas() throws foraDeEstoqueException {
-        for (Reserva reserva : DAO.getReservaDAO().findMany()) {
-            if (reserva.getDataFimReserva().isAfter(LocalDate.now())) {
-                DAO.getReservaDAO().delete(reserva);
+        List <Reserva> reservasdelete = new ArrayList<>();
+        List <Reserva> reservas = DAO.getReservaDAO().findMany();
+        for (Reserva reserva : reservas) {
+            if (reserva.getDataFimReserva().isBefore(LocalDate.now())) {
+                reservasdelete.add(reserva);
                 DAO.getLeitorDAO().findByPk(reserva.getIdReserva()).adicionarUmaReserva();
             }
         }
+        reservas.removeAll(reservasdelete);
     }
 
     /**
