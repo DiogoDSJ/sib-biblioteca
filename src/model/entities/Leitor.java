@@ -4,6 +4,7 @@ import dao.DAO;
 import exceptions.*;
 import model.entities.enums.Cargo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,6 +100,21 @@ public class Leitor extends Usuario {
             }
         }
         if (!checkvar) throw new naoEncontradoException("Não há uma reserva com esse livro.");
+    }
+
+    public void renovarEmprestimo(String isbnLivro) throws usuarioPendenciasException, objetoInexistenteException {
+        Leitor leitor = DAO.getLeitorDAO().findByPk(this.getId());
+        Emprestimo emprestimo = Sistema.buscarEmprestimoDoLeitor(leitor, isbnLivro);
+        if(emprestimo == null)
+            throw new objetoInexistenteException("Não há emprestimo com esse livro.");
+        if (Sistema.checarSeHaAtrasoLeitor(leitor))
+            throw new usuarioPendenciasException("Usuário em atraso, não é possivel renovar.");
+        else if ((emprestimo.getDataFim().compareTo(emprestimo.getDataInicio())) > 7) {
+            throw new usuarioPendenciasException("Esse empréstimo já alcançou o limite de renovações.");
+        }
+        else {
+            emprestimo.setDataFim(LocalDate.now().plusDays(7));
+        }
     }
 
 }
