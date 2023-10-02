@@ -10,49 +10,57 @@ import java.util.List;
 
 public class Leitor extends Usuario {
 
-    private int numeroDeEmprestimos; // refactor para string mais tarde.
+    private String numeroDeEmprestimos; // refactor para string mais tarde.
 
-    private int numeroDeReservas;
+    private String numeroDeReservas;
     private final List<Emprestimo> historicoEmprestimos;
 
     public Leitor(String nome, String endereco, String telefone, String usuario, String senhaDeAcesso) {
         super(nome, endereco, telefone, usuario, senhaDeAcesso);
-        this.numeroDeEmprestimos = 3;
-        this.numeroDeReservas = 3;
+        this.numeroDeEmprestimos = "3";
+        this.numeroDeReservas = "3";
         this.setCargo(Cargo.LEITOR);
         this.historicoEmprestimos = new ArrayList<>();
     }
 
-    public int getNumeroDeEmprestimos(){
+    public String getNumeroDeEmprestimos(){
         return numeroDeEmprestimos;
     }
 
-    public int getNumeroDeReservas() {
+    public String getNumeroDeReservas() {
         return numeroDeReservas;
     }
 
     public void adicionarUmaReserva() throws foraDeEstoqueException {
-        if(numeroDeEmprestimos <= 2)
-            this.numeroDeEmprestimos++ ;
+        int numeroDeReservasInt = Integer.parseInt(this.numeroDeReservas);
+        if(numeroDeReservasInt <= 2)
+            numeroDeReservasInt++ ;
         else throw new foraDeEstoqueException("Usuário não pode ter mais de 3 reservas.");
+        this.numeroDeReservas = Integer.toString(numeroDeReservasInt);
     }
 
     public void removerUmaReserva() throws foraDeEstoqueException{
-        if (numeroDeEmprestimos > 0) {
-            this.numeroDeEmprestimos--;
+        int numeroDeReservasInt = Integer.parseInt(this.numeroDeReservas);
+        if (numeroDeReservasInt > 0) {
+            numeroDeReservasInt--;
         }
         else throw new foraDeEstoqueException("Usuário não pode ter menos que 3 reservas.");
+        this.numeroDeReservas = Integer.toString(numeroDeReservasInt);
     }public void adicionarUmEmprestimo() throws foraDeEstoqueException {
-        if(numeroDeEmprestimos <= 2)
-            this.numeroDeEmprestimos++ ;
+        int numeroDeEmprestimosInt = Integer.parseInt(this.numeroDeEmprestimos);
+        if(numeroDeEmprestimosInt <= 2)
+            numeroDeEmprestimosInt++;
         else throw new foraDeEstoqueException("Usuário não pode ter mais de 3 emprestimos.");
+        this.numeroDeEmprestimos = Integer.toString(numeroDeEmprestimosInt);
     }
 
     public void removerUmEmprestimo() throws foraDeEstoqueException{
-        if (numeroDeEmprestimos > 0) {
-            this.numeroDeEmprestimos--;
+        int numeroDeEmprestimosInt = Integer.parseInt(this.numeroDeEmprestimos);
+        if (numeroDeEmprestimosInt > 0) {
+            numeroDeEmprestimosInt--;
         }
         else throw new foraDeEstoqueException("Usuário não pode ter menos de 3 emprestimos.");
+        this.numeroDeEmprestimos = Integer.toString(numeroDeEmprestimosInt);
     }
 
     public List<Emprestimo> getHistoricoEmprestimos() {
@@ -70,7 +78,7 @@ public class Leitor extends Usuario {
         if (livro == null) {
             throw new naoEncontradoException("Livro não existe.");
         }
-        else if(this.getNumeroDeReservas() == 0){
+        else if(this.getNumeroDeReservas().equals("0")){
             throw new foraDeEstoqueException("Usuário alcançou o máximo de reservas.");
         }
         else if(Sistema.checarSeOUsuarioTemOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode ter dois livros iguais.");

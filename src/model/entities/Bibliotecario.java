@@ -52,7 +52,7 @@ public class Bibliotecario extends Usuario {
         else if (livro.getQuantidade().equals("0")) {
             throw new foraDeEstoqueException("Não há estoque disponível para esse livro.");
         }
-        else if (leitor.getNumeroDeEmprestimos() == 0) {
+        else if (leitor.getNumeroDeEmprestimos().equals("0")) {
             throw new foraDeEstoqueException("Usuário alcançou o máximo de livros.");
         }
         else if(Sistema.checarSeOUsuarioTemOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode ter dois livros iguais.");
