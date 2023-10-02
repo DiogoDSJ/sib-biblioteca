@@ -42,7 +42,6 @@ public class Sistema {
         }
     }
 
-    //public List<Emprestimo> checarEmprestimosUsuario(Leitor leitor){}
     public static boolean checarSeHaAtrasoLeitor(Leitor leitor) {
         List<Emprestimo> emprestimoList = DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId());
         for (Emprestimo obj : emprestimoList) {
@@ -102,19 +101,6 @@ public class Sistema {
         return contadora;
     }
 
-
-/*    public void removerEmprestimo(){
-        for (Emprestimo obj: DAO.getEmprestimoDAO().findMany()) {
-            if(!checarSeHaAtrasoEmprestimo(obj)){
-                DAO.getEmprestimoDAO().delete(obj);
-            }
-            else if(checarSeHaAtrasoLeitor(DAO.getLeitorDAO().findByPk(obj.getIdMutuario()))){
-                // aplicar multa
-                aplicarMulta(DAO.getLeitorDAO().findByPk(obj.getIdMutuario()));
-            }
-
-        }
-    }*/
 
     public static int getQuantidadeLivrosEmprestados() {
         return DAO.getEmprestimoDAO().findMany().size();
