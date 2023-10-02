@@ -22,7 +22,7 @@ public class Sistema {
     public static int calcularDiasDaMulta(Emprestimo emprestimo) {
         LocalDate dataAtual = LocalDate.now();
         LocalDate dataFim = emprestimo.getDataFim();
-        if (dataFim.isAfter(dataAtual)) {
+        if (dataFim.isBefore(dataAtual)) {
             return dataAtual.compareTo(dataFim);
         }
         return 0;
@@ -75,7 +75,7 @@ public class Sistema {
      * @return retorna verdadeiro se estiver em atraso, caso contrário retorna falso.
      */
     public static boolean checarSeHaAtrasoEmprestimo(Emprestimo emprestimo) {
-        return emprestimo.getDataFim().isAfter(LocalDate.now());
+        return emprestimo.getDataFim().isBefore(LocalDate.now());
     }
 
     /**
