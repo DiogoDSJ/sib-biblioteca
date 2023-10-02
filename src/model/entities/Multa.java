@@ -16,17 +16,17 @@ public class Multa {
 
     /**
      * Construtor da classe multa
-     * @param dataIncio data inicio da multa.
+     * @param dataInicio data inicio da multa.
      * @param dataFim data fim da multa.
      * @param idUsuario id do usuário à ser multado.
      */
-    public Multa(LocalDate dataIncio, LocalDate dataFim, String idUsuario) {
-        this.dataIncio = dataIncio;
+    public Multa(LocalDate dataInicio, LocalDate dataFim, String idUsuario) {
+        this.dataIncio = dataInicio;
         this.dataFim = dataFim;
         this.idUsuario = idUsuario;
     }
 
-    public LocalDate getDataIncio() {
+    public LocalDate getDataInicio() {
         return dataIncio;
     }
 

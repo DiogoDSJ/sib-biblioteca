@@ -310,10 +310,9 @@ public class Administrador extends Bibliotecario {
      * @param diasDeMulta Dias que o leitor será multado.
      * @throws objetoInexistenteException Caso o objeto leitor não exista.
      */
-    public static void multarLeitor(Leitor leitor, int diasDeMulta) throws objetoInexistenteException {
+    public void multarLeitor(Leitor leitor, int diasDeMulta) throws objetoInexistenteException {
         if (leitor == null) throw new objetoInexistenteException("Leitor não existe.");
         List<Emprestimo> emprestimoListLeitor = DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId());
-        if (emprestimoListLeitor.isEmpty()) throw new objetoInexistenteException("Usuário não tem empréstimos.");
         if(Sistema.checarSeHaAtrasoLeitor(leitor)){
             Sistema.aplicarMulta(leitor);
         }
@@ -330,7 +329,7 @@ public class Administrador extends Bibliotecario {
      * @throws objetoInexistenteException Caso o usuário não exista.
      */
 
-    public static void desbloquearLeitor(Leitor leitor) throws objetoInexistenteException{
+    public void desbloquearLeitor(Leitor leitor) throws objetoInexistenteException{
         if(leitor == null) throw new objetoInexistenteException("Leitor não existe.");
         if(DAO.getMultaDAO().findByIdMutuario(leitor.getId()) == null) throw new objetoInexistenteException("Leitor não está bloqueado");
         DAO.getMultaDAO().delete(DAO.getMultaDAO().findByIdMutuario(leitor.getId()));
