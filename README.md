@@ -67,4 +67,4 @@ A Sra. Garcia estabeleceu os seguintes requisitos para o sistema:
 - Fase 2 - Persistência de dados 
     - Armazenamento dos dados em disco.
 - Fase 3 - Implementação da interface gráfica (frontend)
-      - Construção da interface gráfica com JavaFX 
+    - Construção da interface gráfica com JavaFX 
