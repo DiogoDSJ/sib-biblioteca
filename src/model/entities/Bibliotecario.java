@@ -13,11 +13,11 @@ public class Bibliotecario extends Usuario {
     }
 
     public void adicionarLivro(String isbn, String autor, String titulo, String editora, String categoria, String ano){
-        if(DAO.getLivroDAO().findByIsbn(isbn) == null && DAO.getLivroDAO().findByTitulo(titulo) == null)
+        if(DAO.getLivroDAO().findByIsbn(isbn) == null)
         {
             DAO.getLivroDAO().create(new Livro(isbn, autor, titulo, editora, categoria, ano));
         }
-        else if(DAO.getLivroDAO().findByIsbn(isbn) == DAO.getLivroDAO().findByTitulo(titulo)) // verificar se todas as informaçoes do livro sao iguais ao qual ja existe, se for, adicionar mais um na quantidade
+        else if(DAO.getLivroDAO().findByIsbn(isbn)!= null)
         {
             DAO.getLivroDAO().findByIsbn(isbn).adicionarUmaUnidade();
         }
