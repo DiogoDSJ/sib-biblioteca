@@ -1,10 +1,7 @@
 package model.entities;
 
 import dao.DAO;
-import exceptions.cargoInvalidoException;
-import exceptions.foraDeEstoqueException;
-import exceptions.objetoInexistenteException;
-import exceptions.usuarioPendenciasException;
+import exceptions.*;
 import model.entities.enums.Cargo;
 
 import java.time.LocalDate;
@@ -155,16 +152,22 @@ public class Administrador extends Bibliotecario {
         atualizarUsuario(administrador);
     }
 
-    public void removerReserva(Leitor leitor, String isbnLivro){
+    public void removerReserva(Leitor leitor, String isbnLivro) throws naoEncontradoException, foraDeEstoqueException{
+        if(leitor == null) throw new naoEncontradoException("Leitor não existe");
+        if(DAO.getLivroDAO().findByIsbn(isbnLivro) == null) throw new naoEncontradoException("Livro não existe");
+        boolean checkvar = false;
         List<Reserva> reservaList = DAO.getReservaDAO().findByIdReservante(leitor.getId());
         for (Reserva reserva: reservaList) {
             if(reserva.getIsbnLivro().equals(isbnLivro)){
                 DAO.getReservaDAO().delete(reserva);
+                leitor.adicionarUmaReserva();
+                DAO.getLeitorDAO().update(leitor);
+                checkvar = true;
                 break;
             }
         }
+        if (!checkvar) throw new naoEncontradoException("Não há uma reserva com esse livro.");
     }
-
     public static void multarLeitor(Leitor leitor, int diasAtraso) throws objetoInexistenteException {
         if (leitor == null) throw new objetoInexistenteException("Leitor não existe.");
         List<Emprestimo> emprestimoListLeitor = DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId());
