@@ -123,7 +123,7 @@ public class Sistema {
         if (ordemReserva == 0) { // usuário não tem reserva
             return quantidade > numeroReservasLivro;
         }
-        return (ordemReserva <= quantidade && ordemReserva > numeroReservasLivro);
+        return (ordemReserva <= quantidade && ordemReserva >= numeroReservasLivro);
 
 
     }
