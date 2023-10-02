@@ -169,7 +169,7 @@ public class Administrador extends Bibliotecario {
     public void trocarEnderecoDoLeitor(String usuario, String novoendereco) throws naoEncontradoException, objetoInexistenteException {
         Leitor leitor = DAO.getLeitorDAO().findByUsuario(usuario);
         if (leitor == null) throw new naoEncontradoException("Leitor não existe.");
-        leitor.setTelefone(novoendereco);
+        leitor.setEndereco(novoendereco);
         atualizarUsuario(leitor);
     }
 
