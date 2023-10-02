@@ -53,13 +53,13 @@ public class Bibliotecario extends Usuario {
      * @throws livroEmprestadoException Sé o livro estiver emprestado ou reservado à um leitor.
      * @throws naoEncontradoException Sé o livro não existir.
      */
-    public void removerLivro(String isbn) throws livroEmprestadoException, naoEncontradoException{
+    public void removerLivro(String isbn) throws livroEmprestadoException,livroReservadoException, naoEncontradoException{
         if(DAO.getLivroDAO().findByIsbn(isbn) == null) throw new naoEncontradoException("Livro não existe");
         else if(!DAO.getEmprestimoDAO().findByIsbn(isbn).isEmpty()) {
             throw new livroEmprestadoException("Livro está emprestado.");
         }
         else if(Sistema.checarSeOLivroFoiReservado(isbn)) {
-            throw new livroEmprestadoException("Livro está reservado.");
+            throw new livroReservadoException("Livro está reservado.");
         }
         else{
             DAO.getLivroDAO().delete(DAO.getLivroDAO().findByIsbn(isbn));
