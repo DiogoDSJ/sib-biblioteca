@@ -3,6 +3,11 @@ package model.entities;
 import model.entities.enums.Cargo;
 import model.entities.enums.StatusConta;
 
+/**
+ * Classe abstrata que passa os campos de nome, endereço, telefone, id, statusDaConta, usuario, senha e cargo para
+ * as sub-classes Administrador, Usuário e Bibliotecário.
+ * A classe herda da classe convidado o método de pesquisa de livros.
+ */
 public abstract class Usuario extends Convidado {
 
     private String nome;
@@ -14,6 +19,14 @@ public abstract class Usuario extends Convidado {
     private String senhaDeAcesso;
     private Cargo cargo;
 
+    /**
+     * Construtor da padrão da classe usuário, o ID é definido pelo DAO e o status da conta vem sempre desbloqueado.
+     * @param nome Nome que será vinculado ao usuário.
+     * @param endereco endereço que será vinculado ao usuário.
+     * @param telefone telefone que será vinculado ao usuário.
+     * @param usuario usuário que será vinculado ao usuário.
+     * @param senhaDeAcesso senha que será vinculado ao usuário.
+     */
     public Usuario(String nome, String endereco, String telefone, String usuario, String senhaDeAcesso) {
         this.nome = nome;
         this.endereco = endereco;
