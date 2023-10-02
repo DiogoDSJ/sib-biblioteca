@@ -116,7 +116,7 @@ public class Administrador extends Bibliotecario {
     public void removerAdministrador(String id) throws naoEncontradoException {
         Administrador administrador = DAO.getAdministradorDAO().findByPk(id);
         if (administrador == null) throw new naoEncontradoException("Administrador não existe.");
-        DAO.getBibliotecarioDAO().delete(administrador);
+        DAO.getAdministradorDAO().delete(administrador);
     }
 
     /**
