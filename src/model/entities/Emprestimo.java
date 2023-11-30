@@ -5,6 +5,7 @@ import exceptions.foraDeEstoqueException;
 import exceptions.objetoInexistenteException;
 import exceptions.usuarioBloqueadoException;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -13,7 +14,7 @@ import java.time.LocalDate;
  * Aqui a classe guarda as datas de inicio e fim do empréstimo, o id do leitor que solicitou o empréstimo, o isbn do
  * livro que foi emprestado e o id do empréstimo que foi gerado pelo DAO.
  */
-public class Emprestimo {
+public class Emprestimo implements Serializable {
     private final LocalDate dataInicio;
     private LocalDate dataFim;
     private final String idMutuario;

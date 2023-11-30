@@ -1,5 +1,6 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -8,7 +9,7 @@ import java.time.LocalDate;
  * dia em que a reserva será desativada caso o usuário não pegue o livro, isbn do livro reservado, id do
  * leitor que reservou.
  */
-public class Reserva {
+public class Reserva implements Serializable {
 
 
     private String idReservante;

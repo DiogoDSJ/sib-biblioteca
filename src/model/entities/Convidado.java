@@ -3,12 +3,13 @@ package model.entities;
 import dao.DAO;
 import exceptions.naoEncontradoException;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Classe convidado que será utilizado pelos usuários sem cadastro para o método de pesquisa.
  */
-public class Convidado {
+public class Convidado implements Serializable {
     public Convidado() {
     }
 

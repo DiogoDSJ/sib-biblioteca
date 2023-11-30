@@ -1,5 +1,6 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -7,7 +8,7 @@ import java.time.LocalDate;
  * A classe contém os atributos de data de inicio da multa, data fim da multa, id da multa que será gerado pelo DAO
  * e o id do usuário.
  */
-public class Multa {
+public class Multa implements Serializable {
 
     private LocalDate dataIncio;
     private LocalDate dataFim;

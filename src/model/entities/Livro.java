@@ -1,11 +1,14 @@
 package model.entities;
 
 import exceptions.foraDeEstoqueException;
+
+import java.io.Serializable;
+
 /**
  * Classe livro que guarda as informações do id do livro no DAO, seu isbn, autor, título, editora, categoria,
  * ano de publicação e quantidade do livro no estoque.
  */
-public class Livro {
+public class Livro implements Serializable {
 
     private String id;
     private String isbn;

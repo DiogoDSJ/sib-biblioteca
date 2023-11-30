@@ -329,7 +329,7 @@ public class Administrador extends Bibliotecario {
      * @throws objetoInexistenteException Caso o usuário não exista.
      */
 
-    public void desbloquearLeitor(Leitor leitor) throws objetoInexistenteException{
+    public void desbloquearLeitor(Leitor leitor) throws objetoInexistenteException {
         if(leitor == null) throw new objetoInexistenteException("Leitor não existe.");
         if(DAO.getMultaDAO().findByIdMutuario(leitor.getId()) == null) throw new objetoInexistenteException("Leitor não está bloqueado");
         DAO.getMultaDAO().delete(DAO.getMultaDAO().findByIdMutuario(leitor.getId()));
