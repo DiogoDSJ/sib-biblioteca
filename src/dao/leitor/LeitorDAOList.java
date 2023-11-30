@@ -11,7 +11,7 @@ public class LeitorDAOList implements LeitorDAO {
     private String proximoID;
 
     public LeitorDAOList() {
-        lista = new ArrayList<>();
+        this.lista = new ArrayList<>();
         this.proximoID = "0";
     }
 

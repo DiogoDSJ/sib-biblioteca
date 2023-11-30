@@ -1,7 +1,6 @@
 package dao.administrador;
 
 import model.entities.Administrador;
-import model.entities.Bibliotecario;
 
 
 import java.util.ArrayList;
