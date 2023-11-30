@@ -13,13 +13,13 @@ public interface CRUD<T> {
      * @param obj objeto criado.
      * @return objeto criado.
      */
-    public T create(T obj);
+    public T create(T obj) ;
 
     /**
      * Deleta um objeto.
      * @param obj objeto a ser deletado.
      */
-    public void delete(T obj);
+    public void delete(T obj) ;
 
     /**
      * Encontra um obj no DAO pela sua Chave primária
@@ -31,14 +31,14 @@ public interface CRUD<T> {
     /**
      * Deleta todos os dados.
      */
-    public void deleteMany();
+    public void deleteMany() ;
 
     /**
      * Atualiza o objeto no DAO.
      * @param obj objeto a ser atualizado.
      * @return retorna o objeto atualizado.
      */
-    public T update(T obj);
+    public T update(T obj) ;
 
     /**
      * retorna todos os elementos do DAO.

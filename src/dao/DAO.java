@@ -2,18 +2,25 @@ package dao;
 
 import dao.administrador.AdministradorDAO;
 import dao.administrador.AdministradorDAOList;
+import dao.administrador.AdministradorDAOListFile;
 import dao.bibliotecario.BibliotecarioDAO;
 import dao.bibliotecario.BibliotecarioDAOList;
+import dao.bibliotecario.BibliotecarioDAOListFile;
 import dao.emprestimo.EmprestimoDAO;
 import dao.emprestimo.EmprestimoDAOList;
+import dao.emprestimo.EmprestimoDAOListFile;
 import dao.leitor.LeitorDAO;
 import dao.leitor.LeitorDAOList;
+import dao.leitor.LeitorDAOListFile;
 import dao.livro.LivroDAO;
 import dao.livro.LivroDAOList;
+import dao.livro.LivroDAOListFile;
 import dao.multa.MultaDAO;
 import dao.multa.MultaDAOList;
+import dao.multa.MultaDAOListFile;
 import dao.reserva.ReservaDAO;
 import dao.reserva.ReservaDAOList;
+import dao.reserva.ReservaDAOListFile;
 
 /**
  * Essa classe é usada para explorar as extensões do DAO no sistema, onde os dados estão em sete diferentes
@@ -38,7 +45,7 @@ public class DAO {
     public static AdministradorDAO getAdministradorDAO() {
         if(administradorDAO == null)
         {
-            administradorDAO = new AdministradorDAOList();
+            administradorDAO = new AdministradorDAOListFile();
         }
         return administradorDAO;
     }
@@ -50,7 +57,7 @@ public class DAO {
     public static BibliotecarioDAO getBibliotecarioDAO() {
         if(bibliotecarioDAO == null)
         {
-            bibliotecarioDAO = new BibliotecarioDAOList();
+            bibliotecarioDAO = new BibliotecarioDAOListFile();
         }
         return bibliotecarioDAO;
     }
@@ -62,7 +69,7 @@ public class DAO {
 
     public static LeitorDAO getLeitorDAO(){
         if(leitorDAO == null){
-            leitorDAO = new LeitorDAOList();
+            leitorDAO = new LeitorDAOListFile();
         }
         return leitorDAO;
     }
@@ -73,7 +80,7 @@ public class DAO {
      */
     public static LivroDAO getLivroDAO(){
         if(livroDAO == null){
-            livroDAO = new LivroDAOList();
+            livroDAO = new LivroDAOListFile();
         }
         return livroDAO;
     }
@@ -84,7 +91,7 @@ public class DAO {
      */
     public static EmprestimoDAO getEmprestimoDAO(){
         if(emprestimoDAO == null){
-            emprestimoDAO = new EmprestimoDAOList();
+            emprestimoDAO = new EmprestimoDAOListFile();
         }
         return emprestimoDAO;
     }
@@ -95,7 +102,7 @@ public class DAO {
      */
     public static ReservaDAO getReservaDAO(){
         if(reservaDAO == null){
-            reservaDAO = new ReservaDAOList();
+            reservaDAO = new ReservaDAOListFile();
         }
         return reservaDAO;
     }
@@ -106,7 +113,7 @@ public class DAO {
      */
     public static MultaDAO getMultaDAO(){
         if(multaDAO == null){
-            multaDAO = new MultaDAOList();
+            multaDAO = new MultaDAOListFile();
         }
         return multaDAO;
     }
