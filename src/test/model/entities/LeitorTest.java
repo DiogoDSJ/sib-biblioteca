@@ -50,7 +50,7 @@ class LeitorTest {
         leitor1.removerReserva("7598");
         assertTrue(DAO.getReservaDAO().findByIdReservante(leitor1.getId()).isEmpty());
         administrador.fazerEmprestimo(leitor1.getId(), livro1.getIsbn());
-        DAO.getEmprestimoDAO().findByIdMutuario(leitor1.getId()).get(0).setDataFim(LocalDate.now().plusDays(-7));
+        DAO.getEmprestimoDAO().findByIdMutuario(leitor1.getId()).get(0).setDataFim(LocalDate.now().plusDays(1));
         System.out.println(DAO.getEmprestimoDAO().findByIdMutuario(leitor1.getId()).get(0).getDataFim().toString());
         leitor1.renovarEmprestimo(livro1.getIsbn());
         System.out.println(DAO.getEmprestimoDAO().findByIdMutuario(leitor1.getId()).get(0).getDataFim().toString()); // correto pq é sempre o dia atual + 7 dias

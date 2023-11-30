@@ -246,7 +246,9 @@ class AdministradorTest {
         administrador.multarLeitor(DAO.getLeitorDAO().findByUsuario("Diogo"), 10);
         assertNotNull(DAO.getMultaDAO().findByIdMutuario(DAO.getLeitorDAO().findByUsuario("Diogo").getId()));
         Multa multa = DAO.getMultaDAO().findByIdMutuario(DAO.getLeitorDAO().findByUsuario("Diogo").getId());
-        assertTrue(multa.getDataInicio().compareTo(multa.getDataFim()) == -10);
+        System.out.println(multa.getDataInicio());
+        System.out.println(multa.getDataFim());
+        assertEquals(multa.getDataInicio().plusDays(10), multa.getDataFim());
     }
 
     @Test
