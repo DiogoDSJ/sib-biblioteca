@@ -15,6 +15,7 @@ class ConvidadoTest {
     Livro livro;
     @BeforeEach
     void setUp() {
+        DAO.getLivroDAO().deleteMany();
         convidado = new Convidado();
         this.livro = new Livro("7598", "Beau Barrera", "ullamcorper", "Aenean Massa Limited", "Ficção", "2020");
         DAO.getLivroDAO().create(livro);
