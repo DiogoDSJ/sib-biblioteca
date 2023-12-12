@@ -6,8 +6,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe que contém as funções estáticas de carregar e salvar os dados do programa em arquivos.
+ */
 public class ControleArmazenamentoArquivoDAO {
 
+    /**
+     * Lê a classe recebida e envia o nome do arquivo de acordo com a classe.
+     * @param classe Classe recebida.
+     * @return Nome do arquivo.
+     * @param <T> Tipo da classe.
+     */
     public static <T> String criarNomeDoArquivo(Class<T> classe) {
         if(classe == Administrador.class){
             return "dadosDAOAdministrador";
@@ -35,6 +44,12 @@ public class ControleArmazenamentoArquivoDAO {
         }
     }
 
+    /**
+     * Função que transforma os dados da memória volátil em binário e salva no arquivo.
+     * @param lista Lista que contém objetos do tipo genérico T.
+     * @param classe Classe do tipo T. Paramêtro utilizado para designar o nome do arquivo.
+     * @param <T> Classe do dado a ser guardado.
+     */
     public static <T> void guardarDados(List<T> lista, Class<T> classe) {
         String nomeDaPasta = criarNomeDoArquivo(classe);
         File dadosDAOPasta = new File("dadosDAO/" + nomeDaPasta);
@@ -51,6 +66,12 @@ public class ControleArmazenamentoArquivoDAO {
         }
     }
 
+    /**
+     * Função que lê os dados da memória não-volátil e carrega para a memória volátil.
+     * @param classe Classe do tipo T. Paramêtro utilizado para designar o nome do arquivo.
+     * @return Dados da memória não-volátil em forma volátil.
+     * @param <T> Classe do dado a ser guardado.
+     */
     public static <T> ArrayList<T> carregarDados(Class <T> classe){
         String nomeDaPasta = criarNomeDoArquivo(classe);
         File dadosDAOPasta = new File("dadosDAO/" + nomeDaPasta);
