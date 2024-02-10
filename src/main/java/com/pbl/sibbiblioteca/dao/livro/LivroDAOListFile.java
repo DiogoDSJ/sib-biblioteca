@@ -84,29 +84,27 @@ public class LivroDAOListFile implements LivroDAO {
     public List<Livro> findByTitulo(String titulo){
         List<Livro> livrosEncontrados = new ArrayList<>();
         for (Livro objIterator: this.lista) {
-            if(objIterator.getTitulo().contains(titulo)){
+            if(objIterator.getTitulo().toLowerCase().contains(titulo.toLowerCase())){
                 livrosEncontrados.add(objIterator);
             }
         }
         return livrosEncontrados;
     }
-
     @Override
     public List<Livro> findByAutor(String autor) {
         List<Livro> livrosEncontrados = new ArrayList<>();
         for (Livro objIterator : this.lista) {
-            if (objIterator.getAutor().contains(autor)) {
+            if (objIterator.getAutor().toLowerCase().contains(autor.toLowerCase())) {
                 livrosEncontrados.add(objIterator);
             }
         }
         return livrosEncontrados;
     }
-
     @Override
     public List<Livro> findByCategoria(String categoria) {
         List<Livro> livrosEncontrados = new ArrayList<>();
         for (Livro objIterator : this.lista) {
-            if (categoria.equals(objIterator.getCategoria())) {
+            if (objIterator.getCategoria().toLowerCase().contains(categoria.toLowerCase())) {
                 livrosEncontrados.add(objIterator);
             }
         }
@@ -117,7 +115,7 @@ public class LivroDAOListFile implements LivroDAO {
     public List<Livro> findByAnoDePublicao(String anoDePublicacao) {
         List<Livro> livrosEncontrados = new ArrayList<>();
         for (Livro objIterator : this.lista) {
-            if (objIterator.getAnoDePublicacao().contains(anoDePublicacao)) {
+            if (objIterator.getAnoDePublicacao().equals(anoDePublicacao)) {
                 livrosEncontrados.add(objIterator);
             }
         }
@@ -127,7 +125,7 @@ public class LivroDAOListFile implements LivroDAO {
     public List<Livro> findByEditora(String editora){
         List<Livro> livrosEncontrados = new ArrayList<>();
         for(Livro objIterator : this.lista){
-            if(objIterator.getEditora().contains(editora)){
+            if(objIterator.getEditora().toLowerCase().contains(editora.toLowerCase())){
                 livrosEncontrados.add(objIterator);
             }
         }
