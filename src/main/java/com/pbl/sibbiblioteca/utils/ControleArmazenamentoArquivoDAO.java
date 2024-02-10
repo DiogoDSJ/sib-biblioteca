@@ -25,7 +25,7 @@ public class ControleArmazenamentoArquivoDAO {
             return "dadosDAOBibliotecario";
         }
         else if(classe == Emprestimo.class){
-            return "dadosDAOEmprestimor";
+            return "dadosDAOEmprestimo";
         }
         else if(classe == Leitor.class){
             return "dadosDAOLeitor";
