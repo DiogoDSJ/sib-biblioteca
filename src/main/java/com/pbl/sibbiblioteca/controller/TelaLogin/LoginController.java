@@ -33,7 +33,7 @@ public class LoginController
     private PasswordField campoSenha;
 
     private Usuario usuarioRetornado;
-    private Cargo[] cargos = {Cargo.ADMINISTRADOR, Cargo.LEITOR, Cargo.BIBLIOTECARIO};
+    private final Cargo[] cargos = {Cargo.ADMINISTRADOR, Cargo.LEITOR, Cargo.BIBLIOTECARIO};
     @FXML
     private Button visitanteButton;
 
@@ -59,8 +59,6 @@ public class LoginController
             telaInicialController.setUsuario(usuarioRetornado);
             telaInicialController.initialize();
             stage.setScene(new Scene(root));
-
-            //CKP12MZT6GD
         }
         catch (naoEncontradoException e) {
             if (e.getMessage().equals("Usuário não encontrado.")) {

@@ -17,6 +17,10 @@ module com.pbl.sibblioteca {
     exports com.pbl.sibbiblioteca.controller.TelaLogin;
     opens com.pbl.sibbiblioteca.controller.TelaInicial to javafx.fxml;
     exports com.pbl.sibbiblioteca.controller.TelaInicial;
+    opens com.pbl.sibbiblioteca.controller.TelaAdicionarObjeto to javafx.fxml;
+    exports com.pbl.sibbiblioteca.controller.TelaAdicionarObjeto;
+    opens com.pbl.sibbiblioteca.controller.TelaMenuBibliotecario to javafx.fxml;
+    exports com.pbl.sibbiblioteca.controller.TelaMenuBibliotecario;
     opens com.pbl.sibbiblioteca.model.entities.enums to javafx.fxml;
     exports com.pbl.sibbiblioteca.model.entities.enums;
     opens com.pbl.sibbiblioteca.exceptions to javafx.fxml;

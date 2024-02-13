@@ -46,11 +46,10 @@ public class TelaInicialController {
     @javafx.fxml.FXML
     private Button minhasReservasButton;
     @javafx.fxml.FXML
-    private Button menuBlibliotecarioButton;
+    private Button menuBibliotecarioButton;
 
     @FXML
     public void initialize() {
-        //usuario = DAO.getAdministradorDAO().findMany().get(0);
         if(usuario != null) {
             fazerLoginButton.setDisable(true);
             desconectarButton.setDisable(false);
@@ -59,11 +58,13 @@ public class TelaInicialController {
                 minhasReservasButton.setDisable(false);
                 meusEmprestimosButton.setDisable(false);
             } else if (usuario.getCargo().equals(Cargo.BIBLIOTECARIO)) {
-                menuBlibliotecarioButton.setDisable(false);
+                menuBibliotecarioButton.setDisable(false);
                 emprestarLivroButton.setDisable(false);
             }
             else if(usuario.getCargo().equals(Cargo.ADMINISTRADOR)){
                 menuAdmButton.setDisable(false);
+                menuBibliotecarioButton.setDisable(false);
+                emprestarLivroButton.setDisable(false);
             }
             String nome = usuario.getNome();
             Cargo cargo = usuario.getCargo();
@@ -105,6 +106,15 @@ public class TelaInicialController {
         Stage stageAtual = TelaController.retornarStage(actionEvent);
         stage.initOwner(stageAtual);
         TelaController.StageBuilder(stage, TelaController.StageFXMLLoader("TelaDeRelatorio.fxml"));
+        stage.showAndWait();
+    }
+
+    @FXML
+    public void setMenuBibliotecarioButton(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        Stage stageAtual = TelaController.retornarStage(actionEvent);
+        stage.initOwner(stageAtual);
+        TelaController.StageBuilder(stage, TelaController.StageFXMLLoader("TelaMenuBibliotecario.fxml"));
         stage.showAndWait();
     }
     public void setUsuario(Usuario usuario){
