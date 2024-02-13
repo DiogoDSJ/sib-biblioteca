@@ -9,8 +9,14 @@ module com.pbl.sibblioteca {
 
     opens com.pbl.sibbiblioteca.view to javafx.fxml;
     exports com.pbl.sibbiblioteca.view;
+    opens com.pbl.sibbiblioteca.controller.TelaRelatorio to javafx.fxml;
+    exports com.pbl.sibbiblioteca.controller.TelaRelatorio;
+    opens com.pbl.sibbiblioteca.controller.TelaPesquisa to javafx.fxml;
+    exports com.pbl.sibbiblioteca.controller.TelaPesquisa;
     opens com.pbl.sibbiblioteca.controller.TelaLogin to javafx.fxml;
     exports com.pbl.sibbiblioteca.controller.TelaLogin;
+    opens com.pbl.sibbiblioteca.controller.TelaInicial to javafx.fxml;
+    exports com.pbl.sibbiblioteca.controller.TelaInicial;
     opens com.pbl.sibbiblioteca.model.entities.enums to javafx.fxml;
     exports com.pbl.sibbiblioteca.model.entities.enums;
     opens com.pbl.sibbiblioteca.exceptions to javafx.fxml;

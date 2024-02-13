@@ -1,11 +1,18 @@
 package com.pbl.sibbiblioteca.view;
 
+import com.pbl.sibbiblioteca.exceptions.foraDeEstoqueException;
+import com.pbl.sibbiblioteca.model.entities.Sistema;
+import com.pbl.sibbiblioteca.utils.TelaController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 import java.io.IOException;
+import java.util.Objects;
+
+import static com.pbl.sibbiblioteca.model.entities.Sistema.atualizarReservas;
 
 public class SibApplication extends Application {
 
@@ -14,11 +21,11 @@ public class SibApplication extends Application {
     }
 
     @Override
-    public void start(Stage telaLogin) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(SibApplication.class.getResource("sib-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        telaLogin.setTitle("Fazer");
-        telaLogin.setScene(scene);
-        telaLogin.show();
+    public void start(Stage program) throws IOException, foraDeEstoqueException {
+        Sistema.atualizarReservas();
+        Sistema.ativarReservasLivros();
+        Sistema.updateMultas();
+        TelaController.StageBuilder(program, TelaController.StageFXMLLoader("TelaDeInicio.fxml"));
+        program.show();
     }
 }

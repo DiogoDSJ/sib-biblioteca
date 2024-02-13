@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pbl.sibbiblioteca.controller.TelaPesquisa.TelaPesquisaController">
+   <children>
+      <Text fill="#2f5aad" layoutX="190.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Acervo Biblioteca">
+         <font>
+            <Font name="Ink Free" size="58.0" />
+         </font>
+      </Text>
+      <TableView fx:id="listaLivros" layoutX="114.0" layoutY="136.0" prefHeight="200.0" prefWidth="571.0" AnchorPane.rightAnchor="114.79999999999995">
+        <columns>
+          <TableColumn fx:id="tituloLivro" prefWidth="121.59997862577438" text="Titulo " />
+          <TableColumn fx:id="isbnLivro" prefWidth="93.59996032714844" text="ISBN" />
+            <TableColumn fx:id="autorLivro" prefWidth="112.80003356933594" text="Autor" />
+            <TableColumn fx:id="editoraLivro" prefWidth="55.20001220703125" text="Editora" />
+            <TableColumn fx:id="categoriaLivro" prefWidth="67.20001220703125" text="Categoria" />
+            <TableColumn fx:id="anoLivro" prefWidth="28.79998779296875" text="Ano" />
+            <TableColumn fx:id="quantidadeLivro" prefWidth="105.60003662109375" text="Quantidade" />
+        </columns>
+      </TableView>
+      <Button fx:id="pesquisaButton" layoutX="364.0" layoutY="483.0" mnemonicParsing="false" onAction="#realizarBusca" text="Pesquisar " />
+      <TextField fx:id="buscaTextField" layoutX="304.0" layoutY="424.0" prefHeight="26.0" prefWidth="190.0" promptText="Digite o termo para pesquisa." />
+      <ChoiceBox fx:id="tipoPesquisaChoiceBox" layoutX="325.0" layoutY="366.0" onAction="#desativarBotao" prefWidth="150.0" />
+      <Button fx:id="voltarButton" layoutX="375.0" layoutY="534.0" mnemonicParsing="false" onAction="#setVoltarButton" text="Voltar" />
+   </children>
+</AnchorPane>

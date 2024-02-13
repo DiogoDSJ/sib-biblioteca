@@ -12,6 +12,6 @@
       <PasswordField fx:id="campoSenha" layoutX="208.0" layoutY="187.0" promptText="Senha" />
       <Button layoutX="208.0" layoutY="279.0" mnemonicParsing="false" onAction="#fazerLogin" text="OK" />
       <ChoiceBox fx:id="cargoLogin" layoutX="207.0" layoutY="71.0" prefWidth="150.0" />
-      <Button layoutX="294.0" layoutY="279.0" mnemonicParsing="false" text="Visitante" />
+      <Button fx:id="visitanteButton" layoutX="294.0" layoutY="279.0" mnemonicParsing="false" onAction="#setVisitanteButton" text="Visitante" />
    </children>
 </AnchorPane>

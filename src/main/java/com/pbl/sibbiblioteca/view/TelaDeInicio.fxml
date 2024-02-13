@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pbl.sibbiblioteca.controller.TelaInicial.TelaInicialController">
+   <children>
+      <Button fx:id="pesquisarLivroButton" layoutX="92.0" layoutY="435.0" mnemonicParsing="false" onAction="#setPesquisarLivroButton" prefHeight="36.0" prefWidth="106.0" text="Pesquisar livro" />
+      <Text fill="#2f5aad" layoutX="141.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema de Biblioteca">
+         <font>
+            <Font name="Ink Free" size="58.0" />
+         </font>
+      </Text>
+      <Text fx:id="MsgBemVindo" layoutX="36.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mensagem boa-vindas">
+         <font>
+            <Font name="Rockwell" size="14.0" />
+         </font>
+      </Text>
+      <Button fx:id="emprestarLivroButton" disable="true" layoutX="232.0" layoutY="435.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="172.0" text="Emprestar livro" />
+      <Button fx:id="reservarLivroButton" disable="true" layoutX="442.0" layoutY="435.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="106.0" text="Reservar livro" />
+      <Button fx:id="fazerLoginButton" layoutX="663.0" layoutY="132.0" mnemonicParsing="false" onAction="#setFazerLoginButton" prefHeight="26.0" prefWidth="92.0" text="Fazer Login" />
+      <Button fx:id="desconectarButton" disable="true" layoutX="663.0" layoutY="171.0" mnemonicParsing="false" onAction="#setDesconectarButton" prefHeight="26.0" prefWidth="92.0" text="Desconectar" textFill="RED" />
+      <Button fx:id="relatorioButton" layoutX="583.0" layoutY="435.0" mnemonicParsing="false" onAction="#setRelatorioButton" prefHeight="36.0" prefWidth="125.0" text="Relatório do sistema" />
+      <Button fx:id="menuBlibliotecarioButton" disable="true" layoutX="646.0" layoutY="214.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="125.0" text="Menu bibliotecário" />
+      <Button fx:id="meusEmprestimosButton" disable="true" layoutX="233.0" layoutY="490.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="172.0" text="Meus empréstimos" />
+      <Button fx:id="minhasReservasButton" disable="true" layoutX="442.0" layoutY="490.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="106.0" text="Minhas reservas" />
+      <Button fx:id="menuAdmButton" disable="true" layoutX="646.0" layoutY="267.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="125.0" text="Menu administrador" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,113 @@
+package com.pbl.sibbiblioteca.controller.TelaInicial;
+
+import com.pbl.sibbiblioteca.controller.TelaLogin.LoginController;
+import com.pbl.sibbiblioteca.dao.DAO;
+import com.pbl.sibbiblioteca.exceptions.naoEncontradoException;
+import com.pbl.sibbiblioteca.model.entities.Usuario;
+import com.pbl.sibbiblioteca.model.entities.enums.Cargo;
+import com.pbl.sibbiblioteca.utils.TelaController;
+import com.pbl.sibbiblioteca.view.SibApplication;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class TelaInicialController {
+    @javafx.fxml.FXML
+    private Text MsgBemVindo;
+
+    private Usuario usuario;
+    @javafx.fxml.FXML
+    private Button pesquisarLivroButton;
+    @javafx.fxml.FXML
+    private Button emprestarLivroButton;
+    @javafx.fxml.FXML
+    private Button reservarLivroButton;
+    @javafx.fxml.FXML
+    private Button fazerLoginButton;
+    @javafx.fxml.FXML
+    private Button desconectarButton;
+    @javafx.fxml.FXML
+    private Button relatorioButton;
+    @javafx.fxml.FXML
+    private Button menuAdmButton;
+    @javafx.fxml.FXML
+    private Button meusEmprestimosButton;
+    @javafx.fxml.FXML
+    private Button minhasReservasButton;
+    @javafx.fxml.FXML
+    private Button menuBlibliotecarioButton;
+
+    @FXML
+    public void initialize() {
+        //usuario = DAO.getAdministradorDAO().findMany().get(0);
+        if(usuario != null) {
+            fazerLoginButton.setDisable(true);
+            desconectarButton.setDisable(false);
+            if (usuario.getCargo().equals(Cargo.LEITOR)) {
+                reservarLivroButton.setDisable(false);
+                minhasReservasButton.setDisable(false);
+                meusEmprestimosButton.setDisable(false);
+            } else if (usuario.getCargo().equals(Cargo.BIBLIOTECARIO)) {
+                menuBlibliotecarioButton.setDisable(false);
+                emprestarLivroButton.setDisable(false);
+            }
+            else if(usuario.getCargo().equals(Cargo.ADMINISTRADOR)){
+                menuAdmButton.setDisable(false);
+            }
+            String nome = usuario.getNome();
+            Cargo cargo = usuario.getCargo();
+            MsgBemVindo.setText("Você entrou como " + cargo.toString().toLowerCase() + ", bem vindo " + nome + ".");
+        }
+        else{
+            MsgBemVindo.setText("Você entrou como convidado.");
+        }
+        MsgBemVindo.autosize();
+    }
+    @FXML
+    public void setPesquisarLivroButton(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        Stage stageAtual = TelaController.retornarStage(actionEvent);
+        stage.initOwner(stageAtual);
+        TelaController.StageBuilder(stage, TelaController.StageFXMLLoader("TelaPesquisa.fxml"));
+        stage.showAndWait();
+    }
+
+    @FXML
+    public void setFazerLoginButton(ActionEvent actionEvent) throws IOException, naoEncontradoException {
+        Stage stage = TelaController.retornarStage(actionEvent);
+        FXMLLoader loader = TelaController.StageFXMLLoader("TelaDeLogin.fxml");
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+    }
+
+    @FXML
+    public void setDesconectarButton(ActionEvent event) throws IOException {
+        Stage stage = TelaController.retornarStage(event);
+        FXMLLoader loader = TelaController.StageFXMLLoader("TelaDeInicio.fxml");
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+    }
+
+    @FXML
+    public void setRelatorioButton(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        Stage stageAtual = TelaController.retornarStage(actionEvent);
+        stage.initOwner(stageAtual);
+        TelaController.StageBuilder(stage, TelaController.StageFXMLLoader("TelaDeRelatorio.fxml"));
+        stage.showAndWait();
+    }
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
+    }
+}
