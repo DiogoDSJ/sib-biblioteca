@@ -1,5 +1,6 @@
 package com.pbl.sibbiblioteca.model.entities;
 
+import com.pbl.sibbiblioteca.dao.DAO;
 import com.pbl.sibbiblioteca.exceptions.foraDeEstoqueException;
 
 import java.io.Serializable;
@@ -73,6 +74,7 @@ public class Livro implements Serializable {
         int quantidadeInt = Integer.parseInt(this.quantidade);
         quantidadeInt++;
         this.quantidade = Integer.toString(quantidadeInt);
+        DAO.getLivroDAO().update(DAO.getLivroDAO().findByIsbn(this.getIsbn()));
     }
 
     /**
@@ -86,6 +88,7 @@ public class Livro implements Serializable {
         }
         quantidadeInt--;
         this.quantidade = Integer.toString(quantidadeInt);
+        DAO.getLivroDAO().update(DAO.getLivroDAO().findByIsbn(this.getIsbn()));
     }
 
     public String getTitulo() {

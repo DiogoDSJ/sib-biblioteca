@@ -36,15 +36,18 @@ public class Bibliotecario extends Usuario {
      * @param categoria Categoria do livro.
      * @param ano Ano do livro.
      */
-    public void adicionarLivro(String isbn, String autor, String titulo, String editora, String categoria, String ano){
+    public int adicionarLivro(String isbn, String autor, String titulo, String editora, String categoria, String ano){
         if(DAO.getLivroDAO().findByIsbn(isbn) == null)
         {
             DAO.getLivroDAO().create(new Livro(isbn, autor, titulo, editora, categoria, ano));
+            return 1;
         }
         else if(DAO.getLivroDAO().findByIsbn(isbn)!= null)
         {
             DAO.getLivroDAO().findByIsbn(isbn).adicionarUmaUnidade();
+            return 0;
         }
+        return -1;
     }
 
     /**
