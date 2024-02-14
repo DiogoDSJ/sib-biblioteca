@@ -62,16 +62,10 @@ public class TelaAdicionarLivroController {
         int retorno = usuarioLogado.adicionarLivro(isbnLivroField.getText(), autorLivroField.getText(), tituloLivroField.getText(),
                 editoraLivroField.getText(), categoriaLivroField.getText(), anoLivroField.getText());
         if(retorno == 1){
-            Alert erroAno = new Alert(Alert.AlertType.CONFIRMATION);
-            erroAno.setTitle("Livro criado.");
-            erroAno.setContentText("O livro foi criado com sucesso.");
-            erroAno.showAndWait();
+            TelaController.gerarAlertaOk("Livro criado.", "O livro foi criado com sucesso.");
         }
         else if(retorno == 0){
-            Alert erroAno = new Alert(Alert.AlertType.WARNING);
-            erroAno.setTitle("Livro já existe.");
-            erroAno.setContentText("O livro já existe, então uma nova unidade foi adicionada ao acervo.");
-            erroAno.showAndWait();
+            TelaController.gerarAlertaOk("Livro já existe.", "O livro já existe, então uma nova unidade foi adicionada ao acervo.");
         }
     }
 }

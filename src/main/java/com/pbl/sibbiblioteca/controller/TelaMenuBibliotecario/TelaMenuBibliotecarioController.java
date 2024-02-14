@@ -1,6 +1,8 @@
 package com.pbl.sibbiblioteca.controller.TelaMenuBibliotecario;
 
+import com.pbl.sibbiblioteca.controller.TelaEditarObjeto.TelaEdicaoLivroController;
 import com.pbl.sibbiblioteca.controller.TelaPesquisa.TelaPesquisaController;
+import com.pbl.sibbiblioteca.exceptions.foraDeEstoqueException;
 import com.pbl.sibbiblioteca.exceptions.livroEmprestadoException;
 import com.pbl.sibbiblioteca.exceptions.livroReservadoException;
 import com.pbl.sibbiblioteca.exceptions.naoEncontradoException;
@@ -10,6 +12,8 @@ import com.pbl.sibbiblioteca.model.entities.Usuario;
 import com.pbl.sibbiblioteca.utils.TelaController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -93,6 +97,7 @@ public class TelaMenuBibliotecarioController {
     public void realizarBusca(ActionEvent actionEvent) {
         try {
             listaLivros.setItems(listaDeLivros(tipoPesquisaChoiceBox, buscaTextField));
+            listaLivros.refresh();
         }
         catch (naoEncontradoException e) {
             if (e.getMessage().equals("A busca não retornou em nada.")) {
@@ -110,21 +115,42 @@ public class TelaMenuBibliotecarioController {
     }
 
     @FXML
-    public void setRemoverLivroButton(ActionEvent actionEvent) throws livroEmprestadoException, livroReservadoException, naoEncontradoException {
+    public void setRemoverLivroButton(ActionEvent actionEvent) throws livroEmprestadoException, livroReservadoException, naoEncontradoException, foraDeEstoqueException {
         setUsuarioLogado(actionEvent);
         Alert erroUsuario = new Alert(Alert.AlertType.CONFIRMATION);
         erroUsuario.setTitle("Confirmar remoção");
         erroUsuario.setContentText("Deseja mesmo remover o livro?.");
         Optional<ButtonType> option = erroUsuario.showAndWait();
         if (option.get() == ButtonType.OK) {
-            usuarioLogado.removerLivro(livroSelecionado.getIsbn());
+            try {
+                usuarioLogado.removerLivro(livroSelecionado.getIsbn());
+                TelaController.gerarAlertaOk("Livro removido.", "Uma unidade do livro foi removida do acervo.");
+            }
+            catch (foraDeEstoqueException e){
+                TelaController.gerarAlertaOk("Livro removido.", "Quantidade mínima (0) alcançada, então o livro foi removido.");
+            }
         } else if (option.get() == ButtonType.CANCEL) {
-            System.out.println("Não");
+            TelaController.gerarAlertaOk("Operação cancelada", "Operação cancelada, nenhuma alteração foi feita.");
         }
     }
 
     @FXML
-    public void setEditarLivroButton(ActionEvent actionEvent) {
+    public void setEditarLivroButton(ActionEvent actionEvent) throws IOException {
         setUsuarioLogado(actionEvent);
+        Stage stage = new Stage();
+        Stage stageAtual = TelaController.retornarStage(actionEvent);
+        stage.initOwner(stageAtual);
+        FXMLLoader loader = TelaController.StageFXMLLoader("TelaEdicaoLivro.fxml");
+        TelaController.StageBuilder(stage, loader);
+        TelaEdicaoLivroController telaEdicaoLivroController = loader.getController();
+        telaEdicaoLivroController.setLivro(livroSelecionado);
+        telaEdicaoLivroController.setBibliotecario(usuarioLogado);
+        telaEdicaoLivroController.setTituloLivroField(livroSelecionado.getTitulo());
+        telaEdicaoLivroController.setAutorLivroField(livroSelecionado.getAutor());
+        telaEdicaoLivroController.setIsbnLivroField(livroSelecionado.getIsbn());
+        telaEdicaoLivroController.setEditoraLivroField(livroSelecionado.getEditora());
+        telaEdicaoLivroController.setCategoriaLivroField(livroSelecionado.getCategoria());
+        telaEdicaoLivroController.setAnoLivroField(livroSelecionado.getAnoDePublicacao());
+        stage.showAndWait();
     }
 }

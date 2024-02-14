@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="334.0" prefWidth="207.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pbl.sibbiblioteca.controller.TelaEditarObjeto.TelaEdicaoLivroController">
+   <children>
+      <TextField fx:id="tituloLivroField" promptText="Titulo do livro" />
+      <Button fx:id="salvarTituloButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setSalvarTituloButton" prefHeight="26.0" prefWidth="211.0" text="Salvar título" textAlignment="CENTER" />
+      <TextField fx:id="isbnLivroField" promptText="ISBN do livro." />
+      <Button fx:id="salvarIsbnButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setSalvarIsbnButton" prefHeight="26.0" prefWidth="210.0" text="Salvar isbn" textAlignment="CENTER" />
+      <TextField fx:id="autorLivroField" promptText="Autor do livro." />
+      <Button fx:id="salvarAutorButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setSalvarAutorButton" prefHeight="26.0" prefWidth="211.0" text="Salvar autor" textAlignment="CENTER" />
+      <TextField fx:id="editoraLivroField" promptText="Editora do livro." />
+      <Button fx:id="salvarEditoraButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setSalvarEditoraButton" prefHeight="26.0" prefWidth="211.0" text="Salvar editora" textAlignment="CENTER" />
+      <TextField fx:id="categoriaLivroField" promptText="Categoria do livro." />
+      <Button fx:id="salvarCategoriaButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setSalvarCategoriaButton" prefHeight="26.0" prefWidth="210.0" text="Salvar categoria" textAlignment="CENTER" />
+      <TextField fx:id="anoLivroField" promptText="Ano do livro" />
+      <Button fx:id="salvarAnoButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setSalvarAnoButton" prefHeight="26.0" prefWidth="212.0" text="Salvar ano" textAlignment="CENTER" />
+      <AnchorPane prefHeight="39.0" prefWidth="207.0" />
+      <Button fx:id="cancelarButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#setCancelarButton" prefHeight="26.0" prefWidth="212.0" text="Cancelar" textAlignment="CENTER" />
+   </children>
+</VBox>

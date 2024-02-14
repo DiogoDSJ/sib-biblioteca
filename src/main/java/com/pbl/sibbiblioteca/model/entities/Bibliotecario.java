@@ -56,16 +56,21 @@ public class Bibliotecario extends Usuario {
      * @throws livroEmprestadoException Sé o livro estiver emprestado ou reservado à um leitor.
      * @throws naoEncontradoException Sé o livro não existir.
      */
-    public void removerLivro(String isbn) throws livroEmprestadoException,livroReservadoException, naoEncontradoException{
-        if(DAO.getLivroDAO().findByIsbn(isbn) == null) throw new naoEncontradoException("Livro não existe");
+    public void removerLivro(String isbn) throws livroEmprestadoException, livroReservadoException, naoEncontradoException, foraDeEstoqueException {
+        Livro livro = DAO.getLivroDAO().findByIsbn(isbn);
+        if(livro == null) throw new naoEncontradoException("Livro não existe");
         else if(!DAO.getEmprestimoDAO().findByIsbn(isbn).isEmpty()) {
             throw new livroEmprestadoException("Livro está emprestado.");
         }
         else if(Sistema.checarSeOLivroFoiReservado(isbn)) {
             throw new livroReservadoException("Livro está reservado.");
         }
-        else{
+        try{
+            livro.removerUmaUnidade();
+        }
+        catch (foraDeEstoqueException e) {
             DAO.getLivroDAO().delete(DAO.getLivroDAO().findByIsbn(isbn));
+            throw new foraDeEstoqueException("O livro foi removido");
         }
     }
 
@@ -116,9 +121,10 @@ public class Bibliotecario extends Usuario {
      * @param novoisbn Novo ISBN que será colocado no livro.
      * @throws objetoInexistenteException Se o livro não existir ou não for encontrado.
      */
-    public void trocarIsbnLivro(String isbn, String novoisbn) throws objetoInexistenteException {
+    public void trocarIsbnLivro(String isbn, String novoisbn) throws objetoInexistenteException, objetoDuplicadoException {
         Livro livro = DAO.getLivroDAO().findByIsbn(isbn);
         if (livro == null) throw new objetoInexistenteException("Livro não existe.");
+        else if (DAO.getLivroDAO().findByIsbn(novoisbn) != null) throw new objetoDuplicadoException("Já existe um livro com esse ISBN.");
         livro.setIsbn(novoisbn);
         DAO.getLivroDAO().update(livro);
     }
