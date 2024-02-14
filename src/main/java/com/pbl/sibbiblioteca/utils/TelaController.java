@@ -32,14 +32,4 @@ public class TelaController {
         return (Stage)((Node)event.getSource()).getScene().getWindow();
     }
 
-    public static void setarTabelaLivros(TableColumn<Livro, String> tituloLivro, TableColumn<Livro, String> isbnLivro, TableColumn<Livro, String> autorLivro, TableColumn<Livro, String> editoraLivro, TableColumn<Livro, String> categoriaLivro, TableColumn<Livro, String> anoLivro, TableColumn<Livro, String> quantidadeLivro) {
-        tituloLivro.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        isbnLivro.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-        autorLivro.setCellValueFactory(new PropertyValueFactory<>("autor"));
-        editoraLivro.setCellValueFactory(new PropertyValueFactory<>("editora"));
-        categoriaLivro.setCellValueFactory(new PropertyValueFactory<>("categoria"));
-        anoLivro.setCellValueFactory(new PropertyValueFactory<>("anoDePublicacao"));
-        quantidadeLivro.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-    }
-
 }

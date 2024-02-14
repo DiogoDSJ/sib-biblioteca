@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.pbl.sibbiblioteca.utils.TelaController.setarTabelaLivros;
 
 public class TelaPesquisaController {
 
@@ -58,8 +57,8 @@ public class TelaPesquisaController {
     @FXML
     private void initialize() {
         tipoPesquisaChoiceBox.getItems().addAll("Todos","Título","ISBN","Autor","Editora","Categoria","Ano");
-        TelaController.setarTabelaLivros(tituloLivro, isbnLivro, autorLivro, editoraLivro, categoriaLivro, anoLivro, quantidadeLivro);
-        desativarBotao();
+        TelaPesquisaController.setarTabelaLivros(tituloLivro, isbnLivro, autorLivro, editoraLivro, categoriaLivro, anoLivro, quantidadeLivro);
+        TelaPesquisaController.desativarBotaoPesquisa(tipoPesquisaChoiceBox, pesquisaButton, buscaTextField);
     }
 
     @javafx.fxml.FXML
@@ -76,8 +75,7 @@ public class TelaPesquisaController {
             }
         }
     }
-    @javafx.fxml.FXML
-    public void desativarBotao(){
+    public static void desativarBotaoPesquisa(ChoiceBox<String> tipoPesquisaChoiceBox, Button pesquisaButton, TextField buscaTextField){
         if(tipoPesquisaChoiceBox.getSelectionModel().getSelectedItem() == null){
             pesquisaButton.setDisable(true);
             buscaTextField.setDisable(true);
@@ -91,8 +89,17 @@ public class TelaPesquisaController {
             buscaTextField.setDisable(false);
         }
     }
+    public static void setarTabelaLivros(TableColumn<Livro, String> tituloLivro, TableColumn<Livro, String> isbnLivro, TableColumn<Livro, String> autorLivro, TableColumn<Livro, String> editoraLivro, TableColumn<Livro, String> categoriaLivro, TableColumn<Livro, String> anoLivro, TableColumn<Livro, String> quantidadeLivro) {
+        tituloLivro.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        isbnLivro.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        autorLivro.setCellValueFactory(new PropertyValueFactory<>("autor"));
+        editoraLivro.setCellValueFactory(new PropertyValueFactory<>("editora"));
+        categoriaLivro.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        anoLivro.setCellValueFactory(new PropertyValueFactory<>("anoDePublicacao"));
+        quantidadeLivro.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+    }
     @FXML
-    private ObservableList<Livro> listaDeLivros(ChoiceBox<String> tipo, TextField campoDePesquisa) throws naoEncontradoException {
+    public static ObservableList<Livro> listaDeLivros(ChoiceBox<String> tipo, TextField campoDePesquisa) throws naoEncontradoException {
         if(tipo.getSelectionModel().isEmpty()) return null;
         else if(tipo.getSelectionModel().getSelectedItem().equals("Todos")) return FXCollections.observableArrayList(Sistema.findAll());
         else if(tipo.getSelectionModel().getSelectedItem().equals("Título")) return FXCollections.observableArrayList(Sistema.findByTitulo(campoDePesquisa.getText()));
@@ -104,6 +111,10 @@ public class TelaPesquisaController {
         return null;
     }
 
+    @FXML
+    public void desativarBotao(){
+        TelaPesquisaController.desativarBotaoPesquisa(tipoPesquisaChoiceBox, pesquisaButton, buscaTextField);
+    }
 
 
     @javafx.fxml.FXML

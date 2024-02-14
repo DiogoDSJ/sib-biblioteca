@@ -1,5 +1,6 @@
 package com.pbl.sibbiblioteca.controller.TelaRelatorio;
 
+import com.pbl.sibbiblioteca.controller.TelaPesquisa.TelaPesquisaController;
 import com.pbl.sibbiblioteca.exceptions.naoEncontradoException;
 import com.pbl.sibbiblioteca.exceptions.objetoInexistenteException;
 import com.pbl.sibbiblioteca.model.entities.Livro;
@@ -14,7 +15,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import static com.pbl.sibbiblioteca.utils.TelaController.setarTabelaLivros;
 
 public class TelaRelatorioLivrosPopulares {
     @javafx.fxml.FXML
@@ -37,6 +37,6 @@ public class TelaRelatorioLivrosPopulares {
     @FXML
     private void initialize() throws objetoInexistenteException {
         listaLivros.setItems(FXCollections.observableArrayList(Sistema.getDezLivrosMaisPopulares()));
-        TelaController.setarTabelaLivros(tituloLivro, isbnLivro, autorLivro, editoraLivro, categoriaLivro, anoLivro, quantidadeLivro);
+        TelaPesquisaController.setarTabelaLivros(tituloLivro, isbnLivro, autorLivro, editoraLivro, categoriaLivro, anoLivro, quantidadeLivro);
     }
 }

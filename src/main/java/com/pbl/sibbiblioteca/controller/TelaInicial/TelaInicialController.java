@@ -113,6 +113,7 @@ public class TelaInicialController {
     public void setMenuBibliotecarioButton(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         Stage stageAtual = TelaController.retornarStage(actionEvent);
+        stageAtual.setUserData(usuario);
         stage.initOwner(stageAtual);
         TelaController.StageBuilder(stage, TelaController.StageFXMLLoader("TelaMenuBibliotecario.fxml"));
         stage.showAndWait();
@@ -120,4 +121,6 @@ public class TelaInicialController {
     public void setUsuario(Usuario usuario){
         this.usuario = usuario;
     }
+
+    public Usuario getUsuario() { return this.usuario; }
 }
