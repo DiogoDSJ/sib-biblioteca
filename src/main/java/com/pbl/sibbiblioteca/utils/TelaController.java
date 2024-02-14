@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -32,4 +33,17 @@ public class TelaController {
         return (Stage)((Node)event.getSource()).getScene().getWindow();
     }
 
+    public static void gerarAlertaErro(String titulo, String conteudo){
+        Alert erro = new Alert(Alert.AlertType.ERROR);
+        erro.setTitle(titulo);
+        erro.setContentText(conteudo);
+        erro.showAndWait();
+    }
+
+    public static void gerarAlertaOk(String titulo, String conteudo){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setContentText(conteudo);
+        alert.showAndWait();
+    }
 }
