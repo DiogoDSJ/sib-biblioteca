@@ -19,13 +19,13 @@
          </font>
       </Text>
       <Button fx:id="emprestarLivroButton" disable="true" layoutX="232.0" layoutY="435.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="172.0" text="Emprestar livro" />
-      <Button fx:id="reservarLivroButton" disable="true" layoutX="442.0" layoutY="435.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="106.0" text="Reservar livro" />
+      <Button fx:id="reservarLivroButton" disable="true" layoutX="442.0" layoutY="435.0" mnemonicParsing="false" onAction="#setReservarLivroButton" prefHeight="36.0" prefWidth="106.0" text="Reservar livro" />
       <Button fx:id="fazerLoginButton" layoutX="663.0" layoutY="132.0" mnemonicParsing="false" onAction="#setFazerLoginButton" prefHeight="26.0" prefWidth="92.0" text="Fazer Login" />
       <Button fx:id="desconectarButton" disable="true" layoutX="663.0" layoutY="171.0" mnemonicParsing="false" onAction="#setDesconectarButton" prefHeight="26.0" prefWidth="92.0" text="Desconectar" textFill="RED" />
       <Button fx:id="relatorioButton" layoutX="583.0" layoutY="435.0" mnemonicParsing="false" onAction="#setRelatorioButton" prefHeight="36.0" prefWidth="125.0" text="Relatório do sistema" />
       <Button fx:id="menuBibliotecarioButton" disable="true" layoutX="646.0" layoutY="214.0" mnemonicParsing="false" onAction="#setMenuBibliotecarioButton" prefHeight="36.0" prefWidth="125.0" text="Menu bibliotecário" />
       <Button fx:id="meusEmprestimosButton" disable="true" layoutX="233.0" layoutY="490.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="172.0" text="Meus empréstimos" />
-      <Button fx:id="minhasReservasButton" disable="true" layoutX="442.0" layoutY="490.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="106.0" text="Minhas reservas" />
+      <Button fx:id="minhasReservasButton" disable="true" layoutX="442.0" layoutY="490.0" mnemonicParsing="false" onAction="#setMinhasReservasButton" prefHeight="36.0" prefWidth="106.0" text="Minhas reservas" />
       <Button fx:id="menuAdmButton" disable="true" layoutX="646.0" layoutY="267.0" mnemonicParsing="false" onAction="#setMenuAdmButton" prefHeight="36.0" prefWidth="125.0" text="Menu administrador" />
    </children>
 </AnchorPane>

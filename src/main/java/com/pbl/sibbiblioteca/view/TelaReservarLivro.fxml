@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pbl.sibbiblioteca.controller.TelaInicial.TelaReservarLivroController">
+   <children>
+      <Text fill="#2f5aad" layoutX="234.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservar livro">
+         <font>
+            <Font name="Ink Free" size="58.0" />
+         </font>
+      </Text>
+      <TableView fx:id="listaLivros" layoutX="114.0" layoutY="116.0" prefHeight="200.0" prefWidth="571.0">
+         <columns>
+            <TableColumn fx:id="tituloLivro" prefWidth="121.59997862577438" text="Titulo " />
+            <TableColumn fx:id="isbnLivro" prefWidth="93.59996032714844" text="ISBN" />
+            <TableColumn fx:id="autorLivro" prefWidth="112.80003356933594" text="Autor" />
+            <TableColumn fx:id="editoraLivro" prefWidth="55.20001220703125" text="Editora" />
+            <TableColumn fx:id="categoriaLivro" prefWidth="67.20001220703125" text="Categoria" />
+            <TableColumn fx:id="anoLivro" prefWidth="28.79998779296875" text="Ano" />
+            <TableColumn fx:id="quantidadeLivro" prefWidth="105.60003662109375" text="Quantidade" />
+         </columns>
+      </TableView>
+      <Button fx:id="pesquisaButton" layoutX="373.0" layoutY="427.0" mnemonicParsing="false" onAction="#realizarBusca" text="Pesquisar " />
+      <TextField fx:id="buscaTextField" layoutX="313.0" layoutY="386.0" prefHeight="26.0" prefWidth="190.0" promptText="Digite o termo para pesquisa." />
+      <ChoiceBox fx:id="tipoPesquisaChoiceBox" layoutX="333.0" layoutY="346.0" onAction="#desativarBotao" prefWidth="150.0" />
+      <Button fx:id="reservarLivroButton" disable="true" layoutX="354.0" layoutY="465.0" mnemonicParsing="false" onAction="#setReservarLivroButton" prefHeight="36.0" prefWidth="106.0" text="Reservar livro" />
+   </children>
+</AnchorPane>

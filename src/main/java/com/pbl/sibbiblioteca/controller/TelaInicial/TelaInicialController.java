@@ -1,7 +1,9 @@
 package com.pbl.sibbiblioteca.controller.TelaInicial;
+import com.pbl.sibbiblioteca.controller.TelaEditarObjeto.TelaEdicaoLivroController;
 import com.pbl.sibbiblioteca.controller.TelaMenuAdministrador.TelaMenuAdministradorController;
 import com.pbl.sibbiblioteca.exceptions.naoEncontradoException;
 import com.pbl.sibbiblioteca.model.entities.Administrador;
+import com.pbl.sibbiblioteca.model.entities.Leitor;
 import com.pbl.sibbiblioteca.model.entities.Usuario;
 import com.pbl.sibbiblioteca.model.entities.enums.Cargo;
 import com.pbl.sibbiblioteca.utils.TelaController;
@@ -131,4 +133,20 @@ public class TelaInicialController {
     }
 
     public Usuario getUsuario() { return this.usuario; }
+
+    @FXML
+    public void setReservarLivroButton(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        Stage stageAtual = TelaController.retornarStage(actionEvent);
+        stage.initOwner(stageAtual);
+        FXMLLoader loader = TelaController.StageFXMLLoader("TelaReservarLivro.fxml");
+        TelaController.StageBuilder(stage, loader);
+        TelaReservarLivroController TelaReservarLivroController = loader.getController();
+        TelaReservarLivroController.setUsuarioLogado((Leitor) usuario);
+        stage.showAndWait();
+    }
+
+    @FXML
+    public void setMinhasReservasButton(ActionEvent actionEvent) {
+    }
 }
