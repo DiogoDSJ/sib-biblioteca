@@ -119,6 +119,14 @@ public class Administrador extends Bibliotecario {
         DAO.getAdministradorDAO().delete(administrador);
     }
 
+    public void trocarNomeDoLeitor(String usuario, String novonome) throws naoEncontradoException, objetoInexistenteException {
+        Leitor leitor = DAO.getLeitorDAO().findByUsuario(usuario);
+        if (leitor == null) throw new naoEncontradoException("Leitor não existe.");
+        leitor.setNome(novonome);
+        atualizarUsuario(leitor);
+    }
+
+
     /**
      * Função que recebe o atual usuário de um leitor e troca para um novo.
      * @param usuario Usuário atual do Leitor.
@@ -173,6 +181,13 @@ public class Administrador extends Bibliotecario {
         atualizarUsuario(leitor);
     }
 
+    public void trocarNomeDoBibliotecario(String usuario, String novonome) throws naoEncontradoException, objetoInexistenteException {
+        Bibliotecario bibliotecario = DAO.getBibliotecarioDAO().findByUsuario(usuario);
+        if (bibliotecario == null) throw new naoEncontradoException("Bibliotecário não existe.");
+        bibliotecario.setNome(novonome);
+        atualizarUsuario(bibliotecario);
+    }
+
     /**
      * Função que recebe o atual usuário de um bibliotecario troca para um novo.
      * @param usuario Usuário atual do bibliotecario.
@@ -224,6 +239,12 @@ public class Administrador extends Bibliotecario {
         if (bibliotecario == null) throw new naoEncontradoException("Bibliotecário não existe.");
         bibliotecario.setEndereco(novoendereco);
         atualizarUsuario(bibliotecario);
+    }
+    public void trocarNomeDoAdministrador(String usuario, String novonome) throws naoEncontradoException, objetoInexistenteException {
+        Administrador administrador = DAO.getAdministradorDAO().findByUsuario(usuario);
+        if (administrador == null) throw new naoEncontradoException("Administrador não existe.");
+        administrador.setNome(novonome);
+        atualizarUsuario(administrador);
     }
     /**
      * Função que recebe o atual usuário de um administrador troca para um novo.

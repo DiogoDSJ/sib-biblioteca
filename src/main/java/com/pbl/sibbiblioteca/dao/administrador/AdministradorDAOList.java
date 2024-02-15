@@ -73,4 +73,13 @@ public class AdministradorDAOList implements AdministradorDAO {
         }
         return null;
     }
+    public List<Administrador> findByUsuarioList(String usuario) {
+        List<Administrador> usuariosEncontrados = new ArrayList<>();
+        for (Administrador objIterator : this.lista) {
+            if (objIterator.getUsuario().toLowerCase().contains(usuario.toLowerCase())) {
+                usuariosEncontrados.add(objIterator);
+            }
+        }
+        return usuariosEncontrados;
+    }
 }

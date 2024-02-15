@@ -1,5 +1,6 @@
 package com.pbl.sibbiblioteca.dao.leitor;
 
+import com.pbl.sibbiblioteca.model.entities.Bibliotecario;
 import com.pbl.sibbiblioteca.model.entities.Leitor;
 import com.pbl.sibbiblioteca.utils.ControleArmazenamentoArquivoDAO;
 
@@ -79,5 +80,14 @@ public class LeitorDAOListFile implements LeitorDAO {
             }
         }
         return null;
+    }
+    public List<Leitor> findByUsuarioList(String usuario) {
+        List<Leitor> usuariosEncontrados = new ArrayList<>();
+        for (Leitor objIterator : this.lista) {
+            if (objIterator.getUsuario().toLowerCase().contains(usuario.toLowerCase())) {
+                usuariosEncontrados.add(objIterator);
+            }
+        }
+        return usuariosEncontrados;
     }
 }

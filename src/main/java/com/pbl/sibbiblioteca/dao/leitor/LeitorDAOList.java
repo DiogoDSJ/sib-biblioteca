@@ -70,4 +70,13 @@ public class LeitorDAOList implements LeitorDAO {
         }
         return null;
     }
+    public List<Leitor> findByUsuarioList(String usuario) {
+        List<Leitor> usuariosEncontrados = new ArrayList<>();
+        for (Leitor objIterator : this.lista) {
+            if (objIterator.getUsuario().toLowerCase().contains(usuario.toLowerCase())) {
+                usuariosEncontrados.add(objIterator);
+            }
+        }
+        return usuariosEncontrados;
+    }
 }

@@ -69,4 +69,13 @@ public class BibliotecarioDAOList implements BibliotecarioDAO {
         }
         return null;
     }
+    public List<Bibliotecario> findByUsuarioList(String usuario) {
+        List<Bibliotecario> usuariosEncontrados = new ArrayList<>();
+        for (Bibliotecario objIterator : this.lista) {
+            if (objIterator.getUsuario().toLowerCase().contains(usuario.toLowerCase())) {
+                usuariosEncontrados.add(objIterator);
+            }
+        }
+        return usuariosEncontrados;
+    }
 }

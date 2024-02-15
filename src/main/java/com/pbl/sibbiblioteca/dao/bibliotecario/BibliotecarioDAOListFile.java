@@ -1,5 +1,6 @@
 package com.pbl.sibbiblioteca.dao.bibliotecario;
 
+import com.pbl.sibbiblioteca.model.entities.Administrador;
 import com.pbl.sibbiblioteca.model.entities.Bibliotecario;
 import com.pbl.sibbiblioteca.utils.ControleArmazenamentoArquivoDAO;
 
@@ -78,5 +79,15 @@ public class BibliotecarioDAOListFile implements BibliotecarioDAO {
             }
         }
         return null;
+    }
+
+    public List<Bibliotecario> findByUsuarioList(String usuario) {
+        List<Bibliotecario> usuariosEncontrados = new ArrayList<>();
+        for (Bibliotecario objIterator : this.lista) {
+            if (objIterator.getUsuario().toLowerCase().contains(usuario.toLowerCase())) {
+                usuariosEncontrados.add(objIterator);
+            }
+        }
+        return usuariosEncontrados;
     }
 }

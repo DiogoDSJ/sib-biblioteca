@@ -4,6 +4,8 @@ package com.pbl.sibbiblioteca.dao.administrador;
 import com.pbl.sibbiblioteca.dao.CRUD;
 import com.pbl.sibbiblioteca.model.entities.Administrador;
 
+import java.util.List;
+
 /**
  * Interface criada para implementar o armazenamento dos objetos administradores, usando a interface CRUD.
  */
@@ -14,4 +16,5 @@ public interface AdministradorDAO extends CRUD<Administrador> {
      * @return o objeto administrador que tem esse atributo usuario
      */
     Administrador findByUsuario(String usuario);
+    List<Administrador> findByUsuarioList(String usuario);
 }

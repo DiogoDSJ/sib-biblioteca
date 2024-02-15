@@ -512,4 +512,21 @@ public class Sistema {
         if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
         return resulBusca;
     }
+
+    public static List<Administrador> findByUsuarioAdministrador(String usuario) throws naoEncontradoException {
+        List<Administrador> resulBusca = DAO.getAdministradorDAO().findByUsuarioList(usuario);
+        if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
+        return resulBusca;
+    }
+    public static List<Bibliotecario> findByUsuarioBibliotecario(String usuario) throws naoEncontradoException {
+        List<Bibliotecario> resulBusca = DAO.getBibliotecarioDAO().findByUsuarioList(usuario);
+        if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
+        return resulBusca;
+    }
+    public static List<Leitor> findByUsuarioLeitor(String usuario) throws naoEncontradoException {
+        List<Leitor> resulBusca = DAO.getLeitorDAO().findByUsuarioList(usuario);
+        if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
+        return resulBusca;
+    }
+
 }
