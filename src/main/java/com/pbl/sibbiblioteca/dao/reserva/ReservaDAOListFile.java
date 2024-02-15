@@ -1,5 +1,6 @@
 package com.pbl.sibbiblioteca.dao.reserva;
 
+import com.pbl.sibbiblioteca.model.entities.Livro;
 import com.pbl.sibbiblioteca.model.entities.Reserva;
 import com.pbl.sibbiblioteca.utils.ControleArmazenamentoArquivoDAO;
 
@@ -13,8 +14,13 @@ public class ReservaDAOListFile implements ReservaDAO{
     private String proximoID;
 
     public ReservaDAOListFile() {
-        this.lista = new ArrayList<>();
-        this.proximoID = "0";
+        this.lista = ControleArmazenamentoArquivoDAO.carregarDados(Reserva.class);
+        if(!lista.isEmpty()){
+            this.proximoID = lista.get(lista.size() - 1).getIdReserva();
+        }
+        else {
+            this.proximoID = "0";
+        }
     }
     private String getProximoID() {
         int proxID = Integer.parseInt(proximoID);

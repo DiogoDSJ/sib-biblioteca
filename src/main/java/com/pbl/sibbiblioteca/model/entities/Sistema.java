@@ -253,6 +253,7 @@ public class Sistema {
                 if (reserva.getIsbnLivro().equals(livro.getIsbn())) {
                     reserva.setDataInicioReserva(LocalDate.now());
                     reserva.setDataFimReserva(reserva.getDataInicioReserva().plusDays(2));
+                    DAO.getReservaDAO().update(reserva);
                     contador++;
                 }
             }
@@ -268,12 +269,13 @@ public class Sistema {
         List <Reserva> reservasdelete = new ArrayList<>();
         List <Reserva> reservas = DAO.getReservaDAO().findMany();
         for (Reserva reserva : reservas) {
+            if(reserva.getDataFimReserva() == null) continue;
             if (reserva.getDataFimReserva().isBefore(LocalDate.now())) {
                 reservasdelete.add(reserva);
                 DAO.getLeitorDAO().findByPk(reserva.getIdReserva()).adicionarUmaReserva();
             }
         }
-        reservas.removeAll(reservasdelete);
+        DAO.getReservaDAO().findMany().removeAll(reservasdelete);
     }
 
     /**
@@ -529,4 +531,14 @@ public class Sistema {
         return resulBusca;
     }
 
+    public static List<Emprestimo> findEmprestimosLeitor(String id) throws naoEncontradoException {
+        List<Emprestimo> resulBusca = DAO.getEmprestimoDAO().findByIdMutuario(id);
+        if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
+        return resulBusca;
+    }
+    public static List<Reserva> findReservasLeitor(String id) throws naoEncontradoException {
+        List<Reserva> resulBusca = DAO.getReservaDAO().findByIdReservante(id);
+        if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
+        return resulBusca;
+    }
 }
