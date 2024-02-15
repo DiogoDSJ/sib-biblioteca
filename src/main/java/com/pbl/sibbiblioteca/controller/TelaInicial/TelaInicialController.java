@@ -164,4 +164,23 @@ public class TelaInicialController {
         telasMinhasReservasController.setLeitor((Leitor) usuario);
         stage.showAndWait();
     }
+
+    @FXML
+    public void setMeusEmprestimosButton(ActionEvent actionEvent) throws IOException {
+        try{
+            Sistema.findEmprestimosLeitor(usuario.getId());
+        }
+        catch (naoEncontradoException e){
+            TelaController.gerarAlertaErro("Erro", "O usuário não tem empréstimos.");
+            return;
+        }
+        Stage stage = new Stage();
+        Stage stageAtual = TelaController.retornarStage(actionEvent);
+        stage.initOwner(stageAtual);
+        FXMLLoader loader = TelaController.StageFXMLLoader("TelaMeusEmprestimos.fxml");
+        TelaController.StageBuilder(stage, loader);
+        TelaMeusEmprestimosController telaMeusEmprestimosController= loader.getController();
+        telaMeusEmprestimosController.setLeitor((Leitor) usuario);
+        stage.showAndWait();
+    }
 }

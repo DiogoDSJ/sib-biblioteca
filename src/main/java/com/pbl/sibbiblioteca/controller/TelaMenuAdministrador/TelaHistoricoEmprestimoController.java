@@ -41,7 +41,7 @@ public class TelaHistoricoEmprestimoController {
     public static ObservableList<Emprestimo> historicoEmprestimo(Leitor leitor){
         return FXCollections.observableArrayList(leitor.getHistoricoEmprestimos());
     }
-    public void setarTabelaEmprestimo(TableColumn<Emprestimo, String> isbnLivro, TableColumn<Emprestimo, LocalDate> dataInicio,
+    public static void setarTabelaEmprestimo(TableColumn<Emprestimo, String> isbnLivro, TableColumn<Emprestimo, LocalDate> dataInicio,
         TableColumn<Emprestimo, LocalDate> dataFim, TableColumn<Emprestimo, String> idMutuario, TableColumn<Emprestimo, String> idEmprestimo)
     {
         isbnLivro.setCellValueFactory(new PropertyValueFactory<>("isbnLivro"));

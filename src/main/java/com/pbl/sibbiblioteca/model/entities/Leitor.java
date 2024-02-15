@@ -182,6 +182,7 @@ public class Leitor extends Usuario {
         }
         else {
             emprestimo.setDataFim(LocalDate.now().plusDays(7));
+            DAO.getEmprestimoDAO().update(emprestimo);
         }
     }
 
