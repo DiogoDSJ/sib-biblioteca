@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pbl.sibbiblioteca.controller.TelaInicial.TelasMinhasReservasController">
+   <children>
+      <TableView fx:id="listaReservas" layoutX="89.0" layoutY="176.0" prefHeight="310.0" prefWidth="635.0">
+         <columns>
+            <TableColumn fx:id="idReserva" prefWidth="121.59997862577438" text="ID Reserva" />
+            <TableColumn fx:id="dataReserva" prefWidth="104.0" text="Data reserva" />
+            <TableColumn fx:id="dataInicioReserva" prefWidth="102.4000244140625" text="Data inicio" />
+            <TableColumn fx:id="dataFimReserva" minWidth="0.0" prefWidth="109.5999755859375" text="Data fim" />
+            <TableColumn fx:id="isbnLivro" prefWidth="101.5999755859375" text="ISBN Livro" />
+            <TableColumn fx:id="idReservante" prefWidth="101.5999755859375" text="ID Reservante" />
+         </columns>
+      </TableView>
+      <Text fill="#2f5aad" layoutX="204.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minhas reservas">
+         <font>
+            <Font name="Ink Free" size="58.0" />
+         </font>
+      </Text>
+      <Button fx:id="removerReservaButton" disable="true" layoutX="355.0" layoutY="528.0" mnemonicParsing="false" onAction="#setRemoverReservaButton" text="Remover reserva" />
+   </children>
+</AnchorPane>

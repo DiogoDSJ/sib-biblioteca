@@ -1,9 +1,9 @@
 package com.pbl.sibbiblioteca.controller.TelaInicial;
-import com.pbl.sibbiblioteca.controller.TelaEditarObjeto.TelaEdicaoLivroController;
 import com.pbl.sibbiblioteca.controller.TelaMenuAdministrador.TelaMenuAdministradorController;
 import com.pbl.sibbiblioteca.exceptions.naoEncontradoException;
 import com.pbl.sibbiblioteca.model.entities.Administrador;
 import com.pbl.sibbiblioteca.model.entities.Leitor;
+import com.pbl.sibbiblioteca.model.entities.Sistema;
 import com.pbl.sibbiblioteca.model.entities.Usuario;
 import com.pbl.sibbiblioteca.model.entities.enums.Cargo;
 import com.pbl.sibbiblioteca.utils.TelaController;
@@ -147,6 +147,21 @@ public class TelaInicialController {
     }
 
     @FXML
-    public void setMinhasReservasButton(ActionEvent actionEvent) {
+    public void setMinhasReservasButton(ActionEvent actionEvent) throws IOException {
+        try{
+            Sistema.findReservasLeitor(usuario.getId());
+        }
+        catch (naoEncontradoException e){
+            TelaController.gerarAlertaErro("Erro", "O usuário não tem reservas.");
+            return;
+        }
+        Stage stage = new Stage();
+        Stage stageAtual = TelaController.retornarStage(actionEvent);
+        stage.initOwner(stageAtual);
+        FXMLLoader loader = TelaController.StageFXMLLoader("TelaMinhasReservas.fxml");
+        TelaController.StageBuilder(stage, loader);
+        TelasMinhasReservasController telasMinhasReservasController= loader.getController();
+        telasMinhasReservasController.setLeitor((Leitor) usuario);
+        stage.showAndWait();
     }
 }
