@@ -1,16 +1,13 @@
 package com.pbl.sibbiblioteca.controller.TelaInicial;
-
-import com.pbl.sibbiblioteca.controller.TelaLogin.LoginController;
-import com.pbl.sibbiblioteca.dao.DAO;
+import com.pbl.sibbiblioteca.controller.TelaMenuAdministrador.TelaMenuAdministradorController;
 import com.pbl.sibbiblioteca.exceptions.naoEncontradoException;
+import com.pbl.sibbiblioteca.model.entities.Administrador;
 import com.pbl.sibbiblioteca.model.entities.Usuario;
 import com.pbl.sibbiblioteca.model.entities.enums.Cargo;
 import com.pbl.sibbiblioteca.utils.TelaController;
-import com.pbl.sibbiblioteca.view.SibApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,8 +16,6 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class TelaInicialController {
     @javafx.fxml.FXML
@@ -116,6 +111,19 @@ public class TelaInicialController {
         stageAtual.setUserData(usuario);
         stage.initOwner(stageAtual);
         TelaController.StageBuilder(stage, TelaController.StageFXMLLoader("TelaMenuBibliotecario.fxml"));
+        stage.showAndWait();
+    }
+
+    @FXML
+    public void setMenuAdmButton(ActionEvent actionEvent) throws IOException{
+        Stage stage = new Stage();
+        Stage stageAtual = TelaController.retornarStage(actionEvent);
+        stageAtual.setUserData(usuario);
+        stage.initOwner(stageAtual);
+        FXMLLoader loader = TelaController.StageFXMLLoader("TelaMenuAdministrador.fxml");
+        TelaController.StageBuilder(stage, loader);
+        TelaMenuAdministradorController telaMenuAdministradorController = loader.getController();
+        telaMenuAdministradorController.setAdministrador((Administrador) usuario);
         stage.showAndWait();
     }
     public void setUsuario(Usuario usuario){

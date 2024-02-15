@@ -9,6 +9,8 @@ module com.pbl.sibblioteca {
 
     opens com.pbl.sibbiblioteca.view to javafx.fxml;
     exports com.pbl.sibbiblioteca.view;
+    opens com.pbl.sibbiblioteca.controller.TelaMulta to javafx.fxml;
+    exports com.pbl.sibbiblioteca.controller.TelaMulta;
     opens com.pbl.sibbiblioteca.controller.TelaRelatorio to javafx.fxml;
     exports com.pbl.sibbiblioteca.controller.TelaRelatorio;
     opens com.pbl.sibbiblioteca.controller.TelaPesquisa to javafx.fxml;
@@ -23,6 +25,8 @@ module com.pbl.sibblioteca {
     exports com.pbl.sibbiblioteca.controller.TelaMenuBibliotecario;
     opens com.pbl.sibbiblioteca.controller.TelaEditarObjeto to javafx.fxml;
     exports com.pbl.sibbiblioteca.controller.TelaEditarObjeto;
+    opens com.pbl.sibbiblioteca.controller.TelaMenuAdministrador to javafx.fxml;
+    exports com.pbl.sibbiblioteca.controller.TelaMenuAdministrador;
     opens com.pbl.sibbiblioteca.model.entities.enums to javafx.fxml;
     exports com.pbl.sibbiblioteca.model.entities.enums;
     opens com.pbl.sibbiblioteca.exceptions to javafx.fxml;

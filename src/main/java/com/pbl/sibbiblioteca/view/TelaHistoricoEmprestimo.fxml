@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pbl.sibbiblioteca.controller.TelaMenuAdministrador.TelaHistoricoEmprestimoController">
+   <children>
+      <TableView fx:id="listaEmprestimos" layoutX="31.0" layoutY="120.0" prefHeight="200.0" prefWidth="538.0">
+         <columns>
+            <TableColumn fx:id="isbnLivro" prefWidth="121.59997862577438" text="ISBN Livro" />
+            <TableColumn fx:id="dataInicio" prefWidth="104.0" text="Data inicio" />
+            <TableColumn fx:id="dataFim" prefWidth="102.4000244140625" text="Data fim" />
+            <TableColumn fx:id="idMutuario" minWidth="0.0" prefWidth="109.5999755859375" text="ID Mutuario" />
+            <TableColumn fx:id="idEmprestimo" prefWidth="101.5999755859375" text="ID Emprestimo" />
+         </columns>
+      </TableView>
+      <Text fill="#2f5aad" layoutX="193.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Histórico">
+         <font>
+            <Font name="Ink Free" size="58.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

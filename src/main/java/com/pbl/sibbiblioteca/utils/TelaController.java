@@ -9,11 +9,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class TelaController {
 
@@ -45,5 +46,11 @@ public class TelaController {
         alert.setTitle(titulo);
         alert.setContentText(conteudo);
         alert.showAndWait();
+    }
+
+    public static String parseData(LocalDate data){
+        Locale localeBrasileiro = new Locale("pt", "BR");
+        final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMMM uuuu", localeBrasileiro);
+        return dtf.format(data);
     }
 }
