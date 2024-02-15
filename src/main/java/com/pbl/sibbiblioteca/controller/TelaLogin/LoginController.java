@@ -4,13 +4,9 @@ import com.pbl.sibbiblioteca.controller.TelaInicial.TelaInicialController;
 import com.pbl.sibbiblioteca.exceptions.naoEncontradoException;
 import com.pbl.sibbiblioteca.model.entities.Usuario;
 import com.pbl.sibbiblioteca.utils.TelaController;
-import com.pbl.sibbiblioteca.view.SibApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,8 +15,6 @@ import com.pbl.sibbiblioteca.model.entities.enums.Cargo;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class LoginController
 {
@@ -45,10 +39,7 @@ public class LoginController
     public void fazerLogin(ActionEvent event) throws naoEncontradoException {
         try{
             if(cargoLogin.getSelectionModel().isEmpty()){
-                Alert erroCargo = new Alert(Alert.AlertType.ERROR);
-                erroCargo.setTitle("Cargo inválido");
-                erroCargo.setContentText("Selecione um dos cargos para prosseguir.");
-                erroCargo.showAndWait();
+                TelaController.gerarAlertaErro("Cargo inválido.", "Selecione um dos cargos para prosseguir.");
                 return;
             }
             Usuario usuarioRetornado = Sistema.fazerLogin(campoUsuario.getText(), campoSenha.getText(), cargoLogin.getSelectionModel().getSelectedItem());
@@ -62,15 +53,9 @@ public class LoginController
         }
         catch (naoEncontradoException e) {
             if (e.getMessage().equals("Usuário não encontrado.")) {
-                Alert erroUsuario = new Alert(Alert.AlertType.ERROR);
-                erroUsuario.setTitle("Usuário inexistente.");
-                erroUsuario.setContentText("O usuário digitado não foi encontrado na base de dados.");
-                erroUsuario.showAndWait();
+                TelaController.gerarAlertaErro("Usuário inexistente.", "O usuário digitado não foi encontrado na base de dados.");
             } else if (e.getMessage().equals("Senha incorreta.")) {
-                Alert erroSenha = new Alert(Alert.AlertType.ERROR);
-                erroSenha.setTitle("Senha incorreta.");
-                erroSenha.setContentText("Senha incorreta, tente novamente.");
-                erroSenha.showAndWait();
+                TelaController.gerarAlertaErro("Senha incorreta.", "Senha incorreta, tente novamente.");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

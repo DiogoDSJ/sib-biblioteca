@@ -1,13 +1,8 @@
 package com.pbl.sibbiblioteca.controller.TelaAdicionarObjeto;
 
-import com.pbl.sibbiblioteca.controller.TelaInicial.TelaInicialController;
 import com.pbl.sibbiblioteca.model.entities.Bibliotecario;
-import com.pbl.sibbiblioteca.model.entities.Usuario;
 import com.pbl.sibbiblioteca.utils.TelaController;
-import com.pbl.sibbiblioteca.view.SibApplication;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -36,10 +31,7 @@ public class TelaAdicionarLivroController {
         if(tituloLivroField.getText().isBlank() || isbnLivroField.getText().isBlank() || isbnLivroField.getText().isBlank() ||
                 autorLivroField.getText().isBlank() || editoraLivroField.getText().isBlank() || categoriaLivroField.getText().isBlank() ||
                 anoLivroField.getText().isBlank()){
-            Alert campoVazio = new Alert(Alert.AlertType.ERROR);
-            campoVazio.setTitle("Campo vazio.");
-            campoVazio.setContentText("Algum dos campos estão vazios.");
-            campoVazio.showAndWait();
+            TelaController.gerarAlertaErro("Campo vazio.", "Algum dos campos estão vazios.");
             return;
         }
         else if(isbnLivroField.getText().matches("[a-zA-Z]+"))
