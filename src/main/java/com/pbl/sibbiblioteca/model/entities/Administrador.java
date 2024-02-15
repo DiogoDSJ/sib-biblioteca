@@ -352,10 +352,13 @@ public class Administrador extends Bibliotecario {
 
     public void desbloquearLeitor(Leitor leitor) throws objetoInexistenteException {
         if(leitor == null) throw new objetoInexistenteException("Leitor não existe.");
-        if(DAO.getMultaDAO().findByIdMutuario(leitor.getId()) == null) throw new objetoInexistenteException("Leitor não está bloqueado");
+        if(retornarMultaLeitor(leitor) == null) throw new objetoInexistenteException("Leitor não está bloqueado");
         DAO.getMultaDAO().delete(DAO.getMultaDAO().findByIdMutuario(leitor.getId()));
         DAO.getLeitorDAO().findByPk(leitor.getId()).desbloquearConta();
-
+        this.atualizarUsuario(leitor);
     }
 
+    public Multa retornarMultaLeitor(Leitor leitor) {
+        return DAO.getMultaDAO().findByIdMutuario(leitor.getId());
+    }
 }

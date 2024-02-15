@@ -1,5 +1,7 @@
 package com.pbl.sibbiblioteca.model.entities;
 
+import com.pbl.sibbiblioteca.dao.DAO;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -37,6 +39,7 @@ public class Multa implements Serializable {
 
     public void aumentarMulta(int dias) {
         this.dataFim = this.dataFim.plusDays(dias);
+        DAO.getMultaDAO().update(this);
     }
 
     public String getIdMulta() {

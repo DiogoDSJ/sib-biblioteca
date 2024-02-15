@@ -37,7 +37,7 @@ public class Sistema {
     public static void aplicarMulta(Leitor leitor) throws objetoInexistenteException {
         if (leitor == null) throw new objetoInexistenteException("Leitor não existe.");
         List<Emprestimo> emprestimoListLeitor = DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId());
-        if (emprestimoListLeitor.isEmpty()) throw new objetoInexistenteException("Usuário não tem empréstimos.");
+        if (emprestimoListLeitor.isEmpty()) return;
         int diasAtraso = 0;
         for (Emprestimo obj : emprestimoListLeitor) {
             if (checarSeHaAtrasoEmprestimo(obj)) {
@@ -85,7 +85,7 @@ public class Sistema {
         List<Multa> multas = DAO.getMultaDAO().findMany();
         List<Multa> multasremovidas = new ArrayList<>();
         for (Multa objIterator : multas) {
-            if (!objIterator.getDataFim().isBefore(LocalDate.now())) {
+            if (objIterator.getDataFim().isBefore(LocalDate.now())) {
                 DAO.getLeitorDAO().findByPk(objIterator.getIdUsuario()).desbloquearConta();
                 multasremovidas.add(objIterator);
             }
