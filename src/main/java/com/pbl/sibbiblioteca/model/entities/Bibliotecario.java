@@ -112,7 +112,7 @@ public class Bibliotecario extends Usuario {
         Emprestimo emprestimo = new Emprestimo(idMutuario, isbnLivro);
         DAO.getEmprestimoDAO().create(emprestimo);
         leitor.adicionarEmprestimoNoHistorico(emprestimo);
-        leitor.removerUmEmprestimo();
+        DAO.getLeitorDAO().update(leitor);
     }
 
     /**
