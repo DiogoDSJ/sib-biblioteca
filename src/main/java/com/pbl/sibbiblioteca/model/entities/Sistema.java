@@ -100,7 +100,20 @@ public class Sistema {
      * @return A ordem em que o reserva está na fila de reservas.
      */
     public static int getOrdemReserva(Leitor leitor, Livro livro) {
+        int checkfor = 0;
         int contadora = 0;
+        if(DAO.getReservaDAO().findByIdReservante(leitor.getId()) == null && DAO.getReservaDAO().findByIdReservante(leitor.getId()).isEmpty()) {
+            return contadora;
+        } else{
+            for (Reserva reserva: DAO.getReservaDAO().findByIdReservante(leitor.getId())) {
+                if(reserva.getIdReservante().equals(leitor.getId())){
+                    checkfor = 4;
+                    break;
+                }
+                checkfor++;
+            }
+            if(checkfor <= 3) return contadora;
+        }
         for (Reserva obj : DAO.getReservaDAO().findMany()) {
             if (obj.getIsbnLivro().equals(livro.getIsbn())) {
                 contadora++;
@@ -124,11 +137,9 @@ public class Sistema {
         int ordemReserva = getOrdemReserva(leitor, livro);
         int numeroReservasLivro = numeroReservasLivro(livro);
         if (ordemReserva == 0) { // usuário não tem reserva
-            return quantidade > numeroReservasLivro;
+            return !(quantidade > numeroReservasLivro);
         }
-        return (ordemReserva <= quantidade && ordemReserva >= numeroReservasLivro);
-
-
+        return (!(ordemReserva <= quantidade) && (ordemReserva <= numeroReservasLivro));
     }
 
     /**
@@ -188,7 +199,7 @@ public class Sistema {
      * @return Número de livros reservados.
      */
     public static int getQuantidadeDeLivrosReservados() {
-        return DAO.getMultaDAO().findMany().size();
+        return DAO.getReservaDAO().findMany().size();
     }
 
     /**

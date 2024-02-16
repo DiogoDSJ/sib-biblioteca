@@ -65,10 +65,7 @@ public class Bibliotecario extends Usuario {
         else if(Sistema.checarSeOLivroFoiReservado(isbn)) {
             throw new livroReservadoException("Livro está reservado.");
         }
-        try{
-            livro.removerUmaUnidade();
-        }
-        catch (foraDeEstoqueException e) {
+        else{
             DAO.getLivroDAO().delete(DAO.getLivroDAO().findByIsbn(isbn));
             throw new foraDeEstoqueException("O livro foi removido");
         }
@@ -106,12 +103,15 @@ public class Bibliotecario extends Usuario {
             throw new foraDeEstoqueException("Usuário alcançou o máximo de livros.");
         }
         else if(Sistema.checarSeOUsuarioTemOLivro(leitor, isbnLivro)) throw new objetoDuplicadoException("Usuário não pode ter dois livros iguais.");
-        else if (!Sistema.checarSeAReservaDoUsuarioOPermitePegarOLivro(leitor, livro)) { // aqui eu tenho o livro em estoque e checo se o usuário tem reserva
+        else if (Sistema.checarSeAReservaDoUsuarioOPermitePegarOLivro(leitor, livro)) { // aqui eu tenho o livro em estoque e checo se o usuário tem reserva
             throw new livroReservadoException("Livro está reservado para outro usuário.");
         }
         Emprestimo emprestimo = new Emprestimo(idMutuario, isbnLivro);
         DAO.getEmprestimoDAO().create(emprestimo);
         leitor.adicionarEmprestimoNoHistorico(emprestimo);
+        if (Sistema.checarSeOUsuarioReservouOLivro(leitor, livro.getIsbn())){
+            leitor.removerReserva(livro.getIsbn());
+        }
         DAO.getLeitorDAO().update(leitor);
     }
 
