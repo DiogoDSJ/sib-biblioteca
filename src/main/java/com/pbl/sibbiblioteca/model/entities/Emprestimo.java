@@ -19,6 +19,8 @@ public class Emprestimo implements Serializable {
     private final String isbnLivro;
     private String idEmprestimo;
 
+    private boolean emprestimoRenovavel;
+
     /**
      * Construtor padrão da classe empréstimo, aqui é criado o empréstimo já com a dataInicio que é a momento que foi
      * criado e a data fim predefinida para daqui a 7 dias da data inicio, aqui o leitor perde uma unidade de emprés-
@@ -32,6 +34,7 @@ public class Emprestimo implements Serializable {
         this.dataFim = this.dataInicio.plusDays(7);
         this.idMutuario = idMutuario;
         this.isbnLivro = isbnLivro;
+        this.emprestimoRenovavel = true;
         DAO.getLeitorDAO().findByPk(idMutuario).removerUmEmprestimo();
         DAO.getLivroDAO().findByIsbn(isbnLivro).removerUmaUnidade();
     }
@@ -62,5 +65,13 @@ public class Emprestimo implements Serializable {
 
     public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public boolean isEmprestimoRenovavel() {
+        return emprestimoRenovavel;
+    }
+
+    public void setEmprestimoRenovavel(boolean emprestimoRenovavel) {
+        this.emprestimoRenovavel = emprestimoRenovavel;
     }
 }

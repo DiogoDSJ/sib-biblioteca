@@ -177,11 +177,12 @@ public class Leitor extends Usuario {
             throw new objetoInexistenteException("Não há emprestimo com esse livro.");
         if (Sistema.checarSeHaAtrasoLeitor(leitor))
             throw new usuarioPendenciasException("Usuário em atraso, não é possivel renovar.");
-        else if ((emprestimo.getDataFim().compareTo(emprestimo.getDataInicio())) > 7) {
+        else if (!emprestimo.isEmprestimoRenovavel()) {
             throw new usuarioPendenciasException("Esse empréstimo já alcançou o limite de renovações.");
         }
         else {
-            emprestimo.setDataFim(LocalDate.now().plusDays(7));
+            emprestimo.setDataFim(emprestimo.getDataFim().plusDays(7));
+            emprestimo.setEmprestimoRenovavel(false);
             DAO.getEmprestimoDAO().update(emprestimo);
         }
     }
