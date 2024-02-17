@@ -1,18 +1,13 @@
 package com.pbl.sibbiblioteca.view;
 
+import com.pbl.sibbiblioteca.dao.DAO;
 import com.pbl.sibbiblioteca.exceptions.foraDeEstoqueException;
 import com.pbl.sibbiblioteca.model.entities.Sistema;
 import com.pbl.sibbiblioteca.utils.TelaController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
 
 import java.io.IOException;
-import java.util.Objects;
-
-import static com.pbl.sibbiblioteca.model.entities.Sistema.atualizarReservas;
 
 public class SibApplication extends Application {
 
