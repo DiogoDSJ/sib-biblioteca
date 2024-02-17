@@ -34,18 +34,10 @@ public class Sistema {
      * @param leitor Leitor que toma a multa.
      * @throws objetoInexistenteException Se o leitor não existir.
      */
-    public static void aplicarMulta(Leitor leitor) throws objetoInexistenteException {
+    public static void aplicarMulta(Leitor leitor, Emprestimo emprestimo) throws objetoInexistenteException {
         if (leitor == null) throw new objetoInexistenteException("Leitor não existe.");
-        List<Emprestimo> emprestimoListLeitor = DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId());
-        if (emprestimoListLeitor.isEmpty()) return;
         int diasAtraso = 0;
-        for (Emprestimo obj : emprestimoListLeitor) {
-            if (checarSeHaAtrasoEmprestimo(obj)) {
-                diasAtraso += calcularDiasDaMulta(obj);
-                DAO.getEmprestimoDAO().delete(obj);
-                leitor.bloquearConta();
-            }
-        }
+        diasAtraso += calcularDiasDaMulta(emprestimo);
         diasAtraso *= 2;
         if (diasAtraso > 0 && DAO.getMultaDAO().findByIdMutuario(leitor.getId()) == null) {
             DAO.getMultaDAO().create(new Multa(LocalDate.now(), LocalDate.now().plusDays(diasAtraso), leitor.getId()));
@@ -83,14 +75,19 @@ public class Sistema {
      */
     public static void updateMultas() {
         List<Multa> multas = DAO.getMultaDAO().findMany();
-        List<Multa> multasremovidas = new ArrayList<>();
+        List<Multa> multasList = new ArrayList<>();
         for (Multa objIterator : multas) {
             if (objIterator.getDataFim().isBefore(LocalDate.now())) {
-                DAO.getLeitorDAO().findByPk(objIterator.getIdUsuario()).desbloquearConta();
-                multasremovidas.add(objIterator);
+                System.out.println(objIterator.getDataFim());
+                Leitor leitor = DAO.getLeitorDAO().findByPk(objIterator.getIdUsuario());
+                leitor.desbloquearConta();
+                DAO.getLeitorDAO().update(leitor);
+                multasList.add(objIterator);
             }
         }
-        DAO.getMultaDAO().findMany().removeAll(multasremovidas);
+        for (Multa obj: multasList) {
+            DAO.getMultaDAO().delete(obj);
+        }
     }
 
     /**
@@ -211,7 +208,10 @@ public class Sistema {
         List<Livro> livrosPopulares = DAO.getLivroDAO().findMany();
         Map<Integer, Livro> livrosPopularesDict = new TreeMap<>();
         for (Livro livro : livrosPopulares) {
-            livrosPopularesDict.put(getQtdLivroNosEmprestimos(livro.getIsbn()), livro);
+            int qtdNoEmprestimo = getQtdLivroNosEmprestimos(livro.getIsbn());
+            if(qtdNoEmprestimo > 0) {
+                livrosPopularesDict.put(qtdNoEmprestimo, livro);
+            }
         }
         return livrosPopularesDict;
     }
@@ -308,15 +308,15 @@ public class Sistema {
             if (livro.getIsbn().equals(emprestimo.getIsbnLivro())) {
                 checkvar = 1;
                 if (checarSeHaAtrasoLeitor(leitor)) {
-                    aplicarMulta(leitor);
+                    aplicarMulta(leitor, emprestimo);
                 }
                 DAO.getLivroDAO().findByPk(livro.getId()).adicionarUmaUnidade();
                 leitor.adicionarUmEmprestimo();
+                leitor.bloquearConta();
                 DAO.getLeitorDAO().update(leitor);
                 DAO.getEmprestimoDAO().delete(emprestimo);
                 atualizarReservas();
                 ativarReservasLivros();
-                break;
             }
         }
         if (checkvar == 0) throw new objetoInexistenteException("Não há um empréstimo com este livro.");

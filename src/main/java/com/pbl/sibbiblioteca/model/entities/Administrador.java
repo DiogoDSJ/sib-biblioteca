@@ -334,14 +334,13 @@ public class Administrador extends Bibliotecario {
     public void multarLeitor(Leitor leitor, int diasDeMulta) throws objetoInexistenteException {
         if (leitor == null) throw new objetoInexistenteException("Leitor não existe.");
         List<Emprestimo> emprestimoListLeitor = DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId());
-        if(Sistema.checarSeHaAtrasoLeitor(leitor)){
-            Sistema.aplicarMulta(leitor);
-        }
         if (DAO.getMultaDAO().findByIdMutuario(leitor.getId()) == null) {
             DAO.getMultaDAO().create(new Multa(LocalDate.now(), LocalDate.now().plusDays(diasDeMulta), leitor.getId()));
         } else if (DAO.getMultaDAO().findByIdMutuario(leitor.getId()) != null) {
             DAO.getMultaDAO().findByIdMutuario(leitor.getId()).aumentarMulta(diasDeMulta);
         }
+        leitor.bloquearConta();
+        DAO.getLeitorDAO().update(leitor);
     }
 
     /**
