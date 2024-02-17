@@ -9,6 +9,7 @@ import com.pbl.sibbiblioteca.exceptions.objetoInexistenteException;
 import com.pbl.sibbiblioteca.exceptions.usuarioPendenciasException;
 import com.pbl.sibbiblioteca.model.entities.*;
 import com.pbl.sibbiblioteca.model.entities.enums.Cargo;
+import com.pbl.sibbiblioteca.model.entities.enums.StatusConta;
 import com.pbl.sibbiblioteca.utils.TelaController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,16 +58,18 @@ public class TelaMenuAdministradorController {
     @FXML
     private TableColumn<Usuario, String> idUsuario;
     @FXML
-    private TableColumn statusUsuario;
+    private TableColumn<Usuario, StatusConta> statusUsuario;
     @FXML
     private Button verMultaButton;
     @FXML
     private Button removerMultaButton;
+    @FXML
+    private Button sairButton;
 
     @FXML
     public void initialize(){
         tipoPesquisaChoiceBox.getItems().addAll("ADMINISTRADOR", "BIBLIOTECARIO", "LEITOR");
-        setarTabelaUsuario(nomeUsuario, enderecoUsuario, telefoneUsuario, usuarioUsuario, senhaUsuario, idUsuario);
+        setarTabelaUsuario(nomeUsuario, enderecoUsuario, telefoneUsuario, usuarioUsuario, senhaUsuario, idUsuario, statusUsuario);
         listaUsuarios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 removerButton.setDisable(false);
@@ -122,7 +125,7 @@ public class TelaMenuAdministradorController {
 
     public static void setarTabelaUsuario(TableColumn<Usuario, String> nomeUsuario, TableColumn<Usuario,
             String> enderecoUsuario, TableColumn<Usuario, String> telefoneUsuario, TableColumn<Usuario, String> usuarioUsuario,
-                                          TableColumn<Usuario, String> senhaUsuario, TableColumn<Usuario, String> idUsuario)
+                                          TableColumn<Usuario, String> senhaUsuario, TableColumn<Usuario, String> idUsuario, TableColumn<Usuario, StatusConta> statusUsuario)
     {
         nomeUsuario.setCellValueFactory(new PropertyValueFactory<>("nome"));
         enderecoUsuario.setCellValueFactory(new PropertyValueFactory<>("endereco"));
@@ -130,6 +133,7 @@ public class TelaMenuAdministradorController {
         usuarioUsuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
         senhaUsuario.setCellValueFactory(new PropertyValueFactory<>("senhaDeAcesso"));
         idUsuario.setCellValueFactory(new PropertyValueFactory<>("id"));
+        statusUsuario.setCellValueFactory(new PropertyValueFactory<>("statusDaConta"));
     }
 
     public void setAdministrador(Administrador administrador){
@@ -247,5 +251,11 @@ public class TelaMenuAdministradorController {
         catch (objetoInexistenteException e){
             TelaController.gerarAlertaErro("Aviso", "Leitor não está bloqueado.");
         }
+    }
+
+    @FXML
+    public void setSairButton(ActionEvent actionEvent) {
+        Stage stage = TelaController.retornarStage(actionEvent);
+        stage.close();
     }
 }

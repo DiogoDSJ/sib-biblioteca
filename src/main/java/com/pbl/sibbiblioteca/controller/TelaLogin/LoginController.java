@@ -30,6 +30,8 @@ public class LoginController
     private final Cargo[] cargos = {Cargo.ADMINISTRADOR, Cargo.LEITOR, Cargo.BIBLIOTECARIO};
     @FXML
     private Button visitanteButton;
+    @FXML
+    private Button sairButton;
 
     @FXML
     public void initialize() {
@@ -71,5 +73,11 @@ public class LoginController
         telaInicialController.setUsuario(null);
         telaInicialController.initialize();
         stage.setScene(new Scene(root));
+    }
+
+    @FXML
+    public void setSairButton(ActionEvent actionEvent) {
+        Stage stage = TelaController.retornarStage(actionEvent);
+        stage.close();
     }
 }

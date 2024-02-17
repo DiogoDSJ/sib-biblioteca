@@ -5,11 +5,14 @@ import com.pbl.sibbiblioteca.model.entities.Leitor;
 import com.pbl.sibbiblioteca.utils.TelaController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
@@ -27,6 +30,8 @@ public class TelaHistoricoEmprestimoController {
     @javafx.fxml.FXML
     private TableView<Emprestimo> listaEmprestimos;
     private Leitor leitor;
+    @FXML
+    private Button sairButton;
 
     public void setLeitor(Leitor leitor) {
         this.leitor = leitor;
@@ -81,5 +86,11 @@ public class TelaHistoricoEmprestimoController {
         dataFim.setCellValueFactory(new PropertyValueFactory<>("dataFim"));
         idMutuario.setCellValueFactory(new PropertyValueFactory<>("idMutuario"));
         idEmprestimo.setCellValueFactory(new PropertyValueFactory<>("idEmprestimo"));
+    }
+
+    @FXML
+    public void setSairButton(ActionEvent actionEvent) {
+        Stage stage = TelaController.retornarStage(actionEvent);
+        stage.close();
     }
 }

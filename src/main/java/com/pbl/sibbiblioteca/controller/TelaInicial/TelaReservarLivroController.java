@@ -4,10 +4,12 @@ import com.pbl.sibbiblioteca.controller.TelaPesquisa.TelaPesquisaController;
 import com.pbl.sibbiblioteca.exceptions.*;
 import com.pbl.sibbiblioteca.model.entities.Leitor;
 import com.pbl.sibbiblioteca.model.entities.Livro;
+import com.pbl.sibbiblioteca.model.entities.Sistema;
 import com.pbl.sibbiblioteca.utils.TelaController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import static com.pbl.sibbiblioteca.controller.TelaPesquisa.TelaPesquisaController.listaDeLivros;
 
@@ -39,6 +41,8 @@ public class TelaReservarLivroController {
 
     private Livro livroSelecionado;
     private Leitor usuarioLogado;
+    @FXML
+    private Button sairButton;
 
     @FXML
     private void initialize() {
@@ -88,6 +92,7 @@ public class TelaReservarLivroController {
         try {
             usuarioLogado.fazerReserva(livroSelecionado.getIsbn());
             TelaController.gerarAlertaOk("Confirmação", "Reserva feita com sucesso.");
+            Sistema.ativarReservasLivros();
         } catch (objetoInexistenteException e) {
             TelaController.gerarAlertaErro("Erro", "Leitor não existe.");
         } catch (objetoDuplicadoException e) {
@@ -101,5 +106,11 @@ public class TelaReservarLivroController {
             TelaController.gerarAlertaErro("Limite alcançado.", "Usuário já tem muitas reservas pendentes.");
         }
 
+    }
+
+    @FXML
+    public void setSairButton(ActionEvent actionEvent) {
+        Stage stage = TelaController.retornarStage(actionEvent);
+        stage.close();
     }
 }

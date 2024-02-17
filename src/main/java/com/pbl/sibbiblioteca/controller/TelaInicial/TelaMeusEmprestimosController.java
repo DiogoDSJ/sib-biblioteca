@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
@@ -41,6 +42,8 @@ public class TelaMeusEmprestimosController {
 
     private Leitor leitor;
     private Emprestimo emprestimoSelecionado;
+    @FXML
+    private Button sairButton;
 
     public void setLeitor(Leitor leitor) {
         this.leitor = leitor;
@@ -74,7 +77,14 @@ public class TelaMeusEmprestimosController {
     public void setRenovarEmprestimoButton(ActionEvent actionEvent) {
         try {
             leitor.renovarEmprestimo(emprestimoSelecionado.getIsbnLivro());
-            TelaController.gerarAlertaOk("Operação realizada.", "O empréstimo foi renovado em mais 7 dias a partir de hoje.");
+            TelaController.gerarAlertaOk("Operação realizada.", "O empréstimo foi renovado em mais 7 dias a partir da data fim.");
+            try{
+                listaEmprestimos.setItems(FXCollections.observableArrayList(Sistema.findEmprestimosLeitor(leitor.getId())));
+                listaEmprestimos.refresh();
+            } catch (naoEncontradoException e) {
+                listaEmprestimos.setItems(FXCollections.observableArrayList());
+                listaEmprestimos.refresh();
+            }
         } catch (usuarioPendenciasException e) {
             if(e.getMessage().equals("Usuário em atraso, não é possivel renovar.")){
                 TelaController.gerarAlertaErro("Erro", "O usuário está com pendências, não é possivel renovar.");
@@ -92,10 +102,21 @@ public class TelaMeusEmprestimosController {
         try {
             Sistema.devolverLivro(leitor, DAO.getLivroDAO().findByIsbn(emprestimoSelecionado.getIsbnLivro()));
             TelaController.gerarAlertaOk("Devolução concluida", "A devolução do livro foi feita.");
+            try {
+                listaEmprestimos.setItems(emprestimosLeitor(leitor));
+            }catch (naoEncontradoException e){
+                listaEmprestimos.setItems(FXCollections.observableArrayList());
+            }
         } catch (objetoInexistenteException e) {
             TelaController.gerarAlertaErro("Erro", "Não há um empréstimo com este livro.");
         } catch (foraDeEstoqueException e) {
             TelaController.gerarAlertaErro("Erro", "Algum ocorrido inesperado aconteceu, não foi possivel devolver.");
         }
+    }
+
+    @FXML
+    public void setSairButton(ActionEvent actionEvent) {
+        Stage stage = TelaController.retornarStage(actionEvent);
+        stage.close();
     }
 }

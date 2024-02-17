@@ -2,6 +2,7 @@ package com.pbl.sibbiblioteca.controller.TelaMenuBibliotecario;
 
 import com.pbl.sibbiblioteca.controller.TelaEditarObjeto.TelaEdicaoLivroController;
 import com.pbl.sibbiblioteca.controller.TelaPesquisa.TelaPesquisaController;
+import com.pbl.sibbiblioteca.dao.DAO;
 import com.pbl.sibbiblioteca.exceptions.foraDeEstoqueException;
 import com.pbl.sibbiblioteca.exceptions.livroEmprestadoException;
 import com.pbl.sibbiblioteca.exceptions.livroReservadoException;
@@ -57,6 +58,12 @@ public class TelaMenuBibliotecarioController {
     private Button removerLivroButton;
     @FXML
     private Button editarLivroButton;
+    @FXML
+    private Button removerUnidadeLivroButton;
+    @FXML
+    private Button adicionarUnidadeLivroButton;
+    @FXML
+    private Button sairButton;
 
     @FXML
     private void initialize() {
@@ -67,16 +74,20 @@ public class TelaMenuBibliotecarioController {
             if (newSelection != null) {
                 removerLivroButton.setDisable(false);
                 editarLivroButton.setDisable(false);
+                removerUnidadeLivroButton.setDisable(false);
+                adicionarUnidadeLivroButton.setDisable(false);
                 livroSelecionado = newSelection;
             }
             else{
                 removerLivroButton.setDisable(true);
                 editarLivroButton.setDisable(true);
+                removerUnidadeLivroButton.setDisable(true);
+                adicionarUnidadeLivroButton.setDisable(true);
             }
         });
     }
 
-    @FXML
+
     public void setUsuarioLogado(ActionEvent actionEvent){
         Stage stageAtual = TelaController.retornarStage(actionEvent);
         usuarioLogado = (Bibliotecario) stageAtual.getOwner().getUserData();
@@ -101,10 +112,7 @@ public class TelaMenuBibliotecarioController {
         }
         catch (naoEncontradoException e) {
             if (e.getMessage().equals("A busca não retornou em nada.")) {
-                Alert erroUsuario = new Alert(Alert.AlertType.ERROR);
-                erroUsuario.setTitle("Falha na pesquisa.");
-                erroUsuario.setContentText("A busca não retornou em nada.");
-                erroUsuario.showAndWait();
+                TelaController.gerarAlertaErro("Falha na pesquisa", "A busca não retornou em nada.");
             }
         }
     }
@@ -129,6 +137,12 @@ public class TelaMenuBibliotecarioController {
             catch (foraDeEstoqueException e){
                 TelaController.gerarAlertaOk("Livro removido.", "Quantidade mínima (0) alcançada, então o livro foi removido.");
             }
+            catch (livroReservadoException e){
+                TelaController.gerarAlertaErro("Erro", "Livro está reservado.");
+            }
+            catch (livroEmprestadoException e){
+                TelaController.gerarAlertaErro("Erro", "Livro está emprestado.");
+            }
         } else if (option.get() == ButtonType.CANCEL) {
             TelaController.gerarAlertaOk("Operação cancelada", "Operação cancelada, nenhuma alteração foi feita.");
         }
@@ -152,5 +166,29 @@ public class TelaMenuBibliotecarioController {
         telaEdicaoLivroController.setCategoriaLivroField(livroSelecionado.getCategoria());
         telaEdicaoLivroController.setAnoLivroField(livroSelecionado.getAnoDePublicacao());
         stage.showAndWait();
+    }
+
+    @FXML
+    public void setRemoverUnidadeLivroButton(ActionEvent actionEvent) {
+        try{
+            livroSelecionado.removerUmaUnidade();
+            TelaController.gerarAlertaOk("Confirmação", "Uma unidade do livro foi removida.");
+            realizarBusca(actionEvent);
+        }
+        catch (foraDeEstoqueException e) {
+            TelaController.gerarAlertaErro("Erro", "O livro já chegou ao mínimo de estoque (0).");
+        }
+    }
+    @FXML
+    public void setAdicionarUnidadeLivroButton(ActionEvent actionEvent) {
+        livroSelecionado.adicionarUmaUnidade();
+        TelaController.gerarAlertaOk("Confirmação", "Uma unidade do livro foi adicionada.");
+        realizarBusca(actionEvent);
+    }
+
+    @FXML
+    public void setSairButton(ActionEvent actionEvent) {
+        Stage stage = TelaController.retornarStage(actionEvent);
+        stage.close();
     }
 }

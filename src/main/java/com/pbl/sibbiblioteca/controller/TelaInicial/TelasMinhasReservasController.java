@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
@@ -36,6 +37,8 @@ public class TelasMinhasReservasController {
     @FXML
     private Button removerReservaButton;
     private Reserva reservaSelecionada;
+    @FXML
+    private Button sairButton;
 
     public void setLeitor(Leitor leitor) {
         this.leitor = leitor;
@@ -95,5 +98,11 @@ public class TelasMinhasReservasController {
         } catch (foraDeEstoqueException e) {
             TelaController.gerarAlertaErro("Erro", "Leitor alcançou o número máximo de reservas.");
         }
+    }
+
+    @FXML
+    public void setSairButton(ActionEvent actionEvent) {
+        Stage stage = TelaController.retornarStage(actionEvent);
+        stage.close();
     }
 }
