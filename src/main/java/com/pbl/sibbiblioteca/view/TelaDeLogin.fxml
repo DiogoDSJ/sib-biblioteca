@@ -8,10 +8,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pbl.sibbiblioteca.controller.TelaLogin.LoginController">
    <children>
-      <TextField fx:id="campoUsuario" layoutX="208.0" layoutY="126.0" promptText="Usuario" />
-      <PasswordField fx:id="campoSenha" layoutX="208.0" layoutY="187.0" promptText="Senha" />
-      <Button layoutX="208.0" layoutY="279.0" mnemonicParsing="false" onAction="#fazerLogin" text="OK" />
-      <ChoiceBox fx:id="cargoLogin" layoutX="207.0" layoutY="71.0" prefWidth="150.0" />
-      <Button fx:id="visitanteButton" layoutX="294.0" layoutY="279.0" mnemonicParsing="false" onAction="#setVisitanteButton" text="Visitante" />
+      <TextField fx:id="campoUsuario" layoutX="226.0" layoutY="126.0" promptText="Usuario" />
+      <PasswordField fx:id="campoSenha" layoutX="226.0" layoutY="187.0" promptText="Senha" />
+      <Button layoutX="226.0" layoutY="279.0" mnemonicParsing="false" onAction="#fazerLogin" text="OK" />
+      <ChoiceBox fx:id="cargoLogin" layoutX="225.0" layoutY="71.0" prefWidth="150.0" />
+      <Button fx:id="visitanteButton" layoutX="312.0" layoutY="279.0" mnemonicParsing="false" onAction="#setVisitanteButton" text="Visitante" />
+      <Button fx:id="sairButton" layoutX="227.0" layoutY="322.0" mnemonicParsing="false" onAction="#setSairButton" prefHeight="26.0" prefWidth="150.0" text="Sair" />
    </children>
 </AnchorPane>

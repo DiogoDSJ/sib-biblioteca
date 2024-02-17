@@ -9,7 +9,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pbl.sibbiblioteca.controller.TelaInicial.TelaReservarLivroController">
    <children>
       <Text fill="#2f5aad" layoutX="234.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservar livro">
@@ -32,5 +31,6 @@
       <TextField fx:id="buscaTextField" layoutX="313.0" layoutY="386.0" prefHeight="26.0" prefWidth="190.0" promptText="Digite o termo para pesquisa." />
       <ChoiceBox fx:id="tipoPesquisaChoiceBox" layoutX="333.0" layoutY="346.0" onAction="#desativarBotao" prefWidth="150.0" />
       <Button fx:id="reservarLivroButton" disable="true" layoutX="354.0" layoutY="465.0" mnemonicParsing="false" onAction="#setReservarLivroButton" prefHeight="36.0" prefWidth="106.0" text="Reservar livro" />
+      <Button fx:id="sairButton" layoutX="355.0" layoutY="512.0" mnemonicParsing="false" onAction="#setSairButton" prefHeight="36.0" prefWidth="106.0" text="Sair" />
    </children>
 </AnchorPane>

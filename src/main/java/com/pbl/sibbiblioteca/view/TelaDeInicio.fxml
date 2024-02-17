@@ -18,7 +18,7 @@
             <Font name="Rockwell" size="14.0" />
          </font>
       </Text>
-      <Button fx:id="emprestarLivroButton" disable="true" layoutX="232.0" layoutY="435.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="172.0" text="Emprestar livro" />
+      <Button fx:id="emprestarLivroButton" disable="true" layoutX="232.0" layoutY="435.0" mnemonicParsing="false" onAction="#setEmprestarLivroButton" prefHeight="36.0" prefWidth="172.0" text="Emprestar livro" />
       <Button fx:id="reservarLivroButton" disable="true" layoutX="442.0" layoutY="435.0" mnemonicParsing="false" onAction="#setReservarLivroButton" prefHeight="36.0" prefWidth="106.0" text="Reservar livro" />
       <Button fx:id="fazerLoginButton" layoutX="663.0" layoutY="132.0" mnemonicParsing="false" onAction="#setFazerLoginButton" prefHeight="26.0" prefWidth="92.0" text="Fazer Login" />
       <Button fx:id="desconectarButton" disable="true" layoutX="663.0" layoutY="171.0" mnemonicParsing="false" onAction="#setDesconectarButton" prefHeight="26.0" prefWidth="92.0" text="Desconectar" textFill="RED" />
@@ -27,5 +27,10 @@
       <Button fx:id="meusEmprestimosButton" disable="true" layoutX="233.0" layoutY="490.0" mnemonicParsing="false" onAction="#setMeusEmprestimosButton" prefHeight="36.0" prefWidth="172.0" text="Meus empréstimos" />
       <Button fx:id="minhasReservasButton" disable="true" layoutX="442.0" layoutY="490.0" mnemonicParsing="false" onAction="#setMinhasReservasButton" prefHeight="36.0" prefWidth="106.0" text="Minhas reservas" />
       <Button fx:id="menuAdmButton" disable="true" layoutX="646.0" layoutY="267.0" mnemonicParsing="false" onAction="#setMenuAdmButton" prefHeight="36.0" prefWidth="125.0" text="Menu administrador" />
+      <Text fx:id="numeroEmprestimos" layoutX="45.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="numeroEmprestimos" visible="false" />
+      <Text fx:id="numeroReservas" layoutX="45.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="numeroReservas" visible="false" />
+      <Button fx:id="sairButton" layoutX="583.0" layoutY="490.0" mnemonicParsing="false" onAction="#setSairButton" prefHeight="36.0" prefWidth="125.0" text="Fechar sistema" />
+      <Text fx:id="statusConta" layoutX="45.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="statusConta" visible="false" />
+      <Text fx:id="dataFimMulta" layoutX="45.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="dataFimMulta" visible="false" />
    </children>
 </AnchorPane>

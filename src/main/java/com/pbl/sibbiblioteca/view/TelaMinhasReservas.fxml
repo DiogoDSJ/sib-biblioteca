@@ -24,6 +24,7 @@
             <Font name="Ink Free" size="58.0" />
          </font>
       </Text>
-      <Button fx:id="removerReservaButton" disable="true" layoutX="355.0" layoutY="528.0" mnemonicParsing="false" onAction="#setRemoverReservaButton" text="Remover reserva" />
+      <Button fx:id="removerReservaButton" disable="true" layoutX="354.0" layoutY="498.0" mnemonicParsing="false" onAction="#setRemoverReservaButton" text="Remover reserva" />
+      <Button fx:id="sairButton" layoutX="354.0" layoutY="538.0" mnemonicParsing="false" onAction="#setSairButton" prefHeight="26.0" prefWidth="105.0" text="Sair" />
    </children>
 </AnchorPane>

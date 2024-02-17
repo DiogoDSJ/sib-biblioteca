@@ -37,5 +37,6 @@
       <Button fx:id="historicoButton" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="483.0" layoutY="457.0" mnemonicParsing="false" onAction="#setHistoricoButton" prefHeight="26.0" prefWidth="147.0" text="Historico de Emprestimo" textAlignment="CENTER" />
       <Button fx:id="verMultaButton" disable="true" layoutX="222.0" layoutY="501.0" mnemonicParsing="false" onAction="#setVerMultaButton" prefHeight="26.0" prefWidth="110.0" text="Ver multa" />
       <Button fx:id="removerMultaButton" disable="true" layoutX="353.0" layoutY="501.0" mnemonicParsing="false" onAction="#setRemoverMultaButton" prefHeight="26.0" prefWidth="110.0" text="Remover multa" />
+      <Button fx:id="sairButton" layoutX="482.0" layoutY="496.0" mnemonicParsing="false" onAction="#setSairButton" prefHeight="36.0" prefWidth="147.0" text="Sair" />
    </children>
 </AnchorPane>

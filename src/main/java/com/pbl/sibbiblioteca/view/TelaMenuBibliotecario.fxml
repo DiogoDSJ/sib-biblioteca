@@ -9,7 +9,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pbl.sibbiblioteca.controller.TelaMenuBibliotecario.TelaMenuBibliotecarioController">
    <children>
       <Text fill="#2f5aad" layoutX="182.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu bibliotecario">
@@ -34,5 +33,8 @@
       <ChoiceBox fx:id="tipoPesquisaChoiceBox" layoutX="333.0" layoutY="364.0" onAction="#desativarBotao" prefWidth="150.0" />
       <Button fx:id="removerLivroButton" disable="true" layoutX="354.0" layoutY="470.0" mnemonicParsing="false" onAction="#setRemoverLivroButton" prefHeight="36.0" prefWidth="106.0" text="Remover Livro" />
       <Button fx:id="editarLivroButton" disable="true" layoutX="511.0" layoutY="470.0" mnemonicParsing="false" onAction="#setEditarLivroButton" prefHeight="36.0" prefWidth="106.0" text="Editar Livro" />
+      <Button fx:id="removerUnidadeLivroButton" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="355.0" layoutY="520.0" mnemonicParsing="false" onAction="#setRemoverUnidadeLivroButton" prefHeight="57.0" prefWidth="106.0" text="Remover uma unidade" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="adicionarUnidadeLivroButton" alignment="CENTER" contentDisplay="CENTER" disable="true" layoutX="182.0" layoutY="520.0" mnemonicParsing="false" onAction="#setAdicionarUnidadeLivroButton" prefHeight="57.0" prefWidth="106.0" text="Adicionar uma unidade" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="sairButton" layoutX="511.0" layoutY="531.0" mnemonicParsing="false" onAction="#setSairButton" prefHeight="36.0" prefWidth="106.0" text="Sair" />
    </children>
 </AnchorPane>

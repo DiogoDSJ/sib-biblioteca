@@ -30,6 +30,6 @@
       <Button fx:id="pesquisaButton" layoutX="364.0" layoutY="483.0" mnemonicParsing="false" onAction="#realizarBusca" text="Pesquisar " />
       <TextField fx:id="buscaTextField" layoutX="304.0" layoutY="424.0" prefHeight="26.0" prefWidth="190.0" promptText="Digite o termo para pesquisa." />
       <ChoiceBox fx:id="tipoPesquisaChoiceBox" layoutX="325.0" layoutY="366.0" onAction="#desativarBotao" prefWidth="150.0" />
-      <Button fx:id="voltarButton" layoutX="375.0" layoutY="534.0" mnemonicParsing="false" onAction="#setVoltarButton" text="Voltar" />
+      <Button fx:id="voltarButton" layoutX="373.0" layoutY="534.0" mnemonicParsing="false" onAction="#setVoltarButton" text="Fechar" />
    </children>
 </AnchorPane>
