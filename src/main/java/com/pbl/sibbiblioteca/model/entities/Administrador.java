@@ -117,6 +117,13 @@ public class Administrador extends Bibliotecario {
         DAO.getAdministradorDAO().delete(administrador);
     }
 
+    /**
+     * Função que recebe o atual usuário de um leitor e troca o nome para um novo.
+     * @param usuario Usuário atual do Leitor.
+     * @param novonome Nome novo do Leitor.
+     * @throws naoEncontradoException Caso o leitor não seja encontrado.
+     * @throws objetoInexistenteException Lançado pelo método de atualizar usuário.
+     */
     public void trocarNomeDoLeitor(String usuario, String novonome) throws naoEncontradoException, objetoInexistenteException {
         Leitor leitor = DAO.getLeitorDAO().findByUsuario(usuario);
         if (leitor == null) throw new naoEncontradoException("Leitor não existe.");
@@ -179,6 +186,13 @@ public class Administrador extends Bibliotecario {
         atualizarUsuario(leitor);
     }
 
+    /**
+     * Função que recebe o atual usuário de um bibliotecario e troca o nome para um novo.
+     * @param usuario Usuário atual do bibliotecario.
+     * @param novonome Nome novo do bibliotecario.
+     * @throws naoEncontradoException  Caso o bibliotecario não seja encontrado.
+     * @throws objetoInexistenteException Lançado pelo método de atualizar usuário.
+     */
     public void trocarNomeDoBibliotecario(String usuario, String novonome) throws naoEncontradoException, objetoInexistenteException {
         Bibliotecario bibliotecario = DAO.getBibliotecarioDAO().findByUsuario(usuario);
         if (bibliotecario == null) throw new naoEncontradoException("Bibliotecário não existe.");
@@ -238,6 +252,14 @@ public class Administrador extends Bibliotecario {
         bibliotecario.setEndereco(novoendereco);
         atualizarUsuario(bibliotecario);
     }
+
+    /**
+     * Função que recebe o atual nome de um administrador e troca o nome para um novo.
+     * @param usuario Usuário atual do administrador.
+     * @param novonome Nome novo do administrador.
+     * @throws naoEncontradoException  Caso o administrador não seja encontrado.
+     * @throws objetoInexistenteException Lançado pelo método de atualizar usuário.
+     */
     public void trocarNomeDoAdministrador(String usuario, String novonome) throws naoEncontradoException, objetoInexistenteException {
         Administrador administrador = DAO.getAdministradorDAO().findByUsuario(usuario);
         if (administrador == null) throw new naoEncontradoException("Administrador não existe.");
@@ -354,6 +376,11 @@ public class Administrador extends Bibliotecario {
         this.atualizarUsuario(leitor);
     }
 
+    /**
+     * Retorna o objeto multa que está vinculado ao id do leitor.
+     * @param leitor Objeto leitor que será utilizado para puxar a multa.
+     * @return Multa vinculada ao leitor.
+     */
     public Multa retornarMultaLeitor(Leitor leitor) {
         return DAO.getMultaDAO().findByIdMutuario(leitor.getId());
     }

@@ -123,11 +123,5 @@ class povoarDados {
         DAO.getLivroDAO().create(new Livro("9781476770383", "Lisa Nguyen", "The Girl on the Train", "Riverhead Books", "Mystery", "2015"));
         DAO.getLivroDAO().create(new Livro("9781451621716", "Matthew Hall", "Steve Jobs", "Simon & Schuster", "Biography", "2011"));
         DAO.getLivroDAO().create(new Livro("9780307476463", "Amanda Thompson", "The Help", "Putnam Adult", "Historical Fiction", "2009"));
-        /* Caso queira testar um empréstimo vencido ou reserva vencido, siga essas instruções, crie o empréstimo usando
-        uma conta de bibliotecário/administrador e após isso, logue na conta do Leitor, olhe o id do empréstimo/reserva
-        e substitua embaixo. Lembrando que as reservas vencidas são apagadas ao início do programa.
-         */
-        //DAO.getEmprestimoDAO().findByPk("IdEmprestimo").setDataFim(LocalDate.now().minusDays(int DiasParaSubtrair));
-        //DAO.getReservaDAO().findByPk("idReserva").setDataFimReserva(LocalDate.now().minusDays(int DiasParaSubtrair));
     }
 }

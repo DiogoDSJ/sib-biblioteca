@@ -376,6 +376,12 @@ public class Sistema {
         return usuarioEncontrado;
     }
 
+    /**
+     * Função que busca e retorna um empréstimo do leitor com o livro passado como paramêtro.
+     * @param leitor Leitor que será feito a busca do empréstimo.
+     * @param isbnLivro isbn do livro que o empréstimo feito.
+     * @return retorna o empréstimo encontrado.
+     */
     public static Emprestimo buscarEmprestimoDoLeitor(Leitor leitor, String isbnLivro) {
         if (DAO.getLeitorDAO().findByPk(leitor.getId()) == null)
             return null;
@@ -519,34 +525,69 @@ public class Sistema {
         if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
         return resulBusca;
     }
-
+    /**
+     * Função que retorna todos os livros contidos no DAO.
+     * @return todos os livros contidos no DAO.
+     * @throws naoEncontradoException Caso a lista esteja vazia.
+     */
     public static List<Livro> findAll() throws naoEncontradoException {
         List<Livro> resulBusca = DAO.getLivroDAO().findMany();
         if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
         return resulBusca;
     }
+    /**
+     * Função que retorna uma lista de administrador que contenha uma parte da string passada como paramêtro.
+     * @param usuario usuario do administrador para pesquisa.
+     * @return lista de administrador que contenha uma parte da string passada como paramêtro.
+     * @throws naoEncontradoException Caso não tenha administrador com esse usuário.
+     */
 
     public static List<Administrador> findByUsuarioAdministrador(String usuario) throws naoEncontradoException {
         List<Administrador> resulBusca = DAO.getAdministradorDAO().findByUsuarioList(usuario);
         if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
         return resulBusca;
     }
+    /**
+     * Função que retorna uma lista de bibliotecarios que contenha uma parte da string passada como paramêtro.
+     * @param usuario usuario do bibliotecarios para pesquisa.
+     * @return lista de bibliotecarios que contenha uma parte da string passada como paramêtro.
+     * @throws naoEncontradoException Caso não tenha bibliotecarios com esse usuário.
+     */
     public static List<Bibliotecario> findByUsuarioBibliotecario(String usuario) throws naoEncontradoException {
         List<Bibliotecario> resulBusca = DAO.getBibliotecarioDAO().findByUsuarioList(usuario);
         if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
         return resulBusca;
     }
+    /**
+     * Função que retorna uma lista de leitores que contenha uma parte da string passada como paramêtro.
+     * @param usuario usuario do Leitor para pesquisa.
+     * @return lista de leitores que contenha uma parte da string passada como paramêtro.
+     * @throws naoEncontradoException Caso não tenha leitores com esse usuário.
+     */
     public static List<Leitor> findByUsuarioLeitor(String usuario) throws naoEncontradoException {
         List<Leitor> resulBusca = DAO.getLeitorDAO().findByUsuarioList(usuario);
         if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
         return resulBusca;
     }
 
+    /**
+     * Função que procura as empréstimos vinculado ao leitor e retorna uma lista delas.
+     * @param id id do Leitor.
+     * @return Lista com empréstimos do leitor.
+     * @throws naoEncontradoException Caso o leitor não tenha empréstimos.
+     */
     public static List<Emprestimo> findEmprestimosLeitor(String id) throws naoEncontradoException {
         List<Emprestimo> resulBusca = DAO.getEmprestimoDAO().findByIdMutuario(id);
         if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
         return resulBusca;
     }
+
+    /**
+     * Função que procura as reservas vinculado ao leitor e retorna uma lista delas.
+     * @param id id do Leitor.
+     * @return Lista com reservas do leitor.
+     * @throws naoEncontradoException Caso o leitor não tenha reservas.
+     */
     public static List<Reserva> findReservasLeitor(String id) throws naoEncontradoException {
         List<Reserva> resulBusca = DAO.getReservaDAO().findByIdReservante(id);
         if(resulBusca == null || resulBusca.isEmpty()) throw new naoEncontradoException("A busca não retornou em nada.");
