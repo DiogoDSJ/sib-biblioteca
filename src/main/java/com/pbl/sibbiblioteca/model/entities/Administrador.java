@@ -30,8 +30,7 @@ public class Administrador extends Bibliotecario {
     }
 
     /**
-     * Função de cadastrar um usuário
-     *
+     * Função de cadastrar um usuário*
      * Essa função cria um usuário de acordo com o cargo passado, que pode ser leitor, bibliotecário ou administrador e
      * passa diretamente para o DAO.
      * @param nome Nome do usuário.
@@ -56,7 +55,6 @@ public class Administrador extends Bibliotecario {
 
     /**
      * Função de atualizar usuário.
-     *
      * Classe que recebe um objeto da classe usuário, e atualiza esse objeto no DAO.
      * @param usuario Objeto da classe usuário, podendo esse ser um leitor, bibliotecário ou administrador.
      * @throws objetoInexistenteException Caso o objeto não exista.
@@ -333,7 +331,6 @@ public class Administrador extends Bibliotecario {
      */
     public void multarLeitor(Leitor leitor, int diasDeMulta) throws objetoInexistenteException {
         if (leitor == null) throw new objetoInexistenteException("Leitor não existe.");
-        List<Emprestimo> emprestimoListLeitor = DAO.getEmprestimoDAO().findByIdMutuario(leitor.getId());
         if (DAO.getMultaDAO().findByIdMutuario(leitor.getId()) == null) {
             DAO.getMultaDAO().create(new Multa(LocalDate.now(), LocalDate.now().plusDays(diasDeMulta), leitor.getId()));
         } else if (DAO.getMultaDAO().findByIdMutuario(leitor.getId()) != null) {

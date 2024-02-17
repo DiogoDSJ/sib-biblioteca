@@ -41,10 +41,6 @@ public class TelaAdicionarUsuarioController {
         this.administrador = administrador;
     }
 
-    @Deprecated
-    public void desativarBotao(ActionEvent actionEvent) {
-    }
-
     @javafx.fxml.FXML
     public void setAdicionarUsuarioButton(ActionEvent actionEvent) throws cargoInvalidoException {
         if(nomeField.getText().isBlank() || enderecoField.getText().isBlank() || telefoneField.getText().isBlank() ||

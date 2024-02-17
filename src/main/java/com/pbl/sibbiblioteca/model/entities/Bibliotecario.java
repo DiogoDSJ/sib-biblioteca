@@ -12,7 +12,6 @@ public class Bibliotecario extends Usuario {
 
     /**
      * Construtor padrão de bibliotecário.
-     *
      * Aqui é utilizado o construtor padrão de usúario, tendo somente a diferença do cargo em que está sendo colocado.
      *
      * @param nome Nome do bibliotecário

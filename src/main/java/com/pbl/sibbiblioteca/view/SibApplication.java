@@ -1,6 +1,5 @@
 package com.pbl.sibbiblioteca.view;
 
-import com.pbl.sibbiblioteca.dao.DAO;
 import com.pbl.sibbiblioteca.exceptions.foraDeEstoqueException;
 import com.pbl.sibbiblioteca.model.entities.Sistema;
 import com.pbl.sibbiblioteca.utils.TelaController;

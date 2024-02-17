@@ -7,8 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
- * Classe empréstimo que ira guardar as informações um empréstimo de um livro para o leitor.
- *
+ * Classe empréstimo que ira guardar as informações um empréstimo de um livro para o leitor.*
  * Aqui a classe guarda as datas de inicio e fim do empréstimo, o id do leitor que solicitou o empréstimo, o isbn do
  * livro que foi emprestado e o id do empréstimo que foi gerado pelo DAO.
  */

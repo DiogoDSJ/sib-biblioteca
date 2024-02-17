@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class Multa implements Serializable {
 
-    private LocalDate dataIncio;
+    private final LocalDate dataIncio;
     private LocalDate dataFim;
     private String idMulta;
     private String idUsuario;

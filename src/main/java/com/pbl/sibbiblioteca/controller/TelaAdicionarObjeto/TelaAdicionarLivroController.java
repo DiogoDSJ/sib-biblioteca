@@ -8,8 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class TelaAdicionarLivroController {
     @javafx.fxml.FXML
     private TextField tituloLivroField;//fazer um alerta para li vro ja existente
@@ -27,7 +25,7 @@ public class TelaAdicionarLivroController {
     private Button adicionarLivroButton;
 
     @javafx.fxml.FXML
-    public void setAdicionarLivroButton(ActionEvent actionEvent) throws IOException {
+    public void setAdicionarLivroButton(ActionEvent actionEvent) {
         if(tituloLivroField.getText().isBlank() || isbnLivroField.getText().isBlank() || isbnLivroField.getText().isBlank() ||
                 autorLivroField.getText().isBlank() || editoraLivroField.getText().isBlank() || categoriaLivroField.getText().isBlank() ||
                 anoLivroField.getText().isBlank()){

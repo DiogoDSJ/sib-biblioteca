@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class TelaEdicaoLivroController {
@@ -70,7 +69,7 @@ public class TelaEdicaoLivroController {
     }
 
     @javafx.fxml.FXML
-    public void setSalvarTituloButton(ActionEvent actionEvent) throws objetoInexistenteException {
+    public void setSalvarTituloButton(ActionEvent actionEvent) {
         try{
             usuarioLogado.trocarTituloLivro(livro.getIsbn(), tituloLivroField.getText());
             TelaController.gerarAlertaOk("Operação realizada", "O título do livro foi trocado.");
@@ -81,7 +80,7 @@ public class TelaEdicaoLivroController {
     }
 
     @javafx.fxml.FXML
-    public void setSalvarIsbnButton(ActionEvent actionEvent) throws objetoInexistenteException, objetoDuplicadoException {
+    public void setSalvarIsbnButton(ActionEvent actionEvent) {
         try {
             usuarioLogado.trocarIsbnLivro(livro.getIsbn(), isbnLivroField.getText());
             TelaController.gerarAlertaOk("Operação realizada", "O isbn do livro foi trocado.");
@@ -95,7 +94,7 @@ public class TelaEdicaoLivroController {
     }
 
     @javafx.fxml.FXML
-    public void setSalvarAutorButton(ActionEvent actionEvent) throws objetoInexistenteException {
+    public void setSalvarAutorButton(ActionEvent actionEvent) {
         try {
             usuarioLogado.trocarAutorLivro(livro.getIsbn(), autorLivroField.getText());
             TelaController.gerarAlertaOk("Operação realizada", "O autor do livro foi trocado.");
@@ -106,7 +105,7 @@ public class TelaEdicaoLivroController {
     }
 
     @javafx.fxml.FXML
-    public void setSalvarEditoraButton(ActionEvent actionEvent) throws objetoInexistenteException {
+    public void setSalvarEditoraButton(ActionEvent actionEvent) {
         try {
             usuarioLogado.trocarEditoraLivro(livro.getIsbn(), editoraLivroField.getText());
             TelaController.gerarAlertaOk("Operação realizada", "A editora do livro foi trocada.");
@@ -117,7 +116,7 @@ public class TelaEdicaoLivroController {
     }
 
     @javafx.fxml.FXML
-    public void setSalvarCategoriaButton(ActionEvent actionEvent) throws objetoInexistenteException {
+    public void setSalvarCategoriaButton(ActionEvent actionEvent)  {
         try {
             usuarioLogado.trocarCategoriaLivro(livro.getIsbn(), editoraLivroField.getText());
             TelaController.gerarAlertaOk("Operação realizada", "A categoria do livro foi trocada.");
@@ -128,7 +127,7 @@ public class TelaEdicaoLivroController {
     }
 
     @javafx.fxml.FXML
-    public void setSalvarAnoButton(ActionEvent actionEvent) throws objetoInexistenteException {
+    public void setSalvarAnoButton(ActionEvent actionEvent) {
         try {
             usuarioLogado.trocarAnoLivro(livro.getIsbn(), anoLivroField.getText());
         }

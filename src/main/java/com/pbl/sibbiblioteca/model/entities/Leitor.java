@@ -4,7 +4,6 @@ import com.pbl.sibbiblioteca.dao.DAO;
 import com.pbl.sibbiblioteca.exceptions.*;
 import com.pbl.sibbiblioteca.model.entities.enums.Cargo;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -20,7 +19,6 @@ public class Leitor extends Usuario {
 
     /**
      * Construtor padrão
-     *
      * Aqui é definido os atributos normais da classe usuário em conjunto com os números de emprestimos e de reservas
      * fixos em um valor do padrão de projeto.
      * @param nome Nome do leitor.

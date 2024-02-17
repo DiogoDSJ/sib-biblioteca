@@ -38,7 +38,7 @@ public class LoginController
         cargoLogin.getItems().addAll(cargos);
     }
 
-    public void fazerLogin(ActionEvent event) throws naoEncontradoException {
+    public void fazerLogin(ActionEvent event) {
         try{
             if(cargoLogin.getSelectionModel().isEmpty()){
                 TelaController.gerarAlertaErro("Cargo inválido.", "Selecione um dos cargos para prosseguir.");

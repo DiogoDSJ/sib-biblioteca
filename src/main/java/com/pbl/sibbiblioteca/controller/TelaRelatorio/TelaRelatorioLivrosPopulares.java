@@ -1,14 +1,11 @@
 package com.pbl.sibbiblioteca.controller.TelaRelatorio;
 
-import com.pbl.sibbiblioteca.controller.TelaPesquisa.TelaPesquisaController;
 import com.pbl.sibbiblioteca.dao.DAO;
-import com.pbl.sibbiblioteca.exceptions.naoEncontradoException;
 import com.pbl.sibbiblioteca.exceptions.objetoInexistenteException;
 import com.pbl.sibbiblioteca.model.entities.Livro;
 import com.pbl.sibbiblioteca.model.entities.Sistema;
 import com.pbl.sibbiblioteca.utils.TelaController;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

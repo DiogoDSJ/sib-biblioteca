@@ -125,7 +125,7 @@ public class TelaInicialController {
     }
 
     @FXML
-    public void setFazerLoginButton(ActionEvent actionEvent) throws IOException, naoEncontradoException {
+    public void setFazerLoginButton(ActionEvent actionEvent) throws IOException {
         Stage stage = TelaController.retornarStage(actionEvent);
         FXMLLoader loader = TelaController.StageFXMLLoader("TelaDeLogin.fxml");
         Parent root = loader.load();

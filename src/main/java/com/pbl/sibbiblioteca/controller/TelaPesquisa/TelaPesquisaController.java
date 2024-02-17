@@ -1,28 +1,16 @@
 package com.pbl.sibbiblioteca.controller.TelaPesquisa;
 
-import com.pbl.sibbiblioteca.controller.TelaInicial.TelaInicialController;
-import com.pbl.sibbiblioteca.controller.TelaRelatorio.TelaRelatorioLivrosPopulares;
 import com.pbl.sibbiblioteca.exceptions.naoEncontradoException;
 import com.pbl.sibbiblioteca.model.entities.Livro;
 import com.pbl.sibbiblioteca.model.entities.Sistema;
 import com.pbl.sibbiblioteca.utils.TelaController;
-import com.pbl.sibbiblioteca.view.SibApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 
 public class TelaPesquisaController {
 
@@ -62,7 +50,7 @@ public class TelaPesquisaController {
     }
 
     @javafx.fxml.FXML
-    public void realizarBusca(ActionEvent actionEvent) throws naoEncontradoException {
+    public void realizarBusca(ActionEvent actionEvent) {
         try {
             listaLivros.setItems(listaDeLivros(tipoPesquisaChoiceBox, buscaTextField));
         }
@@ -118,7 +106,7 @@ public class TelaPesquisaController {
 
 
     @javafx.fxml.FXML
-    public void setVoltarButton(ActionEvent actionEvent) throws IOException {
+    public void setVoltarButton(ActionEvent actionEvent) {
         Stage stage = TelaController.retornarStage(actionEvent);
         stage.close();
     }

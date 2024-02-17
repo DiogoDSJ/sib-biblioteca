@@ -9,13 +9,10 @@ import com.pbl.sibbiblioteca.exceptions.livroReservadoException;
 import com.pbl.sibbiblioteca.exceptions.naoEncontradoException;
 import com.pbl.sibbiblioteca.model.entities.Bibliotecario;
 import com.pbl.sibbiblioteca.model.entities.Livro;
-import com.pbl.sibbiblioteca.model.entities.Usuario;
 import com.pbl.sibbiblioteca.utils.TelaController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -123,7 +120,7 @@ public class TelaMenuBibliotecarioController {
     }
 
     @FXML
-    public void setRemoverLivroButton(ActionEvent actionEvent) throws livroEmprestadoException, livroReservadoException, naoEncontradoException, foraDeEstoqueException {
+    public void setRemoverLivroButton(ActionEvent actionEvent) {
         setUsuarioLogado(actionEvent);
         Alert erroUsuario = new Alert(Alert.AlertType.CONFIRMATION);
         erroUsuario.setTitle("Confirmar remoção");
@@ -142,6 +139,9 @@ public class TelaMenuBibliotecarioController {
             }
             catch (livroEmprestadoException e){
                 TelaController.gerarAlertaErro("Erro", "Livro está emprestado.");
+            }
+            catch (naoEncontradoException e) {
+                TelaController.gerarAlertaErro("Erro", "Erro inesperado, livro não encontrado.");
             }
         } else if (option.get() == ButtonType.CANCEL) {
             TelaController.gerarAlertaOk("Operação cancelada", "Operação cancelada, nenhuma alteração foi feita.");

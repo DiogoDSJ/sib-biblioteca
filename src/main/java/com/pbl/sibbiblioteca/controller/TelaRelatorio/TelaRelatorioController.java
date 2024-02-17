@@ -1,10 +1,8 @@
 package com.pbl.sibbiblioteca.controller.TelaRelatorio;
 
-import com.pbl.sibbiblioteca.model.entities.Livro;
 import com.pbl.sibbiblioteca.utils.TelaController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;

@@ -13,7 +13,7 @@ public class Reserva implements Serializable {
 
 
     private String idReservante;
-    private LocalDate dataReserva;
+    private final LocalDate dataReserva;
     private LocalDate dataInicioReserva;
     private LocalDate dataFimReserva;
     private String isbnLivro;

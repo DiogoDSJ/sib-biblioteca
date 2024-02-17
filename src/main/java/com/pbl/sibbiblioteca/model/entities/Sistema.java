@@ -223,7 +223,7 @@ public class Sistema {
      */
     public static List<Livro> getDezLivrosMaisPopulares() throws objetoInexistenteException {
         Map<Integer, Livro> livrosPopularesDict = getLivrosOrdenadosPorNumeroDeEmprestimo();
-        List<Livro> dezLivrosPopulares = new ArrayList<Livro>(livrosPopularesDict.values());
+        List<Livro> dezLivrosPopulares = new ArrayList<>(livrosPopularesDict.values());
         int tamanho = dezLivrosPopulares.size();
         if(tamanho <= 9)
             return dezLivrosPopulares.subList(0, tamanho);
