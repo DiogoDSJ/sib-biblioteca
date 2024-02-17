@@ -7,7 +7,7 @@ import com.pbl.sibbiblioteca.model.entities.Leitor;
 import com.pbl.sibbiblioteca.model.entities.Livro;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+
 
 class povoarDados {
     @Test
